@@ -31,8 +31,9 @@ To establish that Frameworks, Methods and Processes are the only three categorie
 
 2. A method is a body of techniques; a limited and further distilled Framework which typically serve to solve specific problems. Applications are analagous to methods.
 
-3. A process is a series of actions or steps taken in order to achieve a particular end. Your understanding of a process lie at the heart of your ability to automate it.
+3. A process is a series of actions or steps taken in order to achieve a particular end. It is the lowest-level of performing a task and may be broken down into two or more processes; this is known as [Divide and Conquer][]
 
 [Consensus-Oriented Specification System (COSS)]: http://www.digistan.org/spec:1/COSS
 [RFC 2119]: http://tools.ietf.org/html/rfc2119
+[Divide and Conquer]: http://en.wikipedia.org/wiki/Divide_and_conquer_algorithm
 
