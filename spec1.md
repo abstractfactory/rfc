@@ -13,19 +13,19 @@ This Specification is distributed in the hope that it will be useful, but WITHOU
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses>.
 
-# Change Process
+### Change Process
 
 This document is governed by the [Consensus-Oriented Specification System (COSS)][].
 
-# Language
+### Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][].
 
-# Goal
+### Goal
 
 To establish that Frameworks, Methods and Processes are the only three categories fit for any problem faced in the creation of Content.
 
-# Definition
+### Definition
 
 1. A framework provides guidelines. It exists to provide structure and direction on a preferred way of doing something without being too detailed or rigid. Programming languages are analagous to frameworks.
 

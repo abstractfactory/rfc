@@ -1,8 +1,8 @@
 # IVP - Immutable Versioning for Production
 
-This document describes the traditional approach to versioning most commonly adopted by Visual Effects production houses around the world as of today (March, 2014) that I call Immutable Versioning for Production (IVP)
+This document describes the traditional approach to versioning most commonly adopted by Visual Effects production houses around the world that I call Immutable Versioning for Production (IVP)
 
-* Name: https://github.com/abstract-factory/rfc/spec:1 (1/IVP)
+* Name: https://github.com/abstract-factory/rfc/spec:2 (2/IVP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 
 Copyright (c) 2014 the Editor and Contributors.
@@ -17,11 +17,11 @@ You should have received a copy of the GNU General Public License along with thi
 
 This document is governed by the [Consensus-Oriented Specification System (COSS)][].
 
-Language
+# Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][].
 
-Goals
+# Goals
 
 IVP is meant to facilitate an iterative development-style which is in direct contrast to the [Waterfall-model][] which is still very much alive but not recommended in Visual Effects production because of assumptions implied by it, such as:
 
@@ -33,7 +33,7 @@ The primary goal of COSS is to facilitate the process of writing, proving, and i
 
 COSS is intended to above all be economical and rapid, so that it is useful to small teams with little time to spend on more formal processes.
 
-Principles:
+# Principles:
 
 We aim for rough consensus and running code.
 Specifications are small pieces, made by small teams.
@@ -45,7 +45,7 @@ Specifications should take minutes to explain, hours to design, days to write, w
 
 Specifications have no special status except that accorded by the community.
 
-Architecture
+# Architecture
 
 COSS is designed around fast, easy to use communications tools. Primarily, COSS uses a wiki model for editing and publishing specifications texts.
 
