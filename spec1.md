@@ -32,3 +32,7 @@ To establish that Frameworks, Methods and Processes are the only three categorie
 2. A method is a body of techniques; a limited and further distilled Framework which typically serve to solve specific problems. Applications are analagous to methods.
 
 3. A process is a series of actions or steps taken in order to achieve a particular end. Your understanding of a process lie at the heart of your ability to automate it.
+
+[Consensus-Oriented Specification System (COSS)]: http://www.digistan.org/spec:1/COSS
+[RFC 2119]: http://tools.ietf.org/html/rfc2119
+
