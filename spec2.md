@@ -1,6 +1,6 @@
-# IVP - Immutable Versioning for Production
+# IVP - Immutable Versioning Pattern
 
-This document describes the traditional approach to versioning most commonly adopted by Visual Effects production houses around the world that I call Immutable Versioning for Production (IVP)
+This document describes an approach to versioning adopted from the Software Development industry that I call Immutable Versioning Pattern (IVP) and is a polylithic approach as opposed to a monolithic approach such as the one proposed by spec:3 (MVP).
 
 * Name: https://github.com/abstract-factory/rfc/spec:2 (2/IVP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
@@ -23,47 +23,33 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 # Goals
 
-IVP is meant to facilitate an iterative development-style which is in direct contrast to the [Waterfall-model][] which is still very much alive but not recommended in Visual Effects production because of assumptions implied by it, such as:
+The opposite of versioned is monolithic and may thus be referred to as polylithic. In a monolithic process, there are no record of events or change and all that exists at any given point in time is here and now.
 
-1. Change is considered rare
-2. Information flows in only one direction
-3. The direction of a project doesn't change
+The monolithic approach has a few problems; mainly that it discourages change as change would imply a new permanent state.
 
-The primary goal of COSS is to facilitate the process of writing, proving, and improving new technical specifications. A "technical specification" defines a protocol, a process, an API, a use of language, a methodology, or any other aspect of a technical environment that can usefully be documented for the purposes of technical or social interoperability.
+In a versioned process, change is "layered"; meaning that no change affects previous state. This encourages change as it completely eliminates the cost of making mistakes.
 
-COSS is intended to above all be economical and rapid, so that it is useful to small teams with little time to spend on more formal processes.
+# Definition
 
-# Principles:
+* Refering to past, present and future states MUST be explicit.
 
-We aim for rough consensus and running code.
-Specifications are small pieces, made by small teams.
-Specifications should have a clearly responsible editor.
-The process should be visible, objective, and accessible to anyone.
-The process should clearly separate experiments from solutions.
-The process should allow deprecation of old specifications.
-Specifications should take minutes to explain, hours to design, days to write, weeks to prove, months to become mature, and years to replace.
+# Reference Implementation
 
-Specifications have no special status except that accorded by the community.
+Versioning may take the form of increasing numerical suffixes to files and folders in the form of:
 
-# Architecture
+`name:separator:version`
 
-COSS is designed around fast, easy to use communications tools. Primarily, COSS uses a wiki model for editing and publishing specifications texts.
+Where `name` is a short identifier for the product in development, `separator` being a unique character visually separating head from tail and `version` an increasing integer; higher numbers meaning later versions.
 
-The domain is the conservancy for a set of specifications in a certain area.
-Each domain is implemented as an Internet domain, hosting a wiki and optionally other communications tools.
-Each specification is a set of wiki pages, together with comments, attached files, and other resources.
-Important specifications may also exist as subdomains, i.e. child wikis.
-Individuals can become members of the domain by completing the necessary legal clearance. The copyright, patent, and trademark policies of the domain must be clarified in an Intellectual Property policy that applies to the domain.
+`myAsset_v1`
 
-Specifications exist as multiple pages, one page per version of the specification (see "Branching and Merging", below), which may be assigned URIs that include an incremental number. Thus, we refer to a specification by specifying its domain, number, and short name. New versions of the same specification will have new numbers. The syntax for a specification reference is:
+It can sometimes be helpful to maintain a fixed-length on the number of integers in versioning so as to simplify parsing.
 
-<domain>/spec:<number>/<shortname>
-For example, this specification is www.digistan.org/spec:1/COSS. The short form 1/COSS may be used when referring to the specification from other specifications in the same domain.
+>>> product = 'myAsset_v001'  # A Python string
+>>> version = int(product[:-3])
 
-Every specification (including branches) carries a different number. Lower numbers indicate more mature specifications, higher numbers indicate more experimental specifications.
+Always assuring that the last n number of characters represents the version makes it possible to perform simple string-manipulation techniques to derive a version from any given product.
 
-COSS Lifecycle
-
-Every specification has an independent lifecycle that documents clearly its current status.
-
-A specification has six possible states that reflect its maturity and contractual weight:
+[Consensus-Oriented Specification System (COSS)]: http://www.digistan.org/spec:1/COSS
+[RFC 2119]: http://tools.ietf.org/html/rfc2119
+[versioning]: http://en.wikipedia.org/wiki/Software_versioning

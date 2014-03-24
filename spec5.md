@@ -1,11 +1,9 @@
-# INP - Inheritance Pattern
+# FMP - Frameworks, Methodologies and Processes
 
-This document further defines inheritance within the Abstract Factory RFC.
+This document further defines the meaning of the three hierarchical objects in content production.
 
-* Name: https://github.com/abstract-factory/rfc/spec:1 (1/INH)
+* Name: https://github.com/abstract-factory/rfc/spec:5 (5/FMP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: none
-* Inherited by: *
 
 Copyright (c) 2014 the Editor and Contributors.
 
@@ -15,34 +13,25 @@ This Specification is distributed in the hope that it will be useful, but WITHOU
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses>.
 
-# Change Process
+### Change Process
 
 This document is governed by the [Consensus-Oriented Specification System (COSS)][].
 
-# Language
+### Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][].
 
-# Goal
+### Goal
 
-Inheritance is a mechanism often employed in Object-Oriented programming practices to promote code reuse.
+To establish that Frameworks, Methods and Processes are the only three categories fit for any problem faced in the creation of Content.
 
-In the Abstract Factory RFC, inheritance plays a similar role and lay grounds for a hierarchy in which children may infer content via its parent.
+### Definition
 
-# Architecture
+1. A framework provides guidelines. It exists to provide structure and direction on a preferred way of doing something without being too detailed or rigid. Programming languages are analagous to frameworks.
 
-Specifications provide a `inherits` and an optional `inherited by` property specifying from where to inherit content.
+2. A method is a body of techniques; a limited and further distilled Framework which typically serve to solve specific problems. Applications are analagous to methods.
 
-# Example
-
-* Name: https://github.com/abstract-factory/rfc/spec:3 (3/MVP)
-* Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: spec:2
-* Inherited by: spec:3, 
-
-Here, [spec:3][] inherits from [spec:2][] meaning [spec:3][] includes content specified by [spec:2][] - including copyright notice, change process and language - on a header-by-header notice.
-
-Furthermore, an inherited specification provides the interface for which to design descendant specifications.
+3. A process is a series of actions or steps taken in order to achieve a particular end. It is the lowest-level of performing a task and may be broken down into two or more processes; this is known as [Divide and Conquer][]
 
 [Consensus-Oriented Specification System (COSS)]: http://www.digistan.org/spec:1/COSS
 [RFC 2119]: http://tools.ietf.org/html/rfc2119

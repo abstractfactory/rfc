@@ -1,0 +1,38 @@
+# MVP - Monolithic Versioning for Production
+
+In contrast to [spec:2 - Immutable Versioning for Production][], Mutable Versioning for Production disregards layers and favours a monolithic appraoch to tracking change.
+
+* Name: https://github.com/abstract-factory/rfc/spec:3 (3/MVP)
+* Editor: Marcus Ottosson <marcus@abstractfactory.io>
+* Inherits: spec:2
+* Inherited by: spec:3, 
+
+
+# Goals
+
+TVP implements an implicit system of version control without manual intervention when transitioning between versions.
+
+This is in direct contrast of IVP whose purpose is to enforce that each change remains separate and layered and therefore non-destructive.
+
+The differences may be considered explicit versus implicit; where explicit change facilitates tracking and control wheras implicit facilitates faster turn-around times.
+
+The goals of TVP are to:
+* Simplify the process of maintaining updates of content.
+* Simplify the process of transitioning between updates to content.
+
+# Definition
+
+* Transitioning between versions MUST NOT require manual intervention.
+
+# Reference Implementation
+
+Versioning MUST be allowed to take any form and MUST NOT be restricted to any schema.
+
+`name`
+
+Where `name`, like in IVP, is a short identifier for the product in development.
+
+`myAsset`
+
+[Consensus-Oriented Specification System (COSS)]: http://www.digistan.org/spec:1/COSS
+[RFC 2119]: http://tools.ietf.org/html/rfc2119
