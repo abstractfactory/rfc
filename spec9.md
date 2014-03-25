@@ -14,7 +14,7 @@ When working towards a goal, it can sometimes be difficult to distinguish betwee
 
 # Architecture
 
-When creating content, there are generally two sets of results; `private` and `public` 
+When creating content, there are generally speaking two sets of results; `private` and `public` 
 
 * `private`: work-in-progress or in-development style results not relevant to others but merely a preamble to `public` results.
 * `public`: results conformed to a set of standards so as to provide a consistent service for others.
