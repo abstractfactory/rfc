@@ -12,15 +12,16 @@ Copyright, Change Process and Language is derived via inheritance as per [spec:1
 
 # Goal
 
-[spec:11][] defines a hierarchical representation of all data, encouraging the use of metadata at any level. This is different from the current Open Metadata v.1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [spec:11][].
+[spec:11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of metadata in any situation. This is different from the current Open Metadata v.1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [spec:11][].
 
 # Proposal
 
 Regular folders have representation, use and established syntax.
 
-`separator` + `name` +`extension`
+* `separator` + `name` + `suffix` = `basename`
+* `\` + `funny_picture` + `.jpeg`
 
-If this layout could be perceived as two-dimensional, `x` and `y` - `x` being their absolute path (i.e. location) and `y` their content - then Open Metadata represents a third-dimension `z`, an alternate to `y`.
+A path then is made up out of one or more `basename` objects. If this layout could be perceived as two-dimensional, `x` and `y` - `x` being their absolute path (i.e. location) and `y` their content - then Open Metadata represents a third-dimension `z`, an alternate to `y`.
 
 Their configuration might look as follows:
 
@@ -46,7 +47,7 @@ Groups, like folders, MAY contain one or more datasets and/or groups; a dataset 
 
 ### Data-types
 
-A new concept introduced in OM.2 is the *data-type*. A data-format is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system. A data-type however is their interface towards programmer - their object-type, if you will - and determines which tools are available; both textually but also graphically.
+A new concept introduced in OM.2 is the *data-type*. A data-format is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system, e.g. `jpeg`, `zip`. A data-type however is their interface towards the programmer - their object-type, if you will - and determines what tools are available; both textually but also graphically.
 
 Here are a few examples
 
@@ -60,7 +61,7 @@ Here are a few examples
 * `group.list`
 * `group.set`
 
-`bool` till `date` represent simple files with an added suffix corresponding to their type, such as *myfile.string*. `enum`, `tuple` and `list` however are different from regular groups in that they are *ordered*; meaning they maintain the individual indexes of each member. This is useful when storing data that may be visualised in a UI which needs to display items in a certain order; such as a full address.
+`bool`, `int`, `float`, `string` and `date` represent simple files with an added suffix corresponding to their type, such as *myfile.string*. `enum`, `tuple` and `list` however are different from regular groups in that they are *ordered*; meaning they maintain the individual indexes of each member. This is useful when storing data that may be visualised in a UI which needs to display items in a certain order; such as a full address.
 
 
 ```python
@@ -84,17 +85,105 @@ assert group.data == data
 
 ### Data-formats
 
-Native data-formats, such as `txt` or `jpeg` are treated with the minimal knowledge that their corresponding suffix allows, which in most cases are fine; a `jpeg` can only mean a rectangular bit-map with only one possible compression method. A `txt` however may be formatted in markdown, there is no way for OM.2 to know.
+Native data-formats, such as `txt` or `jpeg` are treated with the minimal knowledge that their corresponding suffix allows, which in most cases are fine; a `jpeg` can only mean a rectangular bit-map with only one possible compression method.
 
 ### Location
 
-Refer to an absolute path as *location* rather than *path* so as to facilitate for future expansion into using full URI/URL addresses.
+Refer to an absolute path as *location* so as to facilitate for future expansion into using URI/URL addresses.
 
-It MUST NOT matter to the programmer where the metadata is stored and it MUST NOT matter in what format that data resides. This makes it possible to assert valid metadata and standard use of said metadata regardless of it residing on a remote file-system, within a binary file or in-memory within an application. Any content can contain metadata, regardless of what is hosting it.
+It MUST NOT matter to the programmer *where* the metadata is stored and it MUST NOT matter in what format that data resides. With such assumptions, we can assert valid metadata and standard use regardless of it residing on a remote file-system, within a binary file or in-memory within an application. Any content can contain metadata, regardless of what is hosting it.
+
+### Writing to groups
+
+Data MAY be written directly to groups; this becomes the metadata of that group. In the example above we write directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
+
+In other cases, where the group has no suffix, the data is formatted as-is; meaning OM.2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.
 
 ```python
-group = om.Location('/home/marcus')
-metadata = group.read('/system/hidden')
+# Example of auto-determining data-type from suffix-less group
+group = om.Group('mygroup', parent=location)
+group.data = ['some data']
+```
+
+This MAY introduce a possible performance penalty; due to the amount of guess-work that has to be done and so the user SHOULD explicitly specify the data-type for any given group.
+
+# Syntax
+
+The purpose of Open Metadata remains the same and the syntactical differences are cosmetic-only.
+
+```python
+"""Demonstration of the previous syntax"""
+
+import os 
+import openmetadata as om 
+  
+# Determine where on disk to add metadata 
+path = os.path.expanduser('~') 
+path = os.path.join(path, 'test_folder') 
+  
+# Instantiate a Folder object 
+folder = om.Folder(path) 
+  
+assert not folder.exists 
+  
+# Establish some data to write 
+data = { 
+    'hello': 'there', 
+    'startFrame': 5, 
+    'endFrame': 10, 
+    'hidden': True
+} 
+  
+# Channel objects represents a high-level data-type; 
+# currently supported are: 
+#   * kvs   -- Key/Value Store 
+#   * txt   -- Plain Text 
+#   * mdw   -- Markdown 
+channel = om.Channel('keyvaluestore.kvs', parent=folder) 
+  
+# Inject data from above and write it out, missing 
+# folders in the hierarchy are created automatically, 
+# such as our `test_folder` 
+channel.data = data 
+channel.write() 
+  
+assert channel.data == data 
+assert folder.data == {channel.name: data}
+  
+# Finally, remove our folder 
+folder.clear() 
+assert not folder.exists 
+
+```
+
+```python
+"""Demonstration of the current syntax"""
+
+import os 
+import openmetadata as om 
+
+path = os.path.expanduser('~') 
+path = os.path.join(path, 'test_folder') 
+
+location = om.Location(path) 
+assert not location.exists 
+
+data = {
+    'hello': 'there', 
+    'startFrame': 5, 
+    'endFrame': 10, 
+    'hidden': True
+} 
+
+group = om.Group('keyvaluestore.dict', parent=location)
+group.data = data
+group.write()
+  
+assert group.data == data
+assert location.data == {group.name: data}
+
+location.clear()
+assert not location.exists
 ```
 
 [spec:1]: www.google.com
