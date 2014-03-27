@@ -750,57 +750,94 @@ body .task-list{
 }</style><title>spec10</title></head><body><h1>
 <a name="arbitrary-open-metadata-hierarchy" class="anchor" href="#arbitrary-open-metadata-hierarchy"><span class="octicon octicon-link"></span></a>Arbitrary Open Metadata Hierarchy</h1>
 
-<p>This document describes the requirements involved in the next-generation of Open Metadata referred to as OM.2 in this specification.</p>
+<p>This document describes the requirements involved in the next-generation of Open Metadata referred to as OM.2 in this specification; previous version referred to as OM.1</p>
 
 <p><a href="https://camo.githubusercontent.com/a2df935bf7c3d30106f45481084d6a3f4b2bc23b/68747470733a2f2f646c2e64726f70626f782e636f6d2f732f617632783867656c3538306f7734382f6f6d325f6869657261726368792e706e67" target="_blank"><img src="https://camo.githubusercontent.com/a2df935bf7c3d30106f45481084d6a3f4b2bc23b/68747470733a2f2f646c2e64726f70626f782e636f6d2f732f617632783867656c3538306f7734382f6f6d325f6869657261726368792e706e67" alt="" data-canonical-src="https://dl.dropbox.com/s/av2x8gel580ow48/om2_hierarchy.png" style="max-width:100%;"></a></p>
 
 <ul>
-<li>Name: <a href="https://github.com/abstract-factory/rfc/spec:10">https://github.com/abstract-factory/rfc/spec:10</a> (10/AOM)</li>
-<li>Editor: Marcus Ottosson <a href="file://A:\development\marcus\pipi\rfc/mailto:marcus@abstractfactory.io">marcus@abstractfactory.io</a>
+<li>Name: <a href="https://github.com/abstract-factory/rfc/RFC10">https://github.com/abstract-factory/rfc/RFC10</a> (10/AOM)</li>
+<li>Editor: Marcus Ottosson <a href="file://C:\Users\marcus\Dropbox\AF\development\marcus\pipi\rfc/mailto:marcus@abstractfactory.io">marcus@abstractfactory.io</a>
 </li>
-<li>Inherits: spec:1</li>
-</ul><p>Copyright, Change Process and Language is derived via inheritance as per <a href="file://A:\development\marcus\pipi\rfc/www.google.com">spec:1</a></p>
+<li>Inherits: RFC1</li>
+</ul><p>Copyright, Change Process and Language is derived via inheritance as per <a href="file://C:\Users\marcus\Dropbox\AF\development\marcus\pipi\rfc/www.google.com">RFC1</a></p>
 
 <h1>
-<a name="goal" class="anchor" href="#goal"><span class="octicon octicon-link"></span></a>Goal</h1>
+<a name="history" class="anchor" href="#history"><span class="octicon octicon-link"></span></a>History</h1>
 
-<p><a href="file://A:\development\marcus\pipi\rfc/www.google.com">spec:11</a> defines a hierarchical representation of all data, encouraging the use of metadata at any level. This is different from the current Open Metadata v.1 in which data is forced into a 2-level hierarchy of <code>channel</code> and <code>key</code>. The goal of this spec then is to make Open Metadata compatible with <a href="file://A:\development\marcus\pipi\rfc/www.google.com">spec:11</a>.</p>
+<p>Open Metadata was first initiated in 2013 to facilitate the development of <a href="http://pipi.io">Pipi</a> and as a response to the ever-more complex nature of meta-data for common use.</p>
+
+<h4>
+<a name="definition" class="anchor" href="#definition"><span class="octicon octicon-link"></span></a>Definition</h4>
+
+<ul>
+<li>meta -- Pertaining to a level above or beyond</li>
+<li>content -- A collection of data</li>
+<li>data -- A piece of information</li>
+</ul><h4>
+<a name="more-reference" class="anchor" href="#more-reference"><span class="octicon octicon-link"></span></a>More Reference</h4>
+
+<ul>
+<li><a href="http://www.abstractfactory.io/blog/notes-on-consistent-metacontent/">Notes on consistent meta-data</a></li>
+<li><a href="http://www.abstractfactory.io/blog/introduction-to-augment-pt-1/">Introduction to Augment pt. 1</a></li>
+<li><a href="http://www.abstractfactory.io/blog/everything-is-a-file/">"Everything is a file"</a></li>
+</ul><h1>
+<a name="goal---open-metadata" class="anchor" href="#goal---open-metadata"><span class="octicon octicon-link"></span></a>Goal - Open Metadata</h1>
+
+<p>The goal of Open Metadata is to introduce a mechanism with which to append meta-data to folders in such a way that it becomes as transparent to the end-user as handling files.</p>
+
+<p>Meta-data is crucial and a basic component not only of computers and the systems we build, but to our psyche. Knowledge is knowledge, but so is our knowledge about this knowledge and therein lies the keyword; <em>about</em>. Meta-knowledge, and knowledge to a computer is called <code>data</code>.</p>
+
+<p>Thus, Open Metadata MUST allow for any <code>data</code> to contain meta-data, including meta-data itself, and it must to so in a manner that doesn't affect the original <code>data</code> in any way and finally this data MUST NOT be bound by any particular representation; meaning it may be in the form of a True or False statement, a string or list of strings or quite simply any format capable of being represented on a file-system.</p>
+
+<h1>
+<a name="goal---om2" class="anchor" href="#goal---om2"><span class="octicon octicon-link"></span></a>Goal - OM.2</h1>
+
+<p>Break free from the 2-level hierarchy imposed by OM.1 and support hierarchies of an arbitrary depth and width.</p>
+
+<p><a href="file://C:\Users\marcus\Dropbox\AF\development\marcus\pipi\rfc/www.google.com">RFC11</a> (Miller Columns) defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current OM.1 in which data is forced into a 2-level hierarchy of <code>channel</code> and <code>key</code>. The goal of this spec then is to make Open Metadata compatible with <a href="file://C:\Users\marcus\Dropbox\AF\development\marcus\pipi\rfc/www.google.com">RFC11</a>.</p>
 
 <h1>
 <a name="proposal" class="anchor" href="#proposal"><span class="octicon octicon-link"></span></a>Proposal</h1>
 
 <p>Regular folders have representation, use and established syntax.</p>
 
-<p><code>separator</code> + <code>name</code> +<code>extension</code></p>
-
-<p>If this layout could be perceived as two-dimensional, <code>x</code> and <code>y</code> - <code>x</code> being their absolute path (i.e. location) and <code>y</code> their content - then Open Metadata represents a third-dimension <code>z</code>, an alternate to <code>y</code>.</p>
+<ul>
+<li>
+<code>separator</code> + (<code>name</code> + <code>suffix</code>) = <code>separator</code> + <code>basename</code>
+</li>
+<li>
+<code>\</code> + <code>funny_picture</code> + <code>.jpeg</code> = <code>\</code> + <code>funny_picture.jpeg</code>
+</li>
+</ul><p>A path then is made up out of one or more <code>basename</code> objects, each preceeded by a <code>separator</code>. If this layout could be perceived as two-dimensional where <code>x</code> represents a path and <code>y</code> representing the content at that path - then Open Metadata provides a third-dimension <code>z</code>, an alternate to <code>y</code>.</p>
 
 <p>Their configuration might look as follows:</p>
 
 <p><code>x</code>/<code>y</code> --&gt; <code>location</code>/<code>content</code></p>
 
-<p><code>x</code>/<code>z</code> --&gt; <code>location</code>/<code>metadata</code></p>
+<p><code>x</code>/<code>z</code> --&gt; <code>location</code>/<code>meta-data</code></p>
 
-<p>Where <code>x</code>/<code>y</code> is data as seen via Windows Explorer and <code>x</code>/<code>z</code> as seen via About.</p>
+<p>Where <code>x</code>/<code>y</code> is data as seen via e.g. Windows Explorer and <code>x</code>/<code>z</code> as seen via e.g. About.</p>
 
-<p>A file-system is a hierarchical and proven system proven in a vast array of scenarios; it is the purpose of this spec to tap into that resource and to further extend it.</p>
+<p>This third-dimension - or <code>tertiary</code> data - then extends upon the concept of a file-system in such a way that makes it possible to store, not only information in an explicit location within a hierarchy of information, but also information <em>about</em> this information, at any level, containing any number of additional levels.</p>
 
 <h1>
 <a name="architecture" class="anchor" href="#architecture"><span class="octicon octicon-link"></span></a>Architecture</h1>
 
-<p>Open Metadata defines three types; <code>location</code>, <code>group</code> and <code>dataset</code>. Location refers to the <code>x</code> from above; the absolute path to a folder on disk.</p>
+<p>Open Metadata defines four types; <code>location</code>, <code>group</code> and <code>dataset</code> and <code>blob</code>. Location refers to the <code>x</code> from above; the absolute path to a folder on disk.</p>
 
 <div class="highlight highlight-python"><pre><span class="n">location</span> <span class="o">=</span> <span class="s">'/home/marcus'</span>
 </pre></div>
 
-<p>A group in metadata is the equivalent of a folder on disk and a dataset its file.</p>
+<p>A group in meta-data is the equivalent of a folder on disk and a dataset its file.</p>
 
 <p>Groups, like folders, MAY contain one or more datasets and/or groups; a dataset on the other hand MUST NOT contain groups or other datasets.</p>
+
+<p>Blobs are arbitrary data not necessarily understood by the Open Metadata library, such as <code>jpeg</code> or <code>mp3</code>.</p>
 
 <h3>
 <a name="data-types" class="anchor" href="#data-types"><span class="octicon octicon-link"></span></a>Data-types</h3>
 
-<p>A new concept introduced in OM.2 is the <em>data-type</em>. A data-format is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system. A data-type however is their interface towards programmer - their object-type, if you will - and determines which tools are available; both textually but also graphically.</p>
+<p>A new concept introduced in OM.2 is the <em>data-type</em>. A data-format is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system, e.g. <code>jpeg</code>, <code>zip</code>. A data-type however is their interface towards the programmer - their object-type, if you will - and determines what tools are available; both textually but also graphically.</p>
 
 <p>Here are a few examples</p>
 
@@ -810,38 +847,299 @@ body .task-list{
 <li><code>dataset.float</code></li>
 <li><code>dataset.string</code></li>
 <li><code>dataset.date</code></li>
+<li><code>dataset.null</code></li>
 <li><code>group.enum</code></li>
 <li><code>group.tuple</code></li>
 <li><code>group.list</code></li>
-<li><code>group.set</code></li>
-</ul><p><code>bool</code> till <code>date</code> represent simple files with an added suffix corresponding to their type, such as <em>myfile.string</em>. <code>enum</code>, <code>tuple</code> and <code>list</code> however are different from regular groups in that they are <em>ordered</em>; meaning they maintain the individual indexes of each member. This is useful when storing data that may be visualised in a UI which needs to display items in a certain order; such as a full address.</p>
+</ul><p><code>bool</code>, <code>int</code>, <code>float</code>, <code>string</code> and <code>date</code> represent simple files with an added suffix corresponding to their type, such as <em>myfile.string</em>. <code>enum</code>, <code>tuple</code> and <code>list</code> however are different from regular groups in that they are <em>ordered</em>; meaning they maintain the individual indexes of each member. This is useful when storing data that may be visualised in a UI which needs to display items in a certain order; such as a full address.</p>
 
-<div class="highlight highlight-python"><pre><span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<div class="highlight highlight-python"><pre><span class="c"># Python example</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s">'31 Quantum Tower'</span><span class="p">,</span>
+    <span class="s">'Poland Road'</span><span class="p">,</span>
+    <span class="s">'W21X 8SL'</span><span class="p">,</span>
+    <span class="s">'London'</span><span class="p">,</span>
+    <span class="s">'UK'</span><span class="p">]</span>
+
+<span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
 <span class="n">group</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'myaddress.list'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
-<span class="mf">1.</span> <span class="mi">31</span> <span class="n">Quantum</span> <span class="n">Tower</span>
-<span class="mf">2.</span> <span class="n">Poland</span> <span class="n">Road</span>
-<span class="mf">3.</span> <span class="n">W21X</span> <span class="mi">8</span><span class="n">SL</span>
-<span class="mf">4.</span> <span class="n">London</span>
-</pre></div>
 
-<p><code>set</code> represents a unique collection of datasets similar to what you would expect from a Python set, and <code>date</code> is essentially a <code>string</code> with special formatting.</p>
+<span class="n">group</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+<span class="n">group</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="k">assert</span> <span class="n">group</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">data</span>
+
+</pre></div>
 
 <h3>
 <a name="data-formats" class="anchor" href="#data-formats"><span class="octicon octicon-link"></span></a>Data-formats</h3>
 
-<p>Native data-formats, such as <code>txt</code> or <code>jpeg</code> are treated with the minimal knowledge that their corresponding suffix allows, which in most cases are fine; a <code>jpeg</code> can only mean a rectangular bit-map with only one possible compression method. A <code>txt</code> however may be formatted in markdown, there is no way for OM.2 to know.</p>
+<p>Native data-formats, such as <code>txt</code> or <code>jpeg</code> are treated with the minimal knowledge that their corresponding suffix allows, which in most cases are fine; a <code>jpeg</code> can only mean a rectangular bit-map with only one possible compression method.</p>
+
+<h3>
+<a name="location" class="anchor" href="#location"><span class="octicon octicon-link"></span></a>Location</h3>
+
+<p>Refer to an absolute path as <em>location</em> so as to facilitate for future expansion into using URI/URL addresses.</p>
+
+<p>It MUST NOT matter to the programmer <em>where</em> the meta-data is stored and it MUST NOT matter in what format that data resides. With such assumptions, we can assert valid meta-data and standard use regardless of it residing on a remote file-system, within a binary file or in-memory within an application. Any content can contain meta-data, regardless of what is hosting it.</p>
+
+<h3>
+<a name="writing-to-groups" class="anchor" href="#writing-to-groups"><span class="octicon octicon-link"></span></a>Writing to groups</h3>
+
+<p>Data MAY be written directly to groups; this becomes the meta-data of that group. In the example above we commit directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.</p>
+
+<p>In other cases, where the group has no suffix, the data is formatted as-is; meaning OM.2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.</p>
+
+<div class="highlight highlight-python"><pre>
+<span class="c"># Example of auto-determining data-type from suffix-less group using</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'mygroup'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+<span class="n">group</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s">'some data'</span><span class="p">]</span>
+</pre></div>
+
+<p>This MAY introduce a possible performance penalty; due to the amount of guess-work that has to be done and so the user SHOULD explicitly specify the data-type for any given group.</p>
+
+<h4>
+<a name="meta-meta-data" class="anchor" href="#meta-meta-data"><span class="octicon octicon-link"></span></a>Meta-meta-data</h4>
+
+<p>It may sometimes be necessary to assign meta-data to meta-data itself; for example, the group.list type represents a physical folder on disk with the suffix ".list"</p>
+
+<div class="highlight highlight-python"><pre><span class="o">-</span> <span class="n">personal</span><span class="o">.</span><span class="n">list</span>
+  <span class="o">|--</span> <span class="n">firstname</span><span class="o">.</span><span class="n">string</span>
+  <span class="o">|--</span> <span class="n">lastname</span><span class="o">.</span><span class="n">string</span>
+  <span class="o">|--</span> <span class="n">age</span><span class="o">.</span><span class="n">int</span>
+</pre></div>
+
+<p>Lists are naturally ordered, but how can we store this order on disk together with the datasets it may contain? One way would be to introduce a header into each of the files.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">firstname</span><span class="o">.</span><span class="n">string</span> <span class="o">=</span> <span class="s">r'order=0\nMarcus'</span>
+</pre></div>
+
+<p>This could potentially be appropriate in many situations, but would in this case introduce possibility of conflicting ordering. </p>
+
+<div class="highlight highlight-python"><pre><span class="n">firstname</span><span class="o">.</span><span class="n">string</span> <span class="o">=</span> <span class="s">r'order=2\nMarcus'</span>
+<span class="n">lastname</span><span class="o">.</span><span class="n">string</span> <span class="o">=</span> <span class="s">r'order=2\nOttosson'</span>
+</pre></div>
+
+<p>So an alternative may be to store this information in a specially formatted dataset pertaining to the information at hand.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">-</span> <span class="n">personal</span><span class="o">.</span><span class="n">list</span>
+  <span class="o">|--</span> <span class="n">__order__</span>
+  <span class="o">|--</span> <span class="n">firstname</span><span class="o">.</span><span class="n">string</span>
+  <span class="o">|--</span> <span class="n">lastname</span><span class="o">.</span><span class="n">string</span>
+  <span class="o">|--</span> <span class="n">age</span><span class="o">.</span><span class="n">int</span>
+</pre></div>
+
+<div class="highlight highlight-python"><pre><span class="n">__order__</span> <span class="o">=</span> <span class="s">r'firstname=0\nlastname=1\nage=2'</span>
+</pre></div>
+
+<p>In code, meta-meta-data could then be retrieved as such:</p>
+
+<div class="highlight highlight-python"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">firstname</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">'/personal/firstname'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">firstname</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s">'Dataset'</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">firstname</span><span class="o">.</span><span class="n">order</span>
+<span class="mi">0</span>
+</pre></div>
+
+<p>Each meta-meta-data dataset or group MAY be accessible via dot-notation syntax by languages that support it and MUST otherwise be accessible via other means.</p>
+
+<p>If a dataset is not included in <code>__order__</code> then a null value MUST be returned. If the host group does not contain a <code>__order__</code> meta-meta-data set then an error MUST be raised.</p>
 
 <h1>
-<a name="implementation" class="anchor" href="#implementation"><span class="octicon octicon-link"></span></a>Implementation</h1>
+<a name="syntax" class="anchor" href="#syntax"><span class="octicon octicon-link"></span></a>Syntax</h1>
 
-<p>Inspired by the HDF5-syntax in which nested metadata is referred to similarly to regular file-system paths, the method for setting and getting metadata from a <code>location</code> looks like this:</p>
+<p>The purpose of Open Metadata remains the same and the syntactical differences are cosmetic-only.</p>
 
-<p>Abstract: <code>parent</code>/<code>child</code></p>
+<div class="highlight highlight-python"><pre><span class="sd">"""Demonstration of the current syntax"""</span>
 
-<p>File-system: <code>folder</code>/<code>file</code></p>
+<span class="kn">import</span> <span class="nn">os</span> 
+<span class="kn">import</span> <span class="nn">openmetadata</span> <span class="kn">as</span> <span class="nn">om</span> 
 
-<p>Open Metadata: <code>group</code>/<code>dataset</code></p>
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">'~'</span><span class="p">)</span> 
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">'test_folder'</span><span class="p">)</span> 
 
-<div class="highlight highlight-python"><pre><span class="n">group</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">'/system/hidden'</span><span class="p">)</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> 
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">location</span><span class="o">.</span><span class="n">exists</span> 
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'hello'</span><span class="p">:</span> <span class="s">'there'</span><span class="p">,</span> 
+    <span class="s">'startFrame'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> 
+    <span class="s">'endFrame'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> 
+    <span class="s">'hidden'</span><span class="p">:</span> <span class="bp">True</span>
+<span class="p">}</span> 
+
+<span class="n">group</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'keyvaluestore.dict'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+<span class="n">group</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+<span class="n">group</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="k">assert</span> <span class="n">group</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">data</span>
+<span class="k">assert</span> <span class="n">location</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="p">{</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span>
+
+<span class="n">location</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">location</span><span class="o">.</span><span class="n">exists</span>
+</pre></div>
+
+<h3>
+<a name="dot-notation" class="anchor" href="#dot-notation"><span class="octicon octicon-link"></span></a>Dot-notation</h3>
+
+<p>Open Metadata MAY support the notion of accessing members via dot-notation syntax.</p>
+
+<div class="highlight highlight-python"><pre><span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+
+<span class="c"># Here, metadata is accessed via the group "personal" within the location</span>
+<span class="c"># followed by the dataset "firstname" residing within this group.</span>
+<span class="n">location</span><span class="o">.</span><span class="n">personal</span><span class="o">.</span><span class="n">firstname</span>
+<span class="s">'Marcus'</span>
+</pre></div>
+
+<h3>
+<a name="__call__" class="anchor" href="#__call__"><span class="octicon octicon-link"></span></a>__call__</h3>
+
+<p>As an alternative to <code>dataset.read()</code> one may simply call upon a <code>group</code> or <code>location</code> object, using a path as argument.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group</span> <span class="o">=</span> <span class="n">location</span><span class="p">(</span><span class="s">'/description'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="n">group</span><span class="p">(</span><span class="s">'/firstname'</span><span class="p">)</span>
+<span class="s">'Marcus'</span>
+</pre></div>
+
+<p>Sure reduces the number of lines, but perhaps not terribly intuitive.</p>
+
+<h3>
+<a name="the-use-of-commit" class="anchor" href="#the-use-of-commit"><span class="octicon octicon-link"></span></a>The use of commit()</h3>
+
+<p>Coupling reading and writing within the same object sure is a convenience, but also introduces a security risk. I'm not talking about someone hacking your object while you use it, but more of security for you, yourself, while using an object. Having commit() so close to overall operation of an object, a misspelling or misuse could potentially lead to removing important information.</p>
+
+<p>An alternative is to introduce a separate method responsible for commit-operations.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'description.list'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s">'my'</span><span class="p">,</span> <span class="s">'ordered'</span><span class="p">,</span> <span class="s">'list'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">om</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+</pre></div>
+
+<p>It didn't take any more lines of code, yet the implementation of writing is de-coupled from the object with which the contains resides and put into a more global space from where it can be distributed appropriately if need be.</p>
+
+<h3>
+<a name="name-conflicts" class="anchor" href="#name-conflicts"><span class="octicon octicon-link"></span></a>Name conflicts</h3>
+
+<p>Due to Open Metadata referencing groups and datasets excluding their suffixes, there is the possibility of group <code>A.list</code> to hide the dataset <code>A.string</code>.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">A</span>  <span class="c"># Will we get the `list` or `tuple`?</span>
+</pre></div>
+
+<p>It is up to the end-user to guarantee that names remain unique as there is no way for Open Metadata to enforce this constraint.</p>
+
+<p>Open Metadata MAY constrain the adding of children to a parent when said child would hide an existing child.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'existing_group'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="s">'existing_group'</span> <span class="n">already</span> <span class="n">exists</span>
+</pre></div>
+
+<p>However as meta-data may also be added ad-hoc via the file-system manually or via a third-part library Open Metadata is unable to enforce this constraint throughout.</p>
+
+<p>As a result, only the first-returned item is visible to the end user. Open Metadata MAY provide a warning-message when the retreived name is not unique.</p>
+
+<h4>
+<a name="example-implementation" class="anchor" href="#example-implementation"><span class="octicon octicon-link"></span></a>Example implementation</h4>
+
+<p>A graphical user interface could hinder the creation of groups and datasets that would end up hiding another group or dataset.</p>
+
+<h1>
+<a name="distribution-and-concurrent-writes" class="anchor" href="#distribution-and-concurrent-writes"><span class="octicon octicon-link"></span></a>Distribution and Concurrent Writes</h1>
+
+<p>Your operating system is very adapt at distributing the tasks you assign to it. However there are times when even the smartest operating system with the smartest of hard-drives can corrupt your data; it is after all, the real world.</p>
+
+<p>One possible source of this corruption is multiple writes to a single location. Since Open Metadata is all about collaborative edits, how can it ensure that data is never written from one location while at the same time being written from another?</p>
+
+<p>One possibly solution is to introduce a <code>broker</code>.</p>
+
+<p><a href="https://camo.githubusercontent.com/4bf5893d2c54653675d46342013ff4f40c374fd0/68747470733a2f2f646c2e64726f70626f782e636f6d2f732f6779717074703930626a6e6f3230782f70657031305f636f6e63757272656e63792e706e67" target="_blank"><img src="https://camo.githubusercontent.com/4bf5893d2c54653675d46342013ff4f40c374fd0/68747470733a2f2f646c2e64726f70626f782e636f6d2f732f6779717074703930626a6e6f3230782f70657031305f636f6e63757272656e63792e706e67" alt="" data-canonical-src="https://dl.dropbox.com/s/gyqptp90bjno20x/pep10_concurrency.png" style="max-width:100%;"></a></p>
+
+<p>It would then be up to the <code>broker</code> to delegate or queue requests to the best of a file-systems capabilities; possibly guaranteeing that there is at most only ever a single writing operating taking place at any given moment per physical hard-disk.</p>
+
+<h1>
+<a name="arbitrary-depths" class="anchor" href="#arbitrary-depths"><span class="octicon octicon-link"></span></a>Arbitrary Depths</h1>
+
+<p>An important aspect of OM.2 is that of arbitrary depths; i.e. allowing for an unlimited nesting of <code>dataset</code> within <code>group</code>.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">|--</span> <span class="n">top</span> <span class="n">folder</span>
+    <span class="o">|--</span> <span class="n">group1</span>
+        <span class="o">|--</span> <span class="n">group2</span>
+            <span class="o">|--</span><span class="n">group3</span>
+                <span class="o">|--</span> <span class="n">dataset</span><span class="o">.</span><span class="n">string</span>
+</pre></div>
+
+<h2>
+<a name="mixing-dataset-and-group" class="anchor" href="#mixing-dataset-and-group"><span class="octicon octicon-link"></span></a>Mixing <code>dataset</code> and <code>group</code>
+</h2>
+
+<p>Open Metadata MUST support the notion of mixing <code>dataset</code> and <code>group</code> objects within a hierarchy.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">|--</span> <span class="n">top</span> <span class="n">folder</span>
+    <span class="o">|--</span> <span class="n">group1</span>
+    <span class="o">|--</span> <span class="n">dataset1</span>
+</pre></div>
+
+<h1>
+<a name="automatic-types" class="anchor" href="#automatic-types"><span class="octicon octicon-link"></span></a>Automatic types</h1>
+
+<p>Open Metadata MUST support the notion of lazily assigning data to <code>group</code> and <code>dataset</code> objects.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+
+<span class="c"># We'll define a dataset, but neglect to give it a suffix.</span>
+<span class="c"># The contents of this dataset could be anything at this point.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="s">'my_simple_dataset'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+
+<span class="c"># Assining data of type 'string' will automatically specify 'string' </span>
+<span class="c"># as the data-type of this dataset, resulting in a file on disk with</span>
+<span class="c"># a suffix of 'string'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s">'my simple string'</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">om</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+
+<h1>
+<a name="2-way-cascade-commit" class="anchor" href="#2-way-cascade-commit"><span class="octicon octicon-link"></span></a>2-way cascade commit</h1>
+
+<p>Open Metadata MUST support the notion of commiting data to disk in a cascading manner.</p>
+
+<div class="highlight highlight-python"><pre><span class="c"># Demonstration of a downwards commit, data located underneath</span>
+<span class="c"># commited object are also commited.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'nested_data.list'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'sub_data'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="s">'valid.bool'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">group2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">om</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>  <span class="c"># &lt;-- note `location`</span>
+
+<span class="c"># In an upwards commit, missing groups are automatically created</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'nested_data.list'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group2</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Group</span><span class="p">(</span><span class="s">'sub_data'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="s">'valid.bool'</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">group2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">om</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>  <span class="c"># &lt;-- note `dataset`</span>
+</pre></div>
+
+<h1>
+<a name="native-types" class="anchor" href="#native-types"><span class="octicon octicon-link"></span></a>Native types</h1>
+
+<p>Open Metadata MUST support the addition of native file-system types such as <code>jpeg</code> or <code>doc</code>. These files may not necessarily be viewable or even editable via the Open Metadata library, but still remains an important part of the possibilities facilitated by it.</p>
+
+<h2>
+<a name="blob" class="anchor" href="#blob"><span class="octicon octicon-link"></span></a><code>Blob</code>
+</h2>
+
+<p>When querying native data-types, Open Metadata MUST return an object of type <code>blob</code>. The functionality of <code>blob</code> objects are limited and MAY provide options for retrieving an absolute path, URL or URI.</p>
+
+<div class="highlight highlight-python"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">location</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="s">'/home/marcus'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">image</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">reference_image</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s">'Blob'</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">image</span><span class="o">.</span><span class="n">path</span>
+<span class="s">'/home/marcus/.meta/reference_image.png'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="s">'/home/marcus/.meta/reference_image.png'</span>
 </pre></div></body></html>
