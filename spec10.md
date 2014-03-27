@@ -26,7 +26,15 @@ As this is the first specification for Open Metadata, let us start with some bac
 * [Introduction to Augment pt. 1][]
 * ["Everything is a file"][]
 
-# Goal
+# Goal - Open Metadata
+
+The goal of Open Metadata is to introduce a mechanism with which to append meta-data to folders in such a way that it becomes as transparent to the end-user as handling files.
+
+Meta-data is crucial and a basic component not only of computers and the systems we build, but to our psyche. Knowledge is knowledge, but so is our knowledge about this knowledge and therein lies the keyword; *about*. Meta-knowledge, and knowledge to a computer is called `data`.
+
+Thus, Open Metadata MUST allow for any `data` to contain meta-data, including meta-data itself, and it must to so in a manner that doesn't affect the original `data` in any way and finally this data MUST NOT be bound by any particular representation; meaning it may be in the form of a True or False statement, a string or list of strings or quite simply any format capable of being represented on a file-system.
+
+# Goal - OM.2
 
 Break free from the 2-level hierarchy imposed by OM.1 and support hierarchies of an arbitrary depth and width.
 
@@ -83,11 +91,12 @@ Here are a few examples
 
 
 ```python
+# Python example
 data = ['31 Quantum Tower',
-		'Poland Road',
-		'W21X 8SL',
-		'London',
-		'UK']
+    'Poland Road',
+    'W21X 8SL',
+    'London',
+    'UK']
 
 location = om.Location('/home/marcus')
 group = om.Group('myaddress.list', parent=location)
@@ -116,7 +125,7 @@ Data MAY be written directly to groups; this becomes the meta-data of that group
 In other cases, where the group has no suffix, the data is formatted as-is; meaning OM.2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.
 
 ```python
-# Example of auto-determining data-type from suffix-less group
+# Example of auto-determining data-type from suffix-less group using
 group = om.Group('mygroup', parent=location)
 group.data = ['some data']
 ```
@@ -158,14 +167,16 @@ So an alternative may be to store this information in a specially formatted data
 ```
 
 ```python
-__order__ = r'firstname;lastname;age'
+__order__ = r'firstname=0\nlastname=1\nage=2'
 ```
 
 In code, meta-meta-data could then be retrieved as such:
 
 ```python
 >>> location = om.Location('/home/marcus')
->>> firstname = location.metadata('personal/firstname')
+>>> firstname = location.read('/personal/firstname')
+>>> type(firstname)
+<type 'Dataset'>
 >>> firstname.order
 0
 ```
@@ -174,58 +185,9 @@ Each meta-meta-data dataset or group MAY be accessible via dot-notation syntax b
 
 If a dataset is not included in `__order__` then a null value MUST be returned. If the host group does not contain a `__order__` meta-meta-data set then an error MUST be raised.
 
-# Graphical Representation
-
-Another major concern with OM.1 was how data was to be displayed in a graphical user interface. 
-
 # Syntax
 
 The purpose of Open Metadata remains the same and the syntactical differences are cosmetic-only.
-
-```python
-"""Demonstration of the previous syntax"""
-
-import os 
-import openmetadata as om 
-  
-# Determine where on disk to add meta-data 
-path = os.path.expanduser('~') 
-path = os.path.join(path, 'test_folder') 
-  
-# Instantiate a Folder object 
-folder = om.Folder(path) 
-  
-assert not folder.exists 
-  
-# Establish some data to write 
-data = { 
-    'hello': 'there', 
-    'startFrame': 5, 
-    'endFrame': 10, 
-    'hidden': True
-} 
-  
-# Channel objects represents a high-level data-type; 
-# currently supported are: 
-#   * kvs   -- Key/Value Store 
-#   * txt   -- Plain Text 
-#   * mdw   -- Markdown 
-channel = om.Channel('keyvaluestore.kvs', parent=folder) 
-  
-# Inject data from above and write it out, missing 
-# folders in the hierarchy are created automatically, 
-# such as our `test_folder` 
-channel.data = data 
-channel.write() 
-  
-assert channel.data == data 
-assert folder.data == {channel.name: data}
-  
-# Finally, remove our folder 
-folder.clear() 
-assert not folder.exists 
-
-```
 
 ```python
 """Demonstration of the current syntax"""
@@ -255,6 +217,64 @@ assert location.data == {group.name: data}
 
 location.clear()
 assert not location.exists
+```
+
+## \__call__
+
+As an alternative to `dataset.read()` one may simply call upon a `group` or `location` object, using a path as argument.
+
+```python
+>>> location = om.Location('/home/marcus')
+>>> group = location('/description')
+>>> print group('/firstname')
+'Marcus'
+```
+
+Sure reduces the number of lines, but perhaps not terribly intuitive.
+
+## The use of write()
+
+Coupling reading and writing within the same object sure is a convenience, but it introduces a security risk. I'm not talking about someone hacking your object while you use it, but more of security for you while using it. Having write() so close to overall operation of an object, a misspelling or misuse could potentially lead to removing important information.
+
+An alternative is to introduce a separate method responsible for write-operations.
+
+```python
+>>> location = om.Location('/home/marcus')
+>>> group = om.Group('description.list')
+>>> group.data = ['my', 'ordered', 'list']
+>>> om.write(group)
+```
+
+It didn't take any more lines of code, yet the implementation of writing is de-coupled from the object with which the contains resides and put into a more global space from where it can be distributed appropriately if need be.
+
+# Distribution and Concurrent reads
+
+Your operating system is very adapt at distributing the tasks you assign to it. However there are times when even the smartest operating system with the smartest of hard-drives can corrupt your data; it is after all, the real world.
+
+One possible source of this corruption is multiple writes to a single location. Since Open Metadata is all about collaborative edits, how can it ensure that data is never written from one location while at the same time being written from another?
+
+One possibly solution is to introduce a `broker`.
+
+![](https://dl.dropbox.com/s/gyqptp90bjno20x/pep10_concurrency.png)
+
+It would then be up to the `broker` to delegate or queue requests to the best of a file-systems capabilities; possibly guaranteeing that there is at most only ever a single writing operating taking place at any given moment per physical hard-disk.
+
+# Arbitrary Depths
+
+An important aspect of OM.2 is that of arbitrary depths; i.e. allowing for an unlimited nesting of `dataset` within `group`.
+
+```python
+|-- top folder
+|   |-- group1
+|   |   |-- group2
+|   |   |   |--group3
+|   |   |   |   |-- dataset.string
+
+|-- top folder
+    |-- group1
+        |-- group2
+            |--group3
+                |-- dataset.string
 ```
 
 [Pipi]: http://pipi.io
