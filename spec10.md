@@ -39,7 +39,7 @@ Regular folders have representation, use and established syntax.
 * `separator` + (`name` + `suffix`) = `separator` + `basename`
 * `\` + `funny_picture` + `.jpeg` = `\` + `funny_picture.jpeg`
 
-A path then is made up out of one or more `basename` objects, each preceeded by `separators`. If this layout could be perceived as two-dimensional, `x` and `y` where `x` represents a path (i.e. location) and `y` the content at that path - then Open Metadata represents a third-dimension `z`, an alternate to `y`.
+A path then is made up out of one or more `basename` objects, each preceeded by a `separator`. If this layout could be perceived as two-dimensional where `x` represents a path and `y` representing the content at that path - then Open Metadata provides a third-dimension `z`, an alternate to `y`.
 
 Their configuration might look as follows:
 
@@ -47,9 +47,9 @@ Their configuration might look as follows:
 
 `x`/`z` --> `location`/`meta-data`
 
-Where `x`/`y` is data as seen via Windows Explorer and `x`/`z` as seen via About.
+Where `x`/`y` is data as seen via e.g. Windows Explorer and `x`/`z` as seen via e.g. About.
 
-A file-system is a hierarchical and proven system proven in a vast array of scenarios; it is the purpose of this spec to tap into that resource and to further extend it.
+This third-dimension - or `tertiary` data - then extends upon the concept of a file-system in such a way that makes it possible to store, not only information in an explicit location within a hierarchy of information, but also information *about* this information, at any level, containing any number of additional levels.
 
 # Architecture
 
@@ -74,10 +74,10 @@ Here are a few examples
 * `dataset.float`
 * `dataset.string`
 * `dataset.date`
+* `dataset.null`
 * `group.enum`
 * `group.tuple`
 * `group.list`
-* `group.set`
 
 `bool`, `int`, `float`, `string` and `date` represent simple files with an added suffix corresponding to their type, such as *myfile.string*. `enum`, `tuple` and `list` however are different from regular groups in that they are *ordered*; meaning they maintain the individual indexes of each member. This is useful when storing data that may be visualised in a UI which needs to display items in a certain order; such as a full address.
 
@@ -98,8 +98,6 @@ group.write()
 assert group.data == data
 
 ```
-
-`set` represents a unique collection of datasets similar to what you would expect from a Python set, and `date` is essentially a `string` with special formatting.
 
 ### Data-formats
 
@@ -124,6 +122,57 @@ group.data = ['some data']
 ```
 
 This MAY introduce a possible performance penalty; due to the amount of guess-work that has to be done and so the user SHOULD explicitly specify the data-type for any given group.
+
+#### Meta-meta-data
+
+It may sometimes be necessary to assign meta-data to meta-data itself; for example, the group.list type represents a physical folder on disk with the suffix ".list"
+
+```python
+- personal.list
+  |-- firstname.string
+  |-- lastname.string
+  |-- age.int
+```
+
+Lists are naturally ordered, but how can we store this order on disk together with the datasets it may contain? One way would be to introduce a header into each of the files.
+
+```python
+firstname.string = r'order=0\nMarcus'
+```
+
+This could potentially be appropriate in many situations, but would in this case introduce possibility of conflicting ordering. 
+
+```python
+firstname.string = r'order=2\nMarcus'
+lastname.string = r'order=2\nOttosson'
+```
+
+So an alternative may be to store this information in a specially formatted dataset pertaining to the information at hand.
+
+```python
+- personal.list
+  |-- __order__
+  |-- firstname.string
+  |-- lastname.string
+  |-- age.int
+```
+
+```python
+__order__ = r'firstname;lastname;age'
+```
+
+In code, meta-meta-data could then be retrieved as such:
+
+```python
+>>> location = om.Location('/home/marcus')
+>>> firstname = location.metadata('personal/firstname')
+>>> firstname.order
+0
+```
+
+Each meta-meta-data dataset or group MAY be accessible via dot-notation syntax by languages that support it and MUST otherwise be accessible via other means.
+
+If a dataset is not included in `__order__` then a null value MUST be returned. If the host group does not contain a `__order__` meta-meta-data set then an error MUST be raised.
 
 # Graphical Representation
 
