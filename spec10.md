@@ -12,7 +12,7 @@ Copyright, Change Process and Language is derived via inheritance as per [RFC1][
 
 # History
 
-As this is the first specification for Open Metadata, let us start with some background. Open Metadata was first initiated in 2013 to facilitate for the development of [Pipi][] and as a response to the ever-more complex nature of meta-data for common use.
+Open Metadata was first initiated in 2013 to facilitate the development of [Pipi][] and as a response to the ever-more complex nature of meta-data for common use.
 
 #### Definition
 
@@ -61,7 +61,7 @@ This third-dimension - or `tertiary` data - then extends upon the concept of a f
 
 # Architecture
 
-Open Metadata defines three types; `location`, `group` and `dataset`. Location refers to the `x` from above; the absolute path to a folder on disk.
+Open Metadata defines four types; `location`, `group` and `dataset` and `blob`. Location refers to the `x` from above; the absolute path to a folder on disk.
 
 ```python
 location = '/home/marcus'
@@ -70,6 +70,8 @@ location = '/home/marcus'
 A group in meta-data is the equivalent of a folder on disk and a dataset its file.
 
 Groups, like folders, MAY contain one or more datasets and/or groups; a dataset on the other hand MUST NOT contain groups or other datasets.
+
+Blobs are arbitrary data not necessarily understood by the Open Metadata library, such as `jpeg` or `mp3`.
 
 ### Data-types
 
@@ -313,23 +315,45 @@ Open Metadata MUST support the notion of lazily assigning data to `group` and `d
 >>> om.commit(dataset)
 ```
 
-# Explicit versus Implicit commits
+# 2-way cascade commit
 
 Open Metadata MUST support the notion of commiting data to disk in a cascading manner.
 
 ```python
-location = om.Location('/home/marcus')
-group = om.Group('nested_data.list', parent=location)
-group2 = om.Group('sub_data', parent=group)
-dataset = om.Dataset('valid.bool', parent=group2)
+# Demonstration of a downwards commit, data located underneath
+# commited object are also commited.
+>>> location = om.Location('/home/marcus')
+>>> group = om.Group('nested_data.list', parent=location)
+>>> group2 = om.Group('sub_data', parent=group)
+>>> dataset = om.Dataset('valid.bool', parent=group2)
+>>> om.commit(location)  # <-- note `location`
 
-# Commit data via `location`, this would result in group, group2 and dataset
-# being written out too.
-om.commit(location)
+# In an upwards commit, missing groups are automatically created
+>>> location = om.Location('/home/marcus')
+>>> group = om.Group('nested_data.list', parent=location)
+>>> group2 = om.Group('sub_data', parent=group)
+>>> dataset = om.Dataset('valid.bool', parent=group2)
+>>> om.commit(dataset)  # <-- note `dataset`
 ```
 
-The opposite, explicit commits means
+# Native types
 
+Open Metadata MUST support the addition of native file-system types such as `jpeg` or `doc`. These files may not necessarily be viewable or even editable via the Open Metadata library, but still remains an important part of the possibilities facilitated by it.
+
+## `Blob`
+
+When querying native data-types, Open Metadata MUST return an object of type `blob`. The functionality of `blob` objects are limited and MAY provide options for retrieving an absolute path, URL or URI.
+
+```python
+>>> location = om.Location('/home/marcus')
+>>> image = location.reference_image
+>>> type(image)
+<type 'Blob'>
+>>> image.path
+'/home/marcus/.meta/reference_image.png'
+>>> str(image)
+'/home/marcus/.meta/reference_image.png'
+```
 
 
 [Pipi]: http://pipi.io
