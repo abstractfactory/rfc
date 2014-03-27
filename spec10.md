@@ -12,24 +12,17 @@ Copyright, Change Process and Language is derived via inheritance as per [spec:1
 
 # History
 
-As this is the first specification for Open Metadata, let us start with some background. Open Metadata was first initiated in 2013 to facilitate for the development of [Pipi][] and as a response to the ever-more complex nature of metadata for common use.
+As this is the first specification for Open Metadata, let us start with some background. Open Metadata was first initiated in 2013 to facilitate for the development of [Pipi][] and as a response to the ever-more complex nature of meta-data for common use.
 
-In these environments, metadata is crucial but often complicated and restricted. C
-
-Complicated in that the way to interact with it is either via a web front-end, such as Shotgun of FTrack, or code. There is no connection between how users normally interact with data; i.e. using files and folders. Restricted because due to the limitations in how users interact with it the data-types you may assign as metadata are limited to mostly text and numbers. The amount of metadata may even be limited to the amount of available "fields" or to the dimensions of a textbox. But perhaps the largest limitation is that you are only capable of assigning metadata to pre-defined objects.
-
-Before we more on, let's define what exactly metadata and its big brother metacontent means.
+#### Definition
 
 * meta -- Pertaining to a level above or beyond
 * content -- A collection of data
 * data -- A piece of information
 
-So it would seem content is merely a container for data, and that `meta` represents a higher-level view of both.
+#### More Reference
 
-And as opposed 
-
-Reference
-* [Notes on consistent metadata][]
+* [Notes on consistent meta-data][]
 * [Introduction to Augment pt. 1][]
 * ["Everything is a file"][]
 
@@ -37,7 +30,7 @@ Reference
 
 Break free from the 2-level hierarchy imposed by OM.1 and support hierarchies of an arbitrary depth and width.
 
-[spec:11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of metadata in any situation. This is different from the current OM.1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [spec:11][].
+[spec:11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current OM.1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [spec:11][].
 
 # Proposal
 
@@ -52,7 +45,7 @@ Their configuration might look as follows:
 
 `x`/`y` --> `location`/`content`
 
-`x`/`z` --> `location`/`metadata`
+`x`/`z` --> `location`/`meta-data`
 
 Where `x`/`y` is data as seen via Windows Explorer and `x`/`z` as seen via About.
 
@@ -66,7 +59,7 @@ Open Metadata defines three types; `location`, `group` and `dataset`. Location r
 location = '/home/marcus'
 ```
 
-A group in metadata is the equivalent of a folder on disk and a dataset its file.
+A group in meta-data is the equivalent of a folder on disk and a dataset its file.
 
 Groups, like folders, MAY contain one or more datasets and/or groups; a dataset on the other hand MUST NOT contain groups or other datasets.
 
@@ -116,11 +109,11 @@ Native data-formats, such as `txt` or `jpeg` are treated with the minimal knowle
 
 Refer to an absolute path as *location* so as to facilitate for future expansion into using URI/URL addresses.
 
-It MUST NOT matter to the programmer *where* the metadata is stored and it MUST NOT matter in what format that data resides. With such assumptions, we can assert valid metadata and standard use regardless of it residing on a remote file-system, within a binary file or in-memory within an application. Any content can contain metadata, regardless of what is hosting it.
+It MUST NOT matter to the programmer *where* the meta-data is stored and it MUST NOT matter in what format that data resides. With such assumptions, we can assert valid meta-data and standard use regardless of it residing on a remote file-system, within a binary file or in-memory within an application. Any content can contain meta-data, regardless of what is hosting it.
 
 ### Writing to groups
 
-Data MAY be written directly to groups; this becomes the metadata of that group. In the example above we write directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
+Data MAY be written directly to groups; this becomes the meta-data of that group. In the example above we write directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
 
 In other cases, where the group has no suffix, the data is formatted as-is; meaning OM.2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.
 
@@ -146,7 +139,7 @@ The purpose of Open Metadata remains the same and the syntactical differences ar
 import os 
 import openmetadata as om 
   
-# Determine where on disk to add metadata 
+# Determine where on disk to add meta-data 
 path = os.path.expanduser('~') 
 path = os.path.join(path, 'test_folder') 
   
@@ -215,8 +208,9 @@ location.clear()
 assert not location.exists
 ```
 
+[Pipi]: http://pipi.io
 ["Everything is a file"]: http://www.abstractfactory.io/blog/everything-is-a-file/
 [Introduction to Augment pt. 1]: http://www.abstractfactory.io/blog/introduction-to-augment-pt-1/
-[Notes on consistent metadata]: http://www.abstractfactory.io/blog/notes-on-consistent-metacontent/
+[Notes on consistent meta-data]: http://www.abstractfactory.io/blog/notes-on-consistent-metacontent/
 [spec:1]: www.google.com
 [spec:11]: www.google.com
