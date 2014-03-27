@@ -12,7 +12,7 @@ Copyright, Change Process and Language is derived via inheritance as per [spec:1
 
 # History
 
-As this is the first specification for Open Metadata, let us start with some background. Open Metadata was first initiated in 2013 to facilitate for the development of [Pipi][] and as a response to the ever-more complex nature of metadata in visual effects environments.
+As this is the first specification for Open Metadata, let us start with some background. Open Metadata was first initiated in 2013 to facilitate for the development of [Pipi][] and as a response to the ever-more complex nature of metadata for common use.
 
 In these environments, metadata is crucial but often complicated and restricted. C
 
