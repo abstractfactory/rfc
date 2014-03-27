@@ -4,11 +4,11 @@ This document describes the requirements involved in the next-generation of Open
 
 ![](https://dl.dropbox.com/s/av2x8gel580ow48/om2_hierarchy.png)
 
-* Name: https://github.com/abstract-factory/rfc/spec:10 (10/AOM)
+* Name: https://github.com/abstract-factory/rfc/RFC10 (10/AOM)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: spec:1
+* Inherits: RFC1
 
-Copyright, Change Process and Language is derived via inheritance as per [spec:1][]
+Copyright, Change Process and Language is derived via inheritance as per [RFC1][]
 
 # History
 
@@ -38,7 +38,7 @@ Thus, Open Metadata MUST allow for any `data` to contain meta-data, including me
 
 Break free from the 2-level hierarchy imposed by OM.1 and support hierarchies of an arbitrary depth and width.
 
-[spec:11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current OM.1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [spec:11][].
+[RFC11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current OM.1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [RFC11][].
 
 # Proposal
 
@@ -102,7 +102,7 @@ location = om.Location('/home/marcus')
 group = om.Group('myaddress.list', parent=location)
 
 group.data = data
-group.write()
+group.commit()
 
 assert group.data == data
 
@@ -120,7 +120,7 @@ It MUST NOT matter to the programmer *where* the meta-data is stored and it MUST
 
 ### Writing to groups
 
-Data MAY be written directly to groups; this becomes the meta-data of that group. In the example above we write directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
+Data MAY be written directly to groups; this becomes the meta-data of that group. In the example above we commit directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
 
 In other cases, where the group has no suffix, the data is formatted as-is; meaning OM.2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.
 
@@ -210,7 +210,7 @@ data = {
 
 group = om.Group('keyvaluestore.dict', parent=location)
 group.data = data
-group.write()
+group.commit()
   
 assert group.data == data
 assert location.data == {group.name: data}
@@ -219,7 +219,20 @@ location.clear()
 assert not location.exists
 ```
 
-## \__call__
+### Dot-notation
+
+Open Metadata MAY support the notion of accessing members via dot-notation syntax.
+
+```python
+location = om.Location('/home/marcus')
+
+# Here, metadata is accessed via the group "personal" within the location
+# followed by the dataset "firstname" residing within this group.
+location.personal.firstname
+'Marcus'
+```
+
+### \__call__
 
 As an alternative to `dataset.read()` one may simply call upon a `group` or `location` object, using a path as argument.
 
@@ -232,17 +245,17 @@ As an alternative to `dataset.read()` one may simply call upon a `group` or `loc
 
 Sure reduces the number of lines, but perhaps not terribly intuitive.
 
-## The use of write()
+### The use of commit()
 
-Coupling reading and writing within the same object sure is a convenience, but it introduces a security risk. I'm not talking about someone hacking your object while you use it, but more of security for you while using it. Having write() so close to overall operation of an object, a misspelling or misuse could potentially lead to removing important information.
+Coupling reading and writing within the same object sure is a convenience, but also introduces a security risk. I'm not talking about someone hacking your object while you use it, but more of security for you, yourself, while using an object. Having commit() so close to overall operation of an object, a misspelling or misuse could potentially lead to removing important information.
 
-An alternative is to introduce a separate method responsible for write-operations.
+An alternative is to introduce a separate method responsible for commit-operations.
 
 ```python
 >>> location = om.Location('/home/marcus')
 >>> group = om.Group('description.list')
 >>> group.data = ['my', 'ordered', 'list']
->>> om.write(group)
+>>> om.commit(group)
 ```
 
 It didn't take any more lines of code, yet the implementation of writing is de-coupled from the object with which the contains resides and put into a more global space from where it can be distributed appropriately if need be.
@@ -265,21 +278,63 @@ An important aspect of OM.2 is that of arbitrary depths; i.e. allowing for an un
 
 ```python
 |-- top folder
-|   |-- group1
-|   |   |-- group2
-|   |   |   |--group3
-|   |   |   |   |-- dataset.string
-
-|-- top folder
     |-- group1
         |-- group2
             |--group3
                 |-- dataset.string
 ```
 
+## Mixing `dataset` and `group`
+
+Open Metadata MUST support the notion of mixing `dataset` and `group` objects within a hierarchy.
+
+```python
+|-- top folder
+    |-- group1
+    |-- dataset1
+```
+
+# Automatic types
+
+Open Metadata MUST support the notion of lazily assigning data to `group` and `dataset` objects.
+
+```python
+>>> location = om.Location('/home/marcus')
+
+# We'll define a dataset, but neglect to give it a suffix.
+# The contents of this dataset could be anything at this point.
+>>> dataset = om.Dataset('my_simple_dataset', parent=location)
+
+# Assining data of type 'string' will automatically specify 'string' 
+# as the data-type of this dataset, resulting in a file on disk with
+# a suffix of 'string'
+>>> dataset.data = 'my simple string'
+
+>>> om.commit(dataset)
+```
+
+# Explicit versus Implicit commits
+
+Open Metadata MUST support the notion of commiting data to disk in a cascading manner.
+
+```python
+location = om.Location('/home/marcus')
+group = om.Group('nested_data.list', parent=location)
+group2 = om.Group('sub_data', parent=group)
+dataset = om.Dataset('valid.bool', parent=group2)
+
+# Commit data via `location`, this would result in group, group2 and dataset
+# being written out too.
+om.commit(location)
+```
+
+The opposite, explicit commits means
+
+
+
 [Pipi]: http://pipi.io
 ["Everything is a file"]: http://www.abstractfactory.io/blog/everything-is-a-file/
 [Introduction to Augment pt. 1]: http://www.abstractfactory.io/blog/introduction-to-augment-pt-1/
 [Notes on consistent meta-data]: http://www.abstractfactory.io/blog/notes-on-consistent-metacontent/
-[spec:1]: www.google.com
-[spec:11]: www.google.com
+[RFC1]: www.google.com
+[RFC11]: www.google.com
