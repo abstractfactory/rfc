@@ -1,6 +1,6 @@
 # Arbitrary Open Metadata Hierarchy
 
-This document describes the requirements involved in the next-generation of Open Metadata referred to as OM.2 in this specification.
+This document describes the requirements involved in the next-generation of Open Metadata referred to as OM.2 in this specification; previous version referred to as OM.1
 
 ![](https://dl.dropbox.com/s/av2x8gel580ow48/om2_hierarchy.png)
 
@@ -10,18 +10,43 @@ This document describes the requirements involved in the next-generation of Open
 
 Copyright, Change Process and Language is derived via inheritance as per [spec:1][]
 
+# History
+
+As this is the first specification for Open Metadata, let us start with some background. Open Metadata was first initiated in 2013 to facilitate for the development of [Pipi][] and as a response to the ever-more complex nature of metadata in visual effects environments.
+
+In these environments, metadata is crucial but often complicated and restricted. C
+
+Complicated in that the way to interact with it is either via a web front-end, such as Shotgun of FTrack, or code. There is no connection between how users normally interact with data; i.e. using files and folders. Restricted because due to the limitations in how users interact with it the data-types you may assign as metadata are limited to mostly text and numbers. The amount of metadata may even be limited to the amount of available "fields" or to the dimensions of a textbox. But perhaps the largest limitation is that you are only capable of assigning metadata to pre-defined objects.
+
+Before we more on, let's define what exactly metadata and its big brother metacontent means.
+
+* meta -- Pertaining to a level above or beyond
+* content -- A collection of data
+* data -- A piece of information
+
+So it would seem content is merely a container for data, and that `meta` represents a higher-level view of both.
+
+And as opposed 
+
+Reference
+* [Notes on consistent metadata][]
+* [Introduction to Augment pt. 1][]
+* ["Everything is a file"][]
+
 # Goal
 
-[spec:11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of metadata in any situation. This is different from the current Open Metadata v.1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [spec:11][].
+Break free from the 2-level hierarchy imposed by OM.1 and support hierarchies of an arbitrary depth and width.
+
+[spec:11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of metadata in any situation. This is different from the current OM.1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [spec:11][].
 
 # Proposal
 
 Regular folders have representation, use and established syntax.
 
-* `separator` + `name` + `suffix` = `basename`
-* `\` + `funny_picture` + `.jpeg`
+* `separator` + (`name` + `suffix`) = `separator + `basename`
+* `\` + `funny_picture` + `.jpeg` = `\` + funny_picture.jpeg`
 
-A path then is made up out of one or more `basename` objects. If this layout could be perceived as two-dimensional, `x` and `y` - `x` being their absolute path (i.e. location) and `y` their content - then Open Metadata represents a third-dimension `z`, an alternate to `y`.
+A path then is made up out of one or more `basename` objects, each preceeded by `separators`. If this layout could be perceived as two-dimensional, `x` and `y` where `x` represents a path (i.e. location) and `y` the content at that path - then Open Metadata represents a third-dimension `z`, an alternate to `y`.
 
 Their configuration might look as follows:
 
@@ -107,6 +132,10 @@ group.data = ['some data']
 
 This MAY introduce a possible performance penalty; due to the amount of guess-work that has to be done and so the user SHOULD explicitly specify the data-type for any given group.
 
+# Graphical Representation
+
+Another major concern with OM.1 was how data was to be displayed in a graphical user interface. 
+
 # Syntax
 
 The purpose of Open Metadata remains the same and the syntactical differences are cosmetic-only.
@@ -186,5 +215,8 @@ location.clear()
 assert not location.exists
 ```
 
+["Everything is a file"]: http://www.abstractfactory.io/blog/everything-is-a-file/
+[Introduction to Augment pt. 1]: http://www.abstractfactory.io/blog/introduction-to-augment-pt-1/
+[Notes on consistent metadata]: http://www.abstractfactory.io/blog/notes-on-consistent-metacontent/
 [spec:1]: www.google.com
 [spec:11]: www.google.com
