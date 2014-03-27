@@ -36,8 +36,8 @@ Break free from the 2-level hierarchy imposed by OM.1 and support hierarchies of
 
 Regular folders have representation, use and established syntax.
 
-* `separator` + (`name` + `suffix`) = `separator + `basename`
-* `\` + `funny_picture` + `.jpeg` = `\` + funny_picture.jpeg`
+* `separator` + (`name` + `suffix`) = `separator` + `basename`
+* `\` + `funny_picture` + `.jpeg` = `\` + `funny_picture.jpeg`
 
 A path then is made up out of one or more `basename` objects, each preceeded by `separators`. If this layout could be perceived as two-dimensional, `x` and `y` where `x` represents a path (i.e. location) and `y` the content at that path - then Open Metadata represents a third-dimension `z`, an alternate to `y`.
 
