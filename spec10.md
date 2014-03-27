@@ -10,22 +10,6 @@ This document describes the requirements involved in the next-generation of Open
 
 Copyright, Change Process and Language is derived via inheritance as per [RFC1][]
 
-*   [History](#history)
-    *   [Definition](#definition)
-    *   [References]
-*   [Goal of Open Metadata]
-*   [Goal of MK2]
-*   [Proposal]
-*   [Architecture]
-    *   [Data-types]
-    *   [Data-formats]
-    *   [Location]
-    *   [Writing to groups]
-    *   [Meta-meta-data]
-*   [Syntax]
-    *   [Dot-notation]
-    *   [__call__]
-
 # History
 
 Open Metadata was first initiated in 2013 to facilitate the development of [Pipi][] and as a response to the ever-more complex nature of meta-data for common use.
@@ -44,7 +28,7 @@ Open Metadata was first initiated in 2013 to facilitate the development of [Pipi
 
 # Goal - Open Metadata
 
-The goal of Open Metadata is to introduce a mechanism with which to append meta-data to folders in such a way that it becomes as transparent to the end-user as handling files.
+Quick re-cap of the goal of Open Metadata. Open Metadata is to introduce a mechanism with which to append meta-data to folders in such a way that it becomes as transparent to the end-user as handling files.
 
 Meta-data is crucial and a basic component not only of computers and the systems we build, but to our psyche. Knowledge is knowledge, but so is our knowledge about this knowledge and therein lies the keyword; *about*. Meta-knowledge, and knowledge to a computer is called `data`.
 
@@ -320,7 +304,7 @@ One possibly solution is to introduce a `broker`.
 
 It would then be up to the `broker` to delegate or queue requests to the best of a file-systems capabilities; possibly guaranteeing that there is at most only ever a single writing operating taking place at any given moment per physical hard-disk.
 
-# Arbitrary Depths
+# Arbitrary Depth
 
 An important aspect of MK2 is that of arbitrary depths; i.e. allowing for an unlimited nesting of `dataset` within `group`.
 
@@ -361,13 +345,79 @@ Open Metadata MUST support the notion of lazily assigning data to `group` and `d
 >>> om.commit(dataset)
 ```
 
-# 2-way cascade commit
+# Cascading
+
+Reading and writing MAY be cascading. Meaning data may be retrieved by query of a leaf-dataset, only to have data returned be influenc
+
+For motivation and use of cascading data, head over to Steve Yegge's inspiration post about the [Universal Design Pattern][]
+
+### Cascading reads
+
+Open Metadata MUST support reading data recursively.
+
+```python
+# Picture this hierarchy
+
+# +-- project
+# |   +-- sequence
+# |       +-- shot
+
+>>> location = om.Location('/project/sequence/shot')
+>>> executables = location.executables
+
+# Now, it may be the case, that no executables reside
+# within `shot`. However, in this environment, executables
+# such as Maya or Houdini would typically reside within `project`
+
+>>> print executables
+{
+  'maya': '/path/to/maya',
+  'houdini': '/path/to/houdini'
+}
+
+# It may however be useful for these properties to "cascade" up
+# through the hierarchy; eventually finding its way to us via the
+# descendant `shot`
+```
+
+Why would we want this? Well, in addition to the specific points made by Steve in his post, we might want to support the notion of cascading data within a post-production environment in which each descendant may *add* or *subtract* from prior properties.
+
+```python
+# +-- project
+# |   +-- sequence
+# |       +-- shot
+
+>>> project = om.Location('/project')
+>>> project.executables
+{
+  'maya': '/path/to/maya',
+  'houdini': '/path/to/houdini'
+}
+
+>>> shot = om.Location('/project/sequence/shot')
+>>> shot.executables
+{
+  'maya': '/path/to/maya', 
+  'houdini': '/path/to/houdini',
+  'mari': '/path/to/mari'
+}
+```
+
+In this example, `shot` has appended `mari` to its roster. It did so without duplicating the ascending hierarchy of metadata and by instead only adding `mari`. The cascading mechanism is then responsible for merging up-stream data.
+
+Removing an existing entry is then as easy as:
+
+```python
+>>> shot.executables = {'maya': None}
+```
+
+### Cascading writes
 
 Open Metadata MUST support the notion of commiting data to disk in a cascading manner.
 
 ```python
 # Demonstration of a downwards commit, data located underneath
-# commited object are also commited.
+# committed object are also committed.
 >>> location = om.Location('/home/marcus')
 >>> group = om.Group('nested_data.list', parent=location)
 >>> group2 = om.Group('sub_data', parent=group)
@@ -384,9 +434,9 @@ Open Metadata MUST support the notion of commiting data to disk in a cascading m
 
 # Native types
 
-Open Metadata MUST support the addition of native file-system types such as `jpeg` or `doc`. These files may not necessarily be viewable or even editable via the Open Metadata library, but still remains an important part of the possibilities facilitated by it.
+Open Metadata MUST support the addition of native OS data-types such as `jpeg` or `mov`. These files may not necessarily be viewable or even editable via the Open Metadata library, but still remains an important part of the possibilities facilitated by it.
 
-## `Blob`
+## `blob`
 
 When querying native data-types, Open Metadata MUST return an object of type `blob`. The functionality of `blob` objects are limited and MAY provide options for retrieving an absolute path, URL or URI.
 
@@ -401,7 +451,49 @@ When querying native data-types, Open Metadata MUST return an object of type `bl
 '/home/marcus/.meta/reference_image.png'
 ```
 
+# Esoteric types
 
+In addition to what you would expect from a metadata-storage API, there is one other possibility that may keep you up at night (in a good way).
+
+We'll cover
+
+* `dataset.stream`
+* `dataset.sql`
+* `dataset.rpc`
+
+### `stream`
+
+```python
++-- folder
+|   +-- presentation.stream
+```
+
+It's important to remember that a file is nothing more than a logical representation of a sequence of 1s and 0s on a hard-drive. Now, whenever you stream video from YouTube, this concept is still very much in play.
+
+It may not stream to disk, but if it did it would not matter. What matters is the sequence of 1s and 0s and how those are represented to you.
+
+In the example above, there is a dataset within a folder with the suffix 'stream'. This indicates that within this file lies instructions for how to connect to a source other than your hard-drive and to provide you with a handle to it; just like you would a regular file.
+
+What do to with this handle however is outside of the scope of this specification and in fact outside the scope of Open Metadata itself.
+
+What Open Metadata provides to you is the possibility of storing such an instruction in arbitrary folders on your hard-drive; it'd then be up to your front-end to interpret and possibly visualise this stream for you.
+
+### `sql`
+
+Any database is ultimately just one or more files on some disk. You could gain access to this file, but it would bear little meaning. What would be more interesting however is to attain a handle into a particular portion of an SQL-based database and manipulate it just like you would a regular Open Metadata dataset. Perhaps even store this handle somewhere in your local hard-drive, as metadata to a folder.
+
+```python
+>>> location = om.Location('/some/folder')
+>>> location.tree()
+# +-- folder
+# |   +-- startFrame.sql
+```
+
+### `rpc`
+
+How about reading and writing data via a remote procedure call (RPC)? The dataset could contain instructions for either and get interpreted by your application.
+
+[universal design pattern]: http://steve-yegge.blogspot.co.uk/2008/10/universal-design-pattern.html
 [Pipi]: http://pipi.io
 ["Everything is a file"]: http://www.abstractfactory.io/blog/everything-is-a-file/
 [Introduction to Augment pt. 1]: http://www.abstractfactory.io/blog/introduction-to-augment-pt-1/
