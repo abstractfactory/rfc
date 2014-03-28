@@ -84,11 +84,11 @@ Here are a all the supported types
 * `dataset.float`
 * `dataset.string`
 * `dataset.date`
-* `dataset.dict`
 * `dataset.null`
 * `group.enum`
 * `group.tuple`
 * `group.list`
+* `group.dict`
 
 `bool`, `int`, `float`, `string` and `date` represent simple files with an added suffix corresponding to their type, such as *myfile.string*. `enum`, `tuple` and `list` however are different from regular groups in that they are *ordered*; meaning they maintain the individual indexes of each member. This is useful when storing data that may be visualised in a UI which needs to display items in a certain order; such as a full address.
 
@@ -303,7 +303,7 @@ Your operating system is very adapt at distributing the tasks you assign to it. 
 
 One possible source of this corruption is multiple writes to a single location. Since Open Metadata is all about collaborative edits, how can it ensure that data is never written from one location while at the same time being written from another?
 
-## Broker
+### Broker
 
 One possibly solution is to introduce a `broker`.
 
@@ -312,9 +312,11 @@ One possibly solution is to introduce a `broker`.
 It would then be up to the `broker` to delegate or queue requests to the best of a file-systems capabilities; possibly guaranteeing that there is at most only ever a single writing operating taking place at any given moment per physical hard-disk.
 
 
-## Push/Pull
+### Push/Pull
 
-Another solution may be to separate private and public writes.
+Similar to the Broker-model, another solution may be to write temporarily to one location, in preparation for the next.
+
+![](https://dl.dropbox.com/s/ln3orzp5xldiz5q/spec10_pushpull.png)
 
 ```python
 >>> location = om.Location('/server/location')
@@ -323,13 +325,17 @@ Another solution may be to separate private and public writes.
 >>> om.push()
 ```
 
-Here, a dataset is first "committed" to be written publicly, but is first written to the local hard-drive; in a common place for metadata written by this user.
+Here, a dataset is first "committed" to be written publicly, meaning it is written the local hard-drive; in a common place for metadata written by this user.
 
 ```python
 /home/marcus/.metastage/server/location/new_data.string
 ```
 
-Upon om.push(), Open Metadata would look for ".metastage" underneath the current users home-directory and schedule the data residing there for publication upon the location where 'location' was initially referenced.
+Upon om.push(), Open Metadata would look for ".metastage" underneath the calling user's home-directory and schedule that data to be written to a server.
+
+The push-mechanism could then handle concurrency and decide who eventually ends up the latest writing the latest data, and also alert the user when writes happen within a certain time-span, such as within 0.1 microseconds. At that point, the user could reasonably expect his data to having been overwritten by someone else.
+
+It could potentially also be the place where priorities are set on requests. Some users or processes may require their data to always take precedence over others, if that data should so happen to be written within a given time-span.
 
 # Arbitrary Depth
 
