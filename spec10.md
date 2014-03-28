@@ -311,6 +311,13 @@ One possibly solution is to introduce a `broker`.
 
 It would then be up to the `broker` to delegate or queue requests to the best of a file-systems capabilities; possibly guaranteeing that there is at most only ever a single writing operating taking place at any given moment per physical hard-disk.
 
+#### RPC
+
+One possible implementation of a broker is to utilising the Open Metadata library via proxy-methods such as a Remore Procedure Call (RPC).
+
+Clients may call upon an exposed service pass to any data they wish to be written as Open Metadata through it. The recieving end would then manage the actual reads and writes to the file-system(s), thus ensuring that there is only ever one concurrent read and write happening while also being natively adept at queing requests and otherwise handle a gigantic amount of requests.
+
+The broker then would be this service.
 
 ### Push/Pull
 
@@ -336,6 +343,9 @@ Upon om.push(), Open Metadata would look for ".metastage" underneath the calling
 The push-mechanism could then handle concurrency and decide who eventually ends up the latest writing the latest data, and also alert the user when writes happen within a certain time-span, such as within 0.1 microseconds. At that point, the user could reasonably expect his data to having been overwritten by someone else.
 
 It could potentially also be the place where priorities are set on requests. Some users or processes may require their data to always take precedence over others, if that data should so happen to be written within a given time-span.
+
+And ultimately, it would help guarantee that, even though data may be overwritten in one location, it is never lost and can be re-submitted either automatically or manually per a user's request.
+
 
 # Arbitrary Depth
 
