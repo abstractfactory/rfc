@@ -77,13 +77,14 @@ Blobs are arbitrary data not necessarily understood by the Open Metadata library
 
 A new concept introduced in MK2 is the *data-type*. A data-format is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system, e.g. `jpeg`, `zip`. A data-type however is their interface towards the programmer - their object-type, if you will - and determines what tools are available; both textually but also graphically.
 
-Here are a few examples
+Here are a all the supported types
 
 * `dataset.bool`
 * `dataset.int`
 * `dataset.float`
 * `dataset.string`
 * `dataset.date`
+* `dataset.dict`
 * `dataset.null`
 * `group.enum`
 * `group.tuple`
@@ -286,6 +287,8 @@ However as meta-data may also be added ad-hoc via the file-system manually or vi
 
 As a result, only the first-returned item is visible to the end user. Open Metadata MAY provide a warning-message when the retrieved name is not unique.
 
+Another area in which name-conflicts may happen is in the use of dot-notation for retrieving children. If a child occupies the same name as an existing member variable, such as 'data', then that child would NOT be accessible via dot-notation as member variables take precedence over children.
+
 #### Example implementation
 
 A graphical user interface could hinder the creation of groups and datasets that would end up hiding another group or dataset.
@@ -294,15 +297,39 @@ Alternatively, it may warn the user upon commit and suggest alternatives.
 
 # Distribution and Concurrent Writes
 
+> "If I write to file A, and you write to file A, who wins?"
+
 Your operating system is very adapt at distributing the tasks you assign to it. However there are times when even the smartest operating system with the smartest of hard-drives can corrupt your data; it is after all, the real world.
 
 One possible source of this corruption is multiple writes to a single location. Since Open Metadata is all about collaborative edits, how can it ensure that data is never written from one location while at the same time being written from another?
+
+## Broker
 
 One possibly solution is to introduce a `broker`.
 
 ![](https://dl.dropbox.com/s/gyqptp90bjno20x/pep10_concurrency.png)
 
 It would then be up to the `broker` to delegate or queue requests to the best of a file-systems capabilities; possibly guaranteeing that there is at most only ever a single writing operating taking place at any given moment per physical hard-disk.
+
+
+## Push/Pull
+
+Another solution may be to separate private and public writes.
+
+```python
+>>> location = om.Location('/server/location')
+>>> dataset = om.Dataset('new_data.string', data='a value', parent=location)
+>>> om.commit(dataset)
+>>> om.push()
+```
+
+Here, a dataset is first "committed" to be written publicly, but is first written to the local hard-drive; in a common place for metadata written by this user.
+
+```python
+/home/marcus/.metastage/server/location/new_data.string
+```
+
+Upon om.push(), Open Metadata would look for ".metastage" underneath the current users home-directory and schedule the data residing there for publication upon the location where 'location' was initially referenced.
 
 # Arbitrary Depth
 
@@ -492,6 +519,14 @@ Any database is ultimately just one or more files on some disk. You could gain a
 ### `rpc`
 
 How about reading and writing data via a remote procedure call (RPC)? The dataset could contain instructions for either and get interpreted by your application.
+
+```python
+>>> location = om.Location('/some/folder')
+>>> location.tree()
+# +-- folder
+# |   +-- startFrame.rpc
+```
+
 
 [universal design pattern]: http://steve-yegge.blogspot.co.uk/2008/10/universal-design-pattern.html
 [Pipi]: http://pipi.io
