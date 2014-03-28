@@ -28,7 +28,7 @@ Open Metadata was first initiated in 2013 to facilitate the development of [Pipi
 
 # Goal - Open Metadata
 
-Quick re-cap of the goal of Open Metadata. Open Metadata is to introduce a mechanism with which to append meta-data to folders in such a way that it becomes as transparent to the end-user as handling files.
+The goal of Open Metadata is to introduce a mechanism with which to append meta-data to folders in such a way that it becomes as transparent to the end-user as handling files.
 
 Meta-data is crucial and a basic component not only of computers and the systems we build, but to our psyche. Knowledge is knowledge, but so is our knowledge about this knowledge and therein lies the keyword; *about*. Meta-knowledge, and knowledge to a computer is called `data`.
 
@@ -332,7 +332,7 @@ Similar to the Broker-model, another solution may be to write temporarily to one
 >>> om.push()
 ```
 
-Here, a dataset is first "committed" to be written publicly, meaning it is written the local hard-drive; in a common place for metadata written by this user.
+Here, a dataset is first "committed" to be written publicly, meaning it is written to the local hard-drive; in a common place for metadata written by this user.
 
 ```python
 /home/marcus/.metastage/server/location/new_data.string
