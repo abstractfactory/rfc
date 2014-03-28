@@ -346,6 +346,19 @@ It could potentially also be the place where priorities are set on requests. Som
 
 And ultimately, it would help guarantee that, even though data may be overwritten in one location, it is never lost and can be re-submitted either automatically or manually per a user's request.
 
+### Push/Pull Daemon
+
+One of the advantages over using a proxy for storage as opposed to working directly towards a database is that you can schedule for writes to happen at a time more convenient for writing.
+
+For example, imagine you are working within an application which produces massive amounts of metadata; sporadically streaming to disk at a rate of 100mb/sec, and that it did so only for a few seconds.
+
+If this data were to immediately write to a remote server, the transfer could potentially become a bottle-neck in this process.
+
+Instead, the data could be written locally and a background process, a.k.a daemon, could then time the instances you are attempting to write and only Push once the time in between writes have reached a certain threshold; such as 10 seconds.
+
+Only after 10 seconds of inactivity would the daemon get to work in pushing all of this data onto the server.
+
+The user would get fast response-time, and the server would get one big chunk of data to store, rather than a sporadic cloud of requests.
 
 # Arbitrary Depth
 
