@@ -8,7 +8,7 @@ Keywords and cross-referencing is an optimisation extension of the Abstract Fact
 
 Copyright, Change Process and Language is derived via inheritance as per [spec:1][].
 
-# Goals
+# Goal
 
 To alleviate the need for repetition in specifications, specifications allow for use of `keywords` and `cross-referencing` as a means of encapsulating meaning and re-using existing information within another specification.
 

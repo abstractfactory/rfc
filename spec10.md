@@ -303,6 +303,33 @@ Your operating system is very adapt at distributing the tasks you assign to it. 
 
 One possible source of this corruption is multiple writes to a single location. Since Open Metadata is all about collaborative edits, how can it ensure that data is never written from one location while at the same time being written from another?
 
+There are many ways of dealing with concurrency. Lets have a look at some in order of its increasing level of complexity.
+
+### Introspection
+
+Possibly the most straight-forward solution is to ash a file-system which files are currently in use and never try and write to one that is, but instead wait for it to become free. (lsof on linux, openfiles.exe on windows)
+
+### Lock-files
+
+Similar to Introspection, another (brute-force) approach of assuring that there is only ever one writer at a time is to use lock-files.
+
+```python
+|-- folder
+|   |-- .meta
+|   |   |-- data.string
+|   |   |-- data.string.lock
+```
+
+A lock-file is merely an empty file somehow designating which files are "locked" for edits. When a lock-file exists, no other than the creator of the lock-file may edit the locked file.
+
+Only upon completing the edit does the creator then remove his lock-file and thus restore permission for others to create lock-files of their own in preparation for their edits.
+
+#### Lock-files and deadlocks
+
+There is of course the possibility of an edit not completing successfully and thus leaving behind its lock-file. In these cases, the locked files are forever locked and can never be edited; not even to remove the lock-file.
+
+In cases such as these it may be necessary to introduce a time-slot within which each edit is expected to take place. During edit, the editor could receive a heartbeat every so often - say 20 ms - to which the editor is required to respond. Upon failure to respond, the lock-file is automatically removed and the editor then looses permission to further write to this destination without re-establishing a lock-file.
+
 ### Broker
 
 One possibly solution is to introduce a `broker`.
