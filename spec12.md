@@ -42,7 +42,15 @@ With `oom.inherit()`, each folder may be thought of as a subclass of its parent,
 ['spell_correction', 'my_custom_plugin']
 ```
 
-# Designed for inheritance
+## Difference between `Group` and `Instance`
+
+`Instance` is essentially a `Group`, with a few minor differences.
+
+1. `Group` does not take into account ascending parent-hood.
+2. `Group` cannot have its members accessed via dot-notation.
+3. and thus `Group` cannot have its members modified directly.
+
+## Designed for inheritance
 
 In the above example, how would you go about *removing* or *altering* inherited information? Consider the following example
 
@@ -69,7 +77,7 @@ Now both 'maya' and 'houdini' have a bool value specifying whether or not they a
 {'maya': False, 'houdini': True}
 ```
 
-# Selective inheritance
+## Selective inheritance
 
 What about situations where you aren't looking to inherit *every* member of an instance? This is the recommended way with which to retrieve metadata in an inheritance manner as it greatly decreases the amount of reading done in each query.
 
@@ -80,7 +88,7 @@ What about situations where you aren't looking to inherit *every* member of an i
 {'maya': False, 'houdini': True}
 ```
 
-## Shallow inheritance
+### Shallow inheritance
 
 How about situations where you may only be interested in an immediate parent, and not any of the parents above?
 

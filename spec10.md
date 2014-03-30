@@ -223,7 +223,7 @@ location.clear()
 assert not location.exists
 ```
 
-### Dot-notation
+### Dot-notation (deprecated)
 
 Open Metadata MAY support the notion of accessing members via dot-notation syntax.
 
@@ -235,6 +235,8 @@ location = om.Location('/home/marcus')
 location.personal.firstname
 'Marcus'
 ```
+
+*Note*: This is not longer valid, as we use this to access meta-meta-data members.
 
 ### \__call__
 
