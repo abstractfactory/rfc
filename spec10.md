@@ -1,6 +1,6 @@
 # Arbitrary Open Metadata Hierarchy
 
-This document describes the requirements involved in the next-generation of Open Metadata referred to as mark 2 (MK2) in this specification; previous version referred to as mark 1 (MK1)
+This document describes the requirements involved in the next-generation of Open Metadata referred to as mark 2 (Mk2) in this specification; previous version referred to as mark 1 (Mk1)
 
 ![](https://dl.dropbox.com/s/av2x8gel580ow48/om2_hierarchy.png)
 
@@ -20,6 +20,8 @@ Open Metadata was first initiated in 2013 to facilitate the development of [Pipi
 * content -- A collection of data
 * data -- A piece of information
 
+In layman's terms; "data about data" - regardless of data-type or traditional use.
+
 #### References
 
 * [Notes on consistent meta-data][]
@@ -34,11 +36,13 @@ Meta-data is crucial and a basic component not only of computers and the systems
 
 Thus, Open Metadata MUST allow for any `data` to contain meta-data, including meta-data itself, and it must to so in a manner that doesn't affect the original `data` in any way and finally this data MUST NOT be bound by any particular representation; meaning it may be in the form of a True or False statement, a string or list of strings or quite simply any format capable of being represented on a file-system.
 
-# Goal - MK2
+# Goal - Mk2
 
-Break free from the 2-level hierarchy imposed by MK1 and support hierarchies of an arbitrary depth and width.
+Break free from the 2-level hierarchy imposed by Mk1 and support hierarchies of an arbitrary depth and width.
 
-[RFC11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current MK1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [RFC11][].
+[RFC11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current Mk1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [RFC11][].
+
+Another important evolution is separating the previous `File` and `Folder` objects into `Group` and `Dataset`. Too often did this cause confusion and conflict, both logically but also practically e.g. with the reserved variable name `file` in Python.
 
 # Proposal
 
@@ -75,7 +79,7 @@ Blobs are arbitrary data not necessarily understood by the Open Metadata library
 
 ### Data-types
 
-A new concept introduced in MK2 is the *data-type*. A data-format is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system, e.g. `jpeg`, `zip`. A data-type however is their interface towards the programmer - their object-type, if you will - and determines what tools are available; both textually but also graphically.
+A new concept introduced in Mk2 is the *data-type*. A data-format is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system, e.g. `jpeg`, `zip`. A data-type however is their interface towards the programmer - their object-type, if you will - and determines what tools are available; both textually but also graphically.
 
 Here are a all the supported types
 
@@ -83,6 +87,7 @@ Here are a all the supported types
 * `dataset.int`
 * `dataset.float`
 * `dataset.string`
+* `dataset.text`
 * `dataset.date`
 * `dataset.null`
 * `group.enum`
@@ -115,6 +120,62 @@ assert group.data == data
 
 Native data-formats, such as `txt` or `jpeg` are treated with the minimal knowledge that their corresponding suffix allows, which in most cases are fine; a `jpeg` can only mean a rectangular bit-map with only one possible compression method.
 
+### History
+
+Whenever an existing attribute is overwritten, a copy of it is backed up. This backup may be retrieved at a later time and may feature support for persistent, per-user undo/redo.
+
+Recorded information
+
+* Previous value
+* Time
+* User
+
+Example
+
+```python
++-- folder
+|   +-- .meta
+|   |   +-- .history
+|   |   |   +-- 20140401-140541-604&some data.string
+|   |   |   |   +-- user
+|   |   |   |   +-- previous_value
+|   |   |   +-- 20140401-140751-121&some data.string
+|   |   |   |   +-- user
+|   |   |   |   +-- previous_value
+|   |   |   +-- 20140401-140751-126&some data.string
+|   |   |   |   +-- user
+|   |   |   |   +-- previous_value
+|   |   +-- some data.string
+```
+
+### Revisions
+
+At any point in time may an attribute be stored as a revision. A revision is identical to a historical backup, except that it allows for a note to be stored with it.
+
+Revisions are useful when making changes that are hard to test without altering original data. A revision could then be made, knowing that one could safely return at any point in time.
+
+A note is stored as convenience for a future self or others who might be interested in knowing what has already been tried in before.
+
+Recorded information
+
+* Previous value
+* Time
+* User
+* Note
+
+Example
+
+```python
++-- folder
+|   +-- .meta
+|   |   +-- .revisions
+|   |   |   +-- 20140401-140541-604&some data.string
+|   |   |   |   +-- user
+|   |   |   |   +-- note
+|   |   |   |   +-- previous_value
+|   |   +-- some data.string
+```
+
 ### Location
 
 Refer to an absolute path as *location* so as to facilitate for future expansion into using URI/URL addresses.
@@ -125,7 +186,7 @@ It MUST NOT matter to the programmer *where* the meta-data is stored and it MUST
 
 Data MAY be written directly to groups; this becomes the meta-data of that group. In the example above we commit directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
 
-In other cases, where the group has no suffix, the data is formatted as-is; meaning MK2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.
+In other cases, where the group has no suffix, the data is formatted as-is; meaning Mk2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.
 
 ```python
 
@@ -142,9 +203,9 @@ It may sometimes be necessary to assign meta-data to meta-data itself; for examp
 
 ```python
 - personal.list
-  |-- firstname.string
-  |-- lastname.string
-  |-- age.int
+  +-- firstname.string
+  +-- lastname.string
+  +-- age.int
 ```
 
 Lists are naturally ordered, but how can we store this order on disk together with the datasets it may contain? One way would be to introduce a header into each of the files.
@@ -164,10 +225,10 @@ So an alternative may be to store this information in a specially formatted data
 
 ```python
 - personal.list
-  |-- __order__
-  |-- firstname.string
-  |-- lastname.string
-  |-- age.int
+  +-- __order__
+  +-- firstname.string
+  +-- lastname.string
+  +-- age.int
 ```
 
 ```python
@@ -316,10 +377,10 @@ Possibly the most straight-forward solution is to ash a file-system which files 
 Similar to Introspection, another (brute-force) approach of assuring that there is only ever one writer at a time is to use lock-files.
 
 ```python
-|-- folder
-|   |-- .meta
-|   |   |-- data.string
-|   |   |-- data.string.lock
++-- folder
+|   +-- .meta
+|   |   +-- data.string
+|   |   +-- data.string.lock
 ```
 
 A lock-file is merely an empty file somehow designating which files are "locked" for edits. When a lock-file exists, no other than the creator of the lock-file may edit the locked file.
@@ -391,14 +452,14 @@ The user would get fast response-time, and the server would get one big chunk of
 
 # Arbitrary Depth
 
-An important aspect of MK2 is that of arbitrary depths; i.e. allowing for an unlimited nesting of `dataset` within `group`.
+An important aspect of Mk2 is that of arbitrary depths; i.e. allowing for an unlimited nesting of `dataset` within `group`.
 
 ```python
-|-- top folder
-    |-- group1
-        |-- group2
-            |--group3
-                |-- dataset.string
++-- top folder
+    +-- group1
+        +-- group2
+            +--group3
+                +-- dataset.string
 ```
 
 ## Mixing `dataset` and `group`
@@ -406,9 +467,9 @@ An important aspect of MK2 is that of arbitrary depths; i.e. allowing for an unl
 Open Metadata MUST support the notion of mixing `dataset` and `group` objects within a hierarchy.
 
 ```python
-|-- top folder
-    |-- group1
-    |-- dataset1
++-- top folder
+    +-- group1
+    +-- dataset1
 ```
 
 # Automatic types
@@ -430,7 +491,9 @@ Open Metadata MUST support the notion of lazily assigning data to `group` and `d
 >>> om.commit(dataset)
 ```
 
-# Cascading
+# Cascading (deprecated)
+
+> Deprecation: This behavior was moved to [RFC12/OOM][]
 
 Reading and writing MAY be cascading. Meaning data may be retrieved by query of a leaf-dataset, only to have data returned be influenc
 
@@ -586,6 +649,7 @@ How about reading and writing data via a remote procedure call (RPC)? The datase
 ```
 
 
+[RFC12/OOM]: http://google.com
 [universal design pattern]: http://steve-yegge.blogspot.co.uk/2008/10/universal-design-pattern.html
 [Pipi]: http://pipi.io
 ["Everything is a file"]: http://www.abstractfactory.io/blog/everything-is-a-file/

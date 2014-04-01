@@ -42,6 +42,16 @@ With `oom.inherit()`, each folder may be thought of as a subclass of its parent,
 ['spell_correction', 'my_custom_plugin']
 ```
 
+## [Liskov Substitution Principle][]
+
+Inheritance is additive. It may be easier to think of inheritance as being cascading. Cascading inheritance enforces the LSP in that however you edit children, a parent may always be replaced by its child.
+
+This is an important concept in a progammable hierarchy and one that is enforced in the design of OOM. If a child were to be given the ability to break the LSP, then you could never be sure at which point in your hierarchy your code will fail.
+
+```python
+>>> oom.remove(userconfig.plugins)
+```
+
 ## Difference between `Group` and `Instance`
 
 `Instance` is essentially a `Group`, with a few minor differences.
@@ -77,7 +87,7 @@ Now both 'maya' and 'houdini' have a bool value specifying whether or not they a
 {'maya': False, 'houdini': True}
 ```
 
-## Selective inheritance
+### Selective inheritance
 
 What about situations where you aren't looking to inherit *every* member of an instance? This is the recommended way with which to retrieve metadata in an inheritance manner as it greatly decreases the amount of reading done in each query.
 
@@ -146,3 +156,5 @@ def inherit(item)
       return inherit_attribute(item)
    raise TypeError
 ```
+
+[Liskov Substitution Principle]: http://en.wikipedia.org/wiki/Liskov_substitution_principle
