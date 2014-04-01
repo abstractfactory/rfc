@@ -27,7 +27,7 @@ Inheritance is not suited to all types of information. Consider the description 
 
 # Architecture
 
-OOM extends Open Metadata with the `Instance` and `Attribute` objects and an `inherit()` method. Open Metadata defines `om.pull()` as a means of reading from disk; `om.inherit()` pulls data from both current and ascending folders. `Instance` then wraps `om.Group` to replicate the interface of a regular plain-data-type programming object.
+OOM extends Open Metadata with the `Instance` and `Attribute` objects and an `inherit()` method. Open Metadata defines `om.pull()` as a means of reading from disk; `om.inherit()` pulls data from both current and ascending folders. `Instance` then wraps `om.Location` to replicate the interface of a regular plain-data-type programming object.
 
 ```python
 >>> config = oom.Instance(r'c:\users\marcus\sublime')
@@ -54,13 +54,13 @@ This is an important concept in a progammable hierarchy and one that is enforced
 >>> oom.remove(userconfig.plugins)
 ```
 
-## Difference between `Group` and `Instance`
+## Difference between `Location` and `Instance`
 
-`Instance` is essentially a `Group`, with a few minor differences.
+`Instance` is essentially a `Location`, with a few minor differences.
 
-1. `Group` does not take into account ascending parent-hood.
-2. `Group` cannot have its members accessed via dot-notation.
-3. and thus `Group` cannot have its members modified directly.
+1. `Location` does not take into account ascending parent-hood.
+2. `Location` cannot have its members accessed via dot-notation.
+3. and thus `Location` cannot have its members modified directly.
 
 ## Designed for inheritance
 
