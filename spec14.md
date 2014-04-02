@@ -1,6 +1,6 @@
 # Temporal Open Metadata (TOM)
 
-An extension to Open Metadata to support the notion of temporal data; e.g. history and versions.
+An extension to Open Metadata to support the notion of time.
 
 ![](https://dl.dropbox.com/s/3b09g8gl4y3is9u/spec14_tom_place_v001.png)
 
@@ -13,7 +13,7 @@ Copyright, Change Process and Language is derived via inheritance as per [RFC1][
 
 # Goal
 
-In a collaborative environment, things change. This document describes a method of making metadata changes non-destructive. We do this by appending `history` `version` and `imprint` to the Open Metadata arsenal.
+This document describes a method of making changes to metadata non-destructive by appending `history`, `version` and `imprint` to the Open Metadata object-model.
 
 # Architecture
 
@@ -46,13 +46,13 @@ Example
 +-- folder
 |   +-- .meta
 |   |   +-- .history
-|   |   |   +-- 20140401-140541-604&some data.string
+|   |   |   +-- some data.string&20140401-140541-604
 |   |   |   |   +-- user
 |   |   |   |   +-- previous_value
-|   |   |   +-- 20140401-140751-121&some data.string
+|   |   |   +-- some data.string&20140401-140751-121
 |   |   |   |   +-- user
 |   |   |   |   +-- previous_value
-|   |   |   +-- 20140401-140751-126&some data.string
+|   |   |   +-- some data.string&20140401-140751-126
 |   |   |   |   +-- user
 |   |   |   |   +-- previous_value
 |   |   +-- some data.string
@@ -79,9 +79,41 @@ Example
 +-- folder
 |   +-- .meta
 |   |   +-- .versions
-|   |   |   +-- r001&some data.string
+|   |   |   +-- v001&some data.string
 |   |   |   |   +-- user
 |   |   |   |   +-- note
 |   |   |   |   +-- previous_value
 |   |   +-- some data.string
 ```
+
+### Undo
+
+```python
+>>> om.undo(item, user=None)
+```
+
+When there is history, there is the possibility of undoing changes made. Since anyone may make edits, there is the possibility of you undoing someone elses change.
+
+```python
++-- .history
+|   +-- some data.string&20140401-000000-001  # <-- by me
+|   +-- some data.string&20140401-000000-002  # <-- by you
+|   +-- some data.string&20140401-000000-003  # <-- by me
+```
+
+When specifying a `user` and the change about to be undone doesn't match Open Metadata MUST break operation and either raise an exception or return an error code.
+
+### Redo
+
+For every undo made, history is moved into a temporary '.redo' cache.
+
+```python
++-- .history
++-- .redo
+|   +-- some data.string&20140401-000000-001  # <-- time of undo
+```
+
+Original time-stamp is removed and replaced with the time of undoing so as to keep track of which to redo in which order.
+
+Once new history is written, e.g. a new change has been made, the redo cache is permanently cleared.
+

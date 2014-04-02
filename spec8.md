@@ -6,7 +6,7 @@ Keywords and cross-referencing is an optimisation extension of the Abstract Fact
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:1
 
-Copyright, Change Process and Language is derived via inheritance as per [spec:1][].
+Copyright, Change Process and Language is derived via inheritance as per [RFC1][].
 
 # Goal
 

@@ -190,7 +190,7 @@ location.personal.firstname
 
 *Note*: This is not longer valid, as we use this to access meta-meta-data members.
 
-### \__call__
+### \__call__ (deprecated)
 
 As an alternative to `dataset.read()` one may simply call upon a `group` or `location` object, using a path as argument.
 
@@ -203,17 +203,17 @@ As an alternative to `dataset.read()` one may simply call upon a `group` or `loc
 
 Sure reduces the number of lines, but perhaps not terribly intuitive.
 
-### Use of commit()
+### Use of dump()
 
-Coupling reading and writing within the same object sure is a convenience, but also introduces a security risk. I'm not talking about someone hacking your object while you use it, but more of security for you, yourself, while using an object. Having commit() so close to overall operation of an object, a misspelling or misuse could potentially lead to removing important information.
+Coupling reading and writing within the same object sure is a convenience, but also introduces a security risk. I'm not talking about someone hacking your object while you use it, but more of security for you, yourself, while using an object. Having dump() so close to overall operation of an object, a misspelling or misuse could potentially lead to removing important information.
 
-An alternative is to introduce a separate method responsible for commit-operations.
+An alternative is to introduce a separate method responsible for dump-operations.
 
 ```python
 >>> location = om.Location('/home/marcus')
 >>> group = om.Group('description.list')
 >>> group.data = ['my', 'ordered', 'list']
->>> om.commit(group)
+>>> om.dump(group)
 ```
 
 It didn't take any more lines of code, yet the implementation of writing is de-coupled from the object with which the contains resides and put into a more global space from where it can be distributed appropriately if need be.
@@ -242,12 +242,6 @@ However as meta-data may also be added ad-hoc via the file-system manually or vi
 As a result, only the first-returned item is visible to the end user. Open Metadata MAY provide a warning-message when the retrieved name is not unique.
 
 Another area in which name-conflicts may happen is in the use of dot-notation for retrieving children. If a child occupies the same name as an existing member variable, such as 'data', then that child would NOT be accessible via dot-notation as member variables take precedence over children.
-
-#### Example implementation
-
-A graphical user interface could hinder the creation of groups and datasets that would end up hiding another group or dataset.
-
-Alternatively, it may warn the user upon commit and suggest alternatives.
 
 # Arbitrary Depth
 
@@ -288,114 +282,6 @@ Open Metadata MUST support the notion of lazily assigning data to `group` and `d
 >>> dataset.data = 'my simple string'
 
 >>> om.commit(dataset)
-```
-
-# Cascading (deprecated)
-
-> Deprecation: This behavior was moved to [RFC12/OOM][]
-
-Reading and writing MAY be cascading. Meaning data may be retrieved by query of a leaf-dataset, only to have data returned be influenc
-
-For motivation and use of cascading data, head over to Steve Yegge's inspiration post about the [Universal Design Pattern][]
-
-### Cascading reads
-
-Open Metadata MUST support reading data recursively.
-
-```python
-# Picture this hierarchy
-
-# +-- project
-# |   +-- sequence
-# |       +-- shot
-
->>> location = om.Location('/project/sequence/shot')
->>> executables = location.executables
-
-# Now, it may be the case, that no executables reside
-# within `shot`. However, in this environment, executables
-# such as Maya or Houdini would typically reside within `project`
-
->>> print executables
-{
-  'maya': '/path/to/maya',
-  'houdini': '/path/to/houdini'
-}
-
-# It may however be useful for these properties to "cascade" up
-# through the hierarchy; eventually finding its way to us via the
-# descendant `shot`
-```
-
-Why would we want this? Well, in addition to the specific points made by Steve in his post, we might want to support the notion of cascading data within a post-production environment in which each descendant may *add* or *subtract* from prior properties.
-
-```python
-# +-- project
-# |   +-- sequence
-# |       +-- shot
-
->>> project = om.Location('/project')
->>> project.executables
-{
-  'maya': '/path/to/maya',
-  'houdini': '/path/to/houdini'
-}
-
->>> shot = om.Location('/project/sequence/shot')
->>> shot.executables
-{
-  'maya': '/path/to/maya', 
-  'houdini': '/path/to/houdini',
-  'mari': '/path/to/mari'
-}
-```
-
-In this example, `shot` has appended `mari` to its roster. It did so without duplicating the ascending hierarchy of metadata and by instead only adding `mari`. The cascading mechanism is then responsible for merging up-stream data.
-
-Removing an existing entry is then as easy as:
-
-```python
->>> shot.executables = {'maya': None}
-```
-
-### Cascading writes
-
-Open Metadata MUST support the notion of commiting data to disk in a cascading manner.
-
-```python
-# Demonstration of a downwards commit, data located underneath
-# committed object are also committed.
->>> location = om.Location('/home/marcus')
->>> group = om.Group('nested_data.list', parent=location)
->>> group2 = om.Group('sub_data', parent=group)
->>> dataset = om.Dataset('valid.bool', parent=group2)
->>> om.commit(location)  # <-- note `location`
-
-# In an upwards commit, missing groups are automatically created
->>> location = om.Location('/home/marcus')
->>> group = om.Group('nested_data.list', parent=location)
->>> group2 = om.Group('sub_data', parent=group)
->>> dataset = om.Dataset('valid.bool', parent=group2)
->>> om.commit(dataset)  # <-- note `dataset`
-```
-
-# Native types
-
-Open Metadata MUST support the addition of native OS data-types such as `jpeg` or `mov`. These files may not necessarily be viewable or even editable via the Open Metadata library, but still remains an important part of the possibilities facilitated by it.
-
-## `blob`
-
-When querying native data-types, Open Metadata MUST return an object of type `blob`. The functionality of `blob` objects are limited and MAY provide options for retrieving an absolute path, URL or URI.
-
-```python
->>> location = om.Location('/home/marcus')
->>> image = location.reference_image
->>> type(image)
-<type 'Blob'>
->>> image.path
-'/home/marcus/.meta/reference_image.png'
->>> str(image)
-'/home/marcus/.meta/reference_image.png'
 ```
 
 # Esoteric types
@@ -449,7 +335,6 @@ How about reading and writing data via a remote procedure call (RPC)? The datase
 
 
 [RFC12/OOM]: http://google.com
-[universal design pattern]: http://steve-yegge.blogspot.co.uk/2008/10/universal-design-pattern.html
 [Pipi]: http://pipi.io
 ["Everything is a file"]: http://www.abstractfactory.io/blog/everything-is-a-file/
 [Introduction to Augment pt. 1]: http://www.abstractfactory.io/blog/introduction-to-augment-pt-1/

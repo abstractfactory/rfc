@@ -1,4 +1,4 @@
-# Meta Open Metadata (MOM)
+# Meta Metadata (MOM)
 
 An extension to Open Metadata to support the notion of meta-meta-data.
 
@@ -29,14 +29,14 @@ Lists are naturally ordered, but how can we store this order on disk together wi
 One way would be to introduce a header into each of the files.
 
 ```python
-firstname.string = r'order=0\nMarcus'
+firstname.string = r'Marcus\norder=0'
 ```
 
 This could potentially be appropriate in many situations, but would in this case introduce possibility of conflicting ordering. 
 
 ```python
-firstname.string = r'order=2\nMarcus'
-lastname.string = r'order=2\nOttosson'
+firstname.string = r'Marcus\norder=2'
+lastname.string = r'Ottosson\norder=2'
 ```
 
 So an alternative may be to store this information in a specially formatted dataset pertaining to the information at hand.
@@ -67,3 +67,7 @@ In code, meta-meta-data could then be retrieved as such:
 Each meta-meta-data dataset or group MAY be accessible via dot-notation syntax by languages that support it and MUST otherwise be accessible via other means.
 
 If a dataset is not included in `__order__` then a null value MUST be returned. If the host group does not contain a `__order__` meta-meta-data set then an error MUST be raised.
+
+### Ordering
+
+Meta-metadata MUST appear *after* the `value` so that `value` may be retrieved without regard to meta-metadata in a streaming fashion.
