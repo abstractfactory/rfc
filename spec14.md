@@ -19,6 +19,7 @@ This document describes a method of making changes to metadata non-destructive b
 * `version`
 * `imprint`
 * `event`
+* `trash`
 
 # Architecture
 
@@ -68,6 +69,7 @@ Example
 Each change MAY be recorded as an `event` containing the following information:
 
 * Action taking place
+* Path to metadata in question
 * Summary of previous value
 * Summary of current value
 * Time
@@ -103,7 +105,7 @@ Each change MAY be recorded as an `event` containing the following information:
 	albert
 ```
 
-As history may be discarded upon retrieval, it is important to retain some notion of history for future reference. For instance, multiple changes may have been made, but at some point in time a very early version of history was restored and thus discarded all history before it. For users in the future, they would have no way of knowing whether there was any data between the restoration and previously latest value.
+As history may be discarded upon retrieval, it is important to retain some notion of history for future reference. For instance, multiple changes may have been made, but at some point in time a very early version of history was restored and thus discarded all following history. For users in the future, they would have no way of knowing whether there was any data between the restoration and previously latest value.
 
 ### An alternative version
 
@@ -132,6 +134,27 @@ Example
 |   |   |   |   +-- previous_value
 |   |   +-- some data.string
 ```
+
+### Taking out the trash
+
+Any removed node MUST be put into a persistent `trash` repository within its immediate parent.
+
+```python
++-- folder
+|   +-- .meta
+|   |   +-- some data.string  # <-- remove
+```
+
+```python
++-- folder
+|   +-- .meta
+|   |   +-- .trash
+|   |   |   +-- some data.string
+```
+
+Names of nodes - i.e. excluding their suffix - in trash MUST be unique; e.g. if "some data.string" is deleted, created once more as "some data.int" and again deleted, the first trashed node MUST be permanently deleted.
+
+Target usage of trash is of software using it to either purposefully restore lost metadata or to casually suggest restoring metadata upon creation of new node that may already exist in trash.
 
 ### Undo
 
