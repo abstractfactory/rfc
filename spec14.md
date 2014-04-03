@@ -1,6 +1,6 @@
 # Temporal Open Metadata (TOM)
 
-An extension to Open Metadata to support the notion of time.
+An extension to Open Metadata to support the notion of past, present and future.
 
 ![](https://dl.dropbox.com/s/3b09g8gl4y3is9u/spec14_tom_place_v001.png)
 
@@ -13,7 +13,12 @@ Copyright, Change Process and Language is derived via inheritance as per [RFC1][
 
 # Goal
 
-This document describes a method of making changes to metadata non-destructive by appending `history`, `version` and `imprint` to the Open Metadata object-model.
+This document describes a method of making changes to metadata non-destructive by appending the following objects to the Open Metadata object-model:
+
+* `history`
+* `version`
+* `imprint`
+* `event`
 
 # Architecture
 
@@ -30,7 +35,7 @@ Within `history` lies versions of previously altered data; `imprints`. Each `imp
 
 `version` is identical to `history` except that it is incrementally versioned and not concerned with time.
 
-### History
+### Recorded history
 
 Whenever an existing attribute is overwritten, a copy of it is backed up. This backup may be retrieved at a later time and may feature support for persistent, per-user undo/redo.
 
@@ -58,9 +63,51 @@ Example
 |   |   +-- some data.string
 ```
 
-### Versions
+### An historical event
 
-At any point in time may an attribute be stored as a version. A version is identical to a historical backup, except for its incremental versioning and that it may also support additional metadata such as a note.
+Each change MAY be recorded as an `event` containing the following information:
+
+* Action taking place
+* Summary of previous value
+* Summary of current value
+* Time
+* User
+
+```python
+# Folder layout
++-- folder
+|   +-- .meta
+|   |   +-- .event  # <-- event `file`
+
+# Event contents
+[time]
+	[metadata]
+	[action]
+	[summary_previous]
+	[summary_current]
+	[user]
+
+# Example
+20140402-215327-643
+	parent/age.int
+	modified
+	5
+	6
+	marcus
+
+20140402-215345-643
+	status.bool
+	modified
+	True
+	False
+	albert
+```
+
+As history may be discarded upon retrieval, it is important to retain some notion of history for future reference. For instance, multiple changes may have been made, but at some point in time a very early version of history was restored and thus discarded all history before it. For users in the future, they would have no way of knowing whether there was any data between the restoration and previously latest value.
+
+### An alternative version
+
+At any point in time MAY an attribute be stored as a version. A version is identical to a historical backup, except for its incremental versioning and that it may also support additional metadata such as a note.
 
 Versions are useful when making changes that are hard to test without altering original data. A version could then be made, knowing that one could safely return at any point in time.
 

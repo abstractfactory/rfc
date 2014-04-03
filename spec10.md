@@ -63,6 +63,11 @@ Where `x`/`y` is data as seen via e.g. Windows Explorer and `x`/`z` as seen via 
 
 This third-dimension - or `tertiary` data - then extends upon the concept of a file-system in such a way that makes it possible to store, not only information in an explicit location within a hierarchy of information, but also information *about* this information, at any level, containing any number of additional levels.
 
+# Zen of Open Metadata
+
+* Control over performance
+* Usability over features
+
 # Architecture
 
 Open Metadata defines four types; `location`, `group` and `dataset` and `blob`. Location refers to the `x` from above; the absolute path to a folder on disk.
@@ -115,6 +120,19 @@ group.commit()
 assert group.data == data
 
 ```
+
+### Default values
+
+Each dataset MUST start out with a default value.
+
+* `dataset.bool` = `False`
+* `dataset.int` = `0`
+* `dataset.float` = `0.0`
+* `dataset.string` = `''`
+* `dataset.text` = `''`
+* `dataset.date` = `Current Date`
+* `dataset.null` = `None`
+
 
 ### Data-formats
 

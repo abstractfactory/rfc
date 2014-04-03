@@ -17,6 +17,8 @@ Open Metadata is a method for storing generic data within folders on your hard-d
 
 The result of this is a cascading behaviour in attributes from top to bottom within a hierarchy.
 
+For motivation and use of cascading data, head over to Steve Yegge's inspiration post about the [Universal Design Pattern][]
+
 ### When to use
 
 When is inheritance in information intuitive? Well, consider configuration files of software. Consider Sublime Text. In Sublime, you have Configuration Files (CF) and then you have User Configuration Files (UCF). The information within UCF augments and, perhaps more importantly, overrides the CF. You may copy certain information over from the CF into the UCF in order to make alterations and you may add your own configuration that would augment the original configuration.
@@ -160,3 +162,4 @@ def inherit(item)
 ```
 
 [Liskov Substitution Principle]: http://en.wikipedia.org/wiki/Liskov_substitution_principle
+[universal design pattern]: http://steve-yegge.blogspot.co.uk/2008/10/universal-design-pattern.html
