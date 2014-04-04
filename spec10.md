@@ -119,7 +119,7 @@ location = om.Location('/home/marcus')
 group = om.Group('myaddress.list', parent=location)
 
 group.data = data
-group.commit()
+group.dump()
 
 assert group.data == data
 
@@ -135,7 +135,7 @@ Each dataset MUST start out with a default value.
 * `dataset.string` = `''`
 * `dataset.text` = `''`
 * `dataset.date` = `Current Date`
-* `dataset.null` = `None`
+* `dataset.null` = `Empty`
 
 
 ### Data-formats
@@ -150,7 +150,7 @@ It MUST NOT matter to the programmer *where* the meta-data is stored and it MUST
 
 ### Writing to groups
 
-Data MAY be written directly to groups; this becomes the meta-data of that group. In the example above we commit directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
+Data MAY be written directly to groups; this becomes the meta-data of that group. In the example above we dump directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
 
 In other cases, where the group has no suffix, the data is formatted as-is; meaning Mk2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.
 
@@ -188,7 +188,7 @@ data = {
 
 group = om.Group('keyvaluestore.dict', parent=location)
 group.data = data
-group.commit()
+group.dump()
   
 assert group.data == data
 assert location.data == {group.name: data}
@@ -303,7 +303,7 @@ Open Metadata MUST support the notion of lazily assigning data to `group` and `d
 # a suffix of 'string'
 >>> dataset.data = 'my simple string'
 
->>> om.commit(dataset)
+>>> om.dump(dataset)
 ```
 
 # Esoteric types
