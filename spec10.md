@@ -8,7 +8,7 @@ This document describes the requirements involved in the next-generation of Open
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: RFC1
 
-Copyright, Change Process and Language is derived via inheritance as per [RFC1][]
+Copyright, Change Process and Language is derived via inheritance as per [RFC1/Inheritance Pattern][]
 
 # History
 
@@ -40,7 +40,7 @@ Thus, Open Metadata MUST allow for any `data` to contain meta-data, including me
 
 Break free from the 2-level hierarchy imposed by Mk1 and support hierarchies of an arbitrary depth and width.
 
-[RFC11][] (Miller Columns) defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current Mk1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [RFC11][].
+[RFC11/Miller Columns for Everything][] defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current Mk1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with [RFC11][].
 
 Another important evolution is separating the previous `File` and `Folder` objects into `Group` and `Dataset`. Too often did this cause confusion and conflict, both logically but also practically e.g. with the reserved variable name `file` in Python.
 
@@ -70,17 +70,21 @@ This third-dimension - or `tertiary` data - then extends upon the concept of a f
 
 # Architecture
 
-Open Metadata defines four types; `location`, `group` and `dataset` and `blob`. Location refers to the `x` from above; the absolute path to a folder on disk.
+Open Metadata defines five types; `node`, `location`, `group` and `dataset` and `blob`. Location refers to the `x` from above; the absolute path to a folder on disk.
 
 ```python
 location = '/home/marcus'
 ```
 
-A group in meta-data is the equivalent of a folder on disk and a dataset its file.
+Nodes represent and entry in a `database` and is the supertype of all other objects. `database` may be anything from SQL to file-systems to in-memory data-structures.
 
-Groups, like folders, MAY contain one or more datasets and/or groups; a dataset on the other hand MUST NOT contain groups or other datasets.
+A group in meta-data is the equivalent of a folder on disk and a dataset a file.
 
-Blobs are arbitrary data not necessarily understood by the Open Metadata library, such as `jpeg` or `mp3`.
+Groups, like folders, MUST feature support for one or more datasets and/or groups; a dataset on the other hand MUST NOT contain groups or other datasets.
+
+Blobs are arbitrary data not necessarily understood by the Open Metadata library, such as `jpeg` or `mp3` and are treated like incomprehensible blobs of data; usually either copied or hard-linked into a metadata repository.
+
+Read more about Blobs in [RFC16/Metadata Blob][]
 
 ### Data-types
 
@@ -352,10 +356,11 @@ How about reading and writing data via a remote procedure call (RPC)? The datase
 ```
 
 
-[RFC12/OOM]: http://google.com
 [Pipi]: http://pipi.io
 ["Everything is a file"]: http://www.abstractfactory.io/blog/everything-is-a-file/
 [Introduction to Augment pt. 1]: http://www.abstractfactory.io/blog/introduction-to-augment-pt-1/
 [Notes on consistent meta-data]: http://www.abstractfactory.io/blog/notes-on-consistent-metacontent/
-[RFC1]: www.google.com
-[RFC11]: www.google.com
+[RFC1/Inheritance Pattern]: https://github.com/abstractfactory/rfc/blob/master/spec1.md
+[RFC11/Miller Columns for Everything]: https://github.com/abstractfactory/rfc/blob/master/spec11.md
+[RFC12/OOM]: https://github.com/abstractfactory/rfc/blob/master/spec12.md
+[RFC16/Metadata Blob]: https://github.com/abstractfactory/rfc/blob/master/spec16.md

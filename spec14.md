@@ -13,7 +13,7 @@ Copyright, Change Process and Language is derived via inheritance as per [RFC1][
 
 # Goal
 
-This document describes a method of making changes to metadata non-destructive by appending the following objects to the Open Metadata object-model:
+This document describes a method of making changes to metadata non-destructive; meaning that any change can be undone, redone and found at any point in time without affecting the overall interactivity and intuitiveness of operation. It does so by appending the following objects to the Open Metadata object-model:
 
 * `history`
 * `version`
