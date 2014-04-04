@@ -65,8 +65,8 @@ This third-dimension - or `tertiary` data - then extends upon the concept of a f
 
 # Zen of Open Metadata
 
-* Control over performance
-* Usability over features
+* Control is more important than performance
+* Usability is valued over amount of features
 
 # Architecture
 

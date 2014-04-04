@@ -33,7 +33,7 @@ At this point, '/home/marcus' will contain an absolute reference to the metadata
 
 # A trustworthy encapsulation
 
-Similar to attribute access within an inheritance tree, children MUST be able to access metadata exposed by parents, but MUST NOT be accessible the other way around.
+Similar to attribute access within an inheritance tree, referencing is a one-way street. Children MUST be able to access metadata exposed by parents, but parents MUST NOT be able to access metadata exposed by children.
 
 #### This won't work
 

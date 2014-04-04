@@ -21,6 +21,24 @@ This document describes a method of making changes to metadata non-destructive; 
 * `event`
 * `trash`
 
+And the following API functions:
+
+* `history`
+* `restore`
+
+```python
+dataset = om.read('/home/marcus', 'age')
+
+# Get closest history
+imprint = om.history(dataset).next()
+
+# Restore to closest history
+om.restore(imprint)
+
+# *Note: Restoring to closest history will
+# 		 in effect undo the latest change.
+```
+
 # Architecture
 
 A folder is added to each metadata hierarchy.
@@ -38,7 +56,7 @@ Within `history` lies versions of previously altered data; `imprints`. Each `imp
 
 ### Recorded history
 
-Whenever an existing attribute is overwritten, a copy of it is backed up. This backup may be retrieved at a later time and may feature support for persistent, per-user undo/redo.
+Whenever an existing attribute is overwritten, a copy of it MUST be backed up. This backup MUST be retrievable at a later time and MUST feature support for persistent, per-user undo/redo.
 
 Recorded information
 
@@ -66,7 +84,7 @@ Example
 
 ### An historical event
 
-Each change MAY be recorded as an `event` containing the following information:
+Each change MUST be recorded as an `event` containing the following information:
 
 * Action taking place
 * Path to metadata in question
@@ -109,7 +127,7 @@ As history may be discarded upon retrieval, it is important to retain some notio
 
 ### An alternative version
 
-At any point in time MAY an attribute be stored as a version. A version is identical to a historical backup, except for its incremental versioning and that it may also support additional metadata such as a note.
+At any point in time MAY a node be stored as a version. A version is identical to a historical backup, except for its incremental versioning and that it may also support additional metadata such as a note.
 
 Versions are useful when making changes that are hard to test without altering original data. A version could then be made, knowing that one could safely return at any point in time.
 
