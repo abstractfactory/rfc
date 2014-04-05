@@ -1,11 +1,9 @@
-# INP - Inheritance Pattern
+# Specification Boiler-plate
 
-This document further defines inheritance within the Abstract Factory RFC.
+This document contains content that MUST be included in every Abstract Factory RFC.
 
-* Name: https://github.com/abstract-factory/rfc/spec:1 (1/INH)
+* Name: http://rfc.abstractfactory.io/spec/1 (1/SBP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: none
-* Inherited by: *
 
 Copyright (c) 2014 the Editor and Contributors.
 
@@ -17,33 +15,8 @@ You should have received a copy of the GNU General Public License along with thi
 
 # Change Process
 
-This document is governed by the [Consensus-Oriented Specification System (COSS)][].
+This document is governed by the [Consensus-Oriented Specification System (COSS)](http://www.digistan.org/spec:1/COSS).
 
 # Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][].
-
-# Goal
-
-Inheritance is a mechanism often employed in Object-Oriented programming practices to promote code reuse.
-
-In the Abstract Factory RFC, inheritance plays a similar role and lay grounds for a hierarchy in which children may infer content via its parent.
-
-# Architecture
-
-Specifications provide a `inherits` and an optional `inherited by` property specifying from where to inherit content.
-
-# Example
-
-* Name: https://github.com/abstract-factory/rfc/spec:3 (3/MVP)
-* Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: spec:2
-* Inherited by: spec:3, 
-
-Here, [spec:3][] inherits from [spec:2][] meaning [spec:3][] includes content specified by [spec:2][] - including copyright notice, change process and language - on a header-by-header notice.
-
-Furthermore, an inherited specification provides the interface for which to design descendant specifications.
-
-[Consensus-Oriented Specification System (COSS)]: http://www.digistan.org/spec:1/COSS
-[RFC 2119]: http://tools.ietf.org/html/rfc2119
-[Divide and Conquer]: http://en.wikipedia.org/wiki/Divide_and_conquer_algorithm
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119).

@@ -2,7 +2,7 @@
 
 The Simple Publishing Pattern (SPP) distills spec:9 - The Shopfront Repository Pattern - with furher use of metaphors and use-case analasys.
 
-* Name: https://github.com/abstract-factory/rfc/spec:6 (6/SPP)
+* Name: http://rfc.abstractfactory.io/spec/6 (6/SPP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:1
 

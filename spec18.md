@@ -1,11 +1,10 @@
-# Open Metadata Data-types
+# Open Metadata Types
 
 This document describes each supported data-type of Open Metadata and their individual features and differences.
 
-* Name: https://github.com/abstract-factory/rfc/spec:12 (12/OOM)
+* Name: http://rfc.abstractfactory.io/spec/18 (18/OMT)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: RFC1
-* State: draft
+* State: raw
 
 Copyright, Change Process and Language is derived via inheritance as per [RFC1][].
 

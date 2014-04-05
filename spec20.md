@@ -4,7 +4,7 @@ This document describes methods for having one set of metadata be available from
 
 ![](https://dl.dropbox.com/s/mp9h56th12wff1e/spec20_mirrored_icon.png)
 
-* Name: https://github.com/abstract-factory/rfc/spec:12 (12/AOM)
+* Name: http://rfc.abstractfactory.io/spec/12 (12/AOM)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:1
 

@@ -4,7 +4,7 @@ This document describes an extension of Open Metadata for high-concurrency and/o
 
 ![](https://dl.dropbox.com/s/ghnv20fy1u725az/spec13_zom_v001.png)
 
-* Name: https://github.com/abstract-factory/rfc/spec:13 (13/ZOM)
+* Name: http://rfc.abstractfactory.io/spec/13 (13/ZOM)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: draft
 * Inherits: RFC1

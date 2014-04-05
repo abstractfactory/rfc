@@ -2,7 +2,7 @@
 
 This document further defines the meaning of the three hierarchical objects in content production.
 
-* Name: https://github.com/abstract-factory/rfc/spec:5 (5/FMP)
+* Name: http://rfc.abstractfactory.io/spec/5 (5/FMP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 
 Copyright (c) 2014 the Editor and Contributors.

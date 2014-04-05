@@ -2,7 +2,7 @@
 
 Keywords and cross-referencing is an optimisation extension of the Abstract Factory RFC that allows for specifications to reference parts of other specifications as a means of clarification and information reuse.
 
-* Name: https://github.com/abstract-factory/rfc/spec:8 (8/KCR)
+* Name: http://rfc.abstractfactory.io/spec/8 (8/KCR)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:1
 

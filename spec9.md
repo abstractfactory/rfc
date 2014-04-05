@@ -2,7 +2,7 @@
 
 This pattern defines `private` versus `public` repositories and their differences.
 
-* Name: https://github.com/abstract-factory/rfc/spec:4 (4/TVP)
+* Name: http://rfc.abstractfactory.io/spec/4 (4/TVP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:3
 

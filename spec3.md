@@ -2,7 +2,7 @@
 
 In contrast to [spec:2 - Immutable Versioning for Production][], Mutable Versioning for Production disregards layers and favours a monolithic appraoch to tracking change.
 
-* Name: https://github.com/abstract-factory/rfc/spec:3 (3/MVP)
+* Name: http://rfc.abstractfactory.io/spec/3 (3/MVP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:2
 * Inherited by: spec:3, 

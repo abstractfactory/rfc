@@ -2,11 +2,11 @@
 
 This document describes a method of making Open Metadata agnostic to where data is ultimately stored; be it on disk, in a database or an in-memory data-structure.
 
-* Name: https://github.com/abstract-factory/rfc/spec:12 (12/AOM)
+* Name: http://rfc.abstractfactory.io/spec/19 (19/SAM)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: spec:1
+* State: raw
 
-Copyright, Change Process and Language is derived via inheritance as per [spec:1][]
+Copyright, Change Process and Language is derived via inheritance as per [RFC1][]
 
 # Goal
 

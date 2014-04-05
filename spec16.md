@@ -2,7 +2,7 @@
 
 This document describes the way in which Open Metadata deals with files it cannot parse.
 
-* Name: https://github.com/abstract-factory/rfc/spec:16 (16/OMB)
+* Name: http://rfc.abstractfactory.io/spec/16 (16/OMB)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: RFC1
 * State: draft

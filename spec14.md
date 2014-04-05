@@ -4,7 +4,7 @@ An extension to Open Metadata to support the notion of past, present and future.
 
 ![](https://dl.dropbox.com/s/3b09g8gl4y3is9u/spec14_tom_place_v001.png)
 
-* Name: https://github.com/abstract-factory/rfc/spec:14 (14/TOM)
+* Name: http://rfc.abstractfactory.io/spec/14 (14/TOM)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: RFC1
 * State: draft

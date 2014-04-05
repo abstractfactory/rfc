@@ -2,7 +2,7 @@
 
 Timed Versioning Pattern attempts to compromise between the benefits of both IVP and MVP to allow for automatic updates, without loosing the ability to later refer back to specific states in development.
 
-* Name: https://github.com/abstract-factory/rfc/spec:4 (4/TVP)
+* Name: http://rfc.abstractfactory.io/spec/4 (4/TVP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:3
 

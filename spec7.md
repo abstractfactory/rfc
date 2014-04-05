@@ -2,7 +2,7 @@
 
 Representations facilitate the need for multiple data-types to co-exist within any given version.
 
-* Name: https://github.com/abstract-factory/rfc/spec:6 (6/SPP)
+* Name: http://rfc.abstractfactory.io/spec/6 (6/SPP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:1
 

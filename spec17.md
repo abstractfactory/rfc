@@ -2,12 +2,11 @@
 
 An extension to Open Metadata to support the notion of cross-referencing.
 
-* Name: https://github.com/abstract-factory/rfc/spec:12 (12/OOM)
+* Name: http://rfc.abstractfactory.io/spec/17 (17/CRM)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: RFC1
 * State: draft
 
-Copyright, Change Process and Language is derived via inheritance as per [RFC1][].
+Copyright, Change Process and Language is derived via inheritance as per [RFC1][]
 
 # Goal
 

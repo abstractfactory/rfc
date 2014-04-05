@@ -2,7 +2,7 @@
 
 This document describes an approach to versioning adopted from the Software Development industry that I call Immutable Versioning Pattern (IVP) and is a polylithic approach as opposed to a monolithic approach such as the one proposed by RFC3/MVP.
 
-* Name: https://github.com/abstract-factory/rfc/spec:2 (2/IVP)
+* Name: http://rfc.abstractfactory.io/spec/2 (2/IVP)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 
 Copyright (c) 2014 the Editor and Contributors.

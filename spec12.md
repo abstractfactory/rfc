@@ -4,7 +4,7 @@ An extension to Open Metadata to support the notion of inheritance.
 
 ![](https://dl.dropbox.com/s/2eyg655o4cws97t/oom_place_v001.png)
 
-* Name: https://github.com/abstract-factory/rfc/spec:12 (12/OOM)
+* Name: http://rfc.abstractfactory.io/spec/12 (12/OOM)
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: RFC1
 * State: draft
