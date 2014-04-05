@@ -27,7 +27,7 @@ And the following API functions:
 * `restore`
 
 ```python
-dataset = om.read('/home/marcus', 'age')
+dataset = om.metadata('/home/marcus', 'age')
 
 # Get closest history
 imprint = om.history(dataset).next()
