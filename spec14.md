@@ -41,13 +41,13 @@ om.restore(imprint)
 
 # Architecture
 
-A folder is added to each metadata hierarchy.
+A `Group` is added to each metadata hierarchy.
 
-```python
-+-- folder
-|   +-- .meta
-|   |   |-- .history
-|   |   |-- .versions
+```
+folder
+└─── .meta
+	 ├─── .history
+	 ├─── .versions
 ```
 
 Within `history` lies versions of previously altered data; `imprints`. Each `imprint` contains information about when the change occured, who performed it as well as the previous value itself.
@@ -56,7 +56,11 @@ Within `history` lies versions of previously altered data; `imprints`. Each `imp
 
 ### Recorded history
 
-Whenever an existing attribute is overwritten, a copy of it MUST be backed up. This backup MUST be retrievable at a later time and MUST feature support for persistent, per-user undo/redo.
+Whenever an existing attribute is overwritten, a copy of it MAY be backed up. This backup MAY be retrievable at a later time and MAY feature support for persistent, per-user undo/redo.
+
+#### Tracking on/off
+
+The decision whether or not to record history MUST be offered as an option to the user; e.g. via the presence of a `track_history` null in the meta-metadata (more about meta-metadata in [RFC15][]) of a given node. Or `do_not_track_history` depending on whether or not history should be tracked per-default or remain optional.
 
 Recorded information
 
@@ -66,61 +70,62 @@ Recorded information
 
 Example
 
-```python
-+-- folder
-|   +-- .meta
-|   |   +-- .history
-|   |   |   +-- some data.string&20140401-140541-604
-|   |   |   |   +-- user
-|   |   |   |   +-- previous_value
-|   |   |   +-- some data.string&20140401-140751-121
-|   |   |   |   +-- user
-|   |   |   |   +-- previous_value
-|   |   |   +-- some data.string&20140401-140751-126
-|   |   |   |   +-- user
-|   |   |   |   +-- previous_value
-|   |   +-- some data.string
+```
+folder
+└─── .meta
+     ├─── .history
+     │    ├─── some data.string&20140401-140541-604
+     │    ├─── user
+     │    └─── value
+     ├────some data.string&20140401-140751-121
+     │    ├─── user
+     │    └─── value
+     ├────some data.string&20140401-140751-126
+     │    ├─── user
+     │    └─── value
+     └────some data.string
 ```
 
 ### An historical event
 
 Each change MUST be recorded as an `event` containing the following information:
 
+* Author
 * Action taking place
-* Path to metadata in question
+* Path to target
 * Summary of previous value
 * Summary of current value
 * Time
-* User
 
-```python
-# Folder layout
-+-- folder
-|   +-- .meta
-|   |   +-- .event  # <-- event `file`
+```
+# Metadata layout example
+folder
+└───.meta
+    └───.event  # <-- event `Dataset`
 
 # Event contents
-[time]
-	[metadata]
-	[action]
-	[summary_previous]
-	[summary_current]
-	[user]
+time
+├─── author
+├─── action
+├─── metadata
+├─── summary_current
+└─── summary_previous
 
-# Example
+# Event contents Example
 20140402-215327-643
-	parent/age.int
-	modified
-	5
-	6
-	marcus
+├─── marcus
+├─── modified
+├─── parent/age.int
+├─── 5
+└─── 6
 
 20140402-215345-643
-	status.bool
-	modified
-	True
-	False
-	albert
+├─── status.bool
+├─── modified
+├─── True
+├─── False
+└─── albert
+
 ```
 
 As history may be discarded upon retrieval, it is important to retain some notion of history for future reference. For instance, multiple changes may have been made, but at some point in time a very early version of history was restored and thus discarded all following history. For users in the future, they would have no way of knowing whether there was any data between the restoration and previously latest value.
@@ -205,3 +210,4 @@ Original time-stamp is removed and replaced with the time of undoing so as to ke
 
 Once new history is written, e.g. a new change has been made, the redo cache is permanently cleared.
 
+[RFC15]: http://rfc.abstractfactory.io/spec/15

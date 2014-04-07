@@ -8,7 +8,7 @@ This document describes methods for having one set of metadata be available from
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:1
 
-Copyright, Change Process and Language is derived via inheritance as per [spec:1][]
+Copyright, Change Process and Language can be found in [RFC1][]
 
 # Goal
 

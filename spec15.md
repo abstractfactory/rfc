@@ -22,6 +22,12 @@ It may sometimes be necessary to assign meta-data to meta-data itself; for examp
   +-- age.int
 ```
 
+Generic meta-metadata
+
+* `readonly`
+* `hidden`
+* `permissions`
+
 Lists are naturally ordered, but how can we store this order on disk together with the datasets it may contain?
 
 # Architecture

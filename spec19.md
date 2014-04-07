@@ -6,7 +6,7 @@ This document describes a method of making Open Metadata agnostic to where data 
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: raw
 
-Copyright, Change Process and Language is derived via inheritance as per [RFC1][]
+Copyright, Change Process and Language can be found in [RFC1][]
 
 # Goal
 

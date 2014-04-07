@@ -8,7 +8,7 @@ This document describes the requirements involved in the next-generation of Open
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: RFC1
 
-Copyright, Change Process and Language is derived via inheritance as per [RFC1/Inheritance Pattern][]
+Copyright, Change Process and Language can be found in [RFC1][]
 
 # History
 
@@ -67,7 +67,16 @@ This third-dimension - or `tertiary` data - then extends upon the concept of a f
 
 * Change is common
 * Control is more important than performance
-* Usability is valued over amount of features
+* Usability is more important than features
+* Encapsulation is more important than disk-space
+
+### Cool isn't in technology but in how you use it
+
+One of the things Open Metadata fights is the perception that "cool" equals "useful" and how new technology adds fuel to this fire.
+
+Things like HDF5, Camlistore and ... each offer complex data management techniques out of the box and appeal to us in the same way that magic appeals to laymen;
+
+Thus the goal of Open Metadata is to encapsulate ALL of what is capable with HDF5, Camlistone and others using the most basic of techniques proven to work and guaranteed to last for the next couple of decennia.
 
 # Architecture
 
@@ -93,6 +102,8 @@ A new concept introduced in Mk2 is the *data-type*. A data-format is the physica
 
 Here are a all the supported types
 
+Generic
+
 * `dataset.bool`
 * `dataset.int`
 * `dataset.float`
@@ -104,6 +115,17 @@ Here are a all the supported types
 * `group.tuple`
 * `group.list`
 * `group.dict`
+
+Numbers
+
+* `group.point`
+* `group.vector`
+* `group.matrix`
+
+Web
+
+* `dataset.email`
+* `dataset.like`
 
 `bool`, `int`, `float`, `string` and `date` represent simple files with an added suffix corresponding to their type, such as *myfile.string*. `enum`, `tuple` and `list` however are different from regular groups in that they are *ordered*; meaning they maintain the individual indexes of each member. This is useful when storing data that may be visualised in a UI which needs to display items in a certain order; such as a full address.
 
