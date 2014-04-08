@@ -1,0 +1,28 @@
+# Pipi FAQ
+
+This document aims to centralise the most common of all questions asked about Pipi on a first-time basis.
+
+* Name: http://rfc.abstractfactory.io/spec/12 (12/OOM)
+* Editor: Marcus Ottosson <marcus@abstractfactory.io>
+* Inherits: RFC1
+* State: draft
+
+Copyright, Change Process and Language can be found in RFC1
+
+# Frequently Asked Questions
+
+> What is the difference between Pipi and Shotgun/FTrack/Tactic/5th Kind?
+
+I suppose one way of summarising their differences is this - Shotgun et. al. connects *people*, Pipi connects *software*. They're actually solving a different set of problems - Shotgun et. al. are for production; i.e. keeping track of artists and their tasks and ensuring the project is on track - and they do it really well. Pipi on the other hand is concerned with tracking data as it passes through software and the process of distilling and reconstituting data so as to facilitate change throghout the project. At the end of the day, they both need each other.
+
+> Is Pipi running in the cloud?
+
+Pipi is where the work is. At the moment, our target audience work locally so locally is where it needs to be. This is one of the issues with cloud-based solutions; they are too far (relative to Pipi) away from many of the problems they have started solving recently i.e. software integrations. Because they are so far away (i.e. in the cloud) you get ultimately struggle with latency on anything that relies on communicating with the pipeline.
+
+> How is the current user resolved?
+
+By looking at your user account. The idea is that one identity is enough; with your user account you've already got Google setup, your chat program and mail client. We're there too.
+
+> How do I install Pipi?
+
+Pipi is mainly Python and would initially be installed somewhere central. This location would then be added to each additional computer's PYTHONPATH and viola; Pipi is accessible from (i.e. is "installed on") all your computers.

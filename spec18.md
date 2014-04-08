@@ -6,7 +6,7 @@ This document describes each supported data-type of Open Metadata and their indi
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: raw
 
-Copyright, Change Process and Language can be found in [RFC1][]
+Copyright, Change Process and Language can be found in RFC1
 
 ### List
 

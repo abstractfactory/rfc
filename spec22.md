@@ -8,4 +8,4 @@ This document describes a method of working within a given production that facil
 * Related: RFC22
 * Tags: software discovery, dealing with change
 
-Copyright, Change Process and Language can be found in [RFC1][]
+Copyright, Change Process and Language can be found in RFC1

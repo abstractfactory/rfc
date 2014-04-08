@@ -1,12 +1,18 @@
-# SPP - Simple Publishing Pattern
+# Simple Publishing Pattern
 
-The Simple Publishing Pattern (SPP) distills spec:9 - The Shopfront Repository Pattern - with furher use of metaphors and use-case analasys.
+This document extends RFC9 with further use of metaphors and use-case analysis.
 
-* Name: http://rfc.abstractfactory.io/spec/6 (6/SPP)
+* Name: http://rfc.abstractfactory.io/spec/6
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: spec:1
+* Tags: publishing
+* Related: RFC9
+* State: raw
 
-Copyright, Change Process and Language is derived via inheritance as per [spec:1][]
+Copyright and Language can be found in RFC1
+
+# Change Process
+
+These RFC documents are Open-source and collaborative. To find out how you can contribute, see the [Consensus-Oriented Specification System (COSS)](http://www.digistan.org/spec:1/COSS).
 
 # Goals
 

@@ -8,7 +8,7 @@ This document acts as parent for subsequent specifications each meant to illummi
 * Related: RFC24, RFC25, RFC27
 * Tags:
 
-Copyright, Change Process and Language can be found in [RFC1][]
+Copyright, Change Process and Language can be found in RFC1
 
 # Goal
 

@@ -9,7 +9,7 @@ An extension to Open Metadata to support the notion of past, present and future.
 * Inherits: RFC1
 * State: draft
 
-Copyright, Change Process and Language is derived via inheritance as per [RFC1][].
+Copyright, Change Process and Language is derived via inheritance as per RFC1.
 
 # Goal
 
@@ -60,7 +60,7 @@ Whenever an existing attribute is overwritten, a copy of it MAY be backed up. Th
 
 #### Tracking on/off
 
-The decision whether or not to record history MUST be offered as an option to the user; e.g. via the presence of a `track_history` null in the meta-metadata (more about meta-metadata in [RFC15][]) of a given node. Or `do_not_track_history` depending on whether or not history should be tracked per-default or remain optional.
+The decision whether or not to record history MUST be offered as an option to the user; e.g. via the presence of a `track_history` null in the meta-metadata (more about meta-metadata in RFC15) of a given node. Or `do_not_track_history` depending on whether or not history should be tracked per-default or remain optional.
 
 Recorded information
 
@@ -209,5 +209,3 @@ For every undo made, history is moved into a temporary '.redo' cache.
 Original time-stamp is removed and replaced with the time of undoing so as to keep track of which to redo in which order.
 
 Once new history is written, e.g. a new change has been made, the redo cache is permanently cleared.
-
-[RFC15]: http://rfc.abstractfactory.io/spec/15

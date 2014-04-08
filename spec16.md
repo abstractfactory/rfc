@@ -7,7 +7,7 @@ This document describes the way in which Open Metadata deals with files it canno
 * Inherits: RFC1
 * State: draft
 
-Copyright, Change Process and Language is derived via inheritance as per [RFC1][].
+Copyright, Change Process and Language is derived via inheritance as per RFC1.
 
 # Goal
 

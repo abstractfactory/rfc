@@ -1,12 +1,18 @@
-# REP - Representations Pattern
+# Representations Pattern
 
-Representations facilitate the need for multiple data-types to co-exist within any given version.
+This document describes a method facilitating the need for multiple data-types co-existing within any given version.
 
-* Name: http://rfc.abstractfactory.io/spec/6 (6/SPP)
+* Name: http://rfc.abstractfactory.io/spec/7
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: spec:1
+* Related: RFC1, RFC2, RFC3, RFC4, RFC6
+* Tags: versioning, publishing
+* State: raw
 
-Copyright, Change Process and Language is derived via inheritance as per [spec:1][]
+Copyright and Language can be found in RFC1
+
+# Change Process
+
+These RFC documents are Open-source and collaborative. To find out how you can contribute, see the [Consensus-Oriented Specification System (COSS)](http://www.digistan.org/spec:1/COSS).
 
 # Goal
 
