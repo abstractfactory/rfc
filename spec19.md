@@ -1,8 +1,8 @@
-# Storage Agnostic Metadata (SAM)
+# Storage Agnostic Metadata
 
 This document describes a method of making Open Metadata agnostic to where data is ultimately stored; be it on disk, in a database or an in-memory data-structure.
 
-* Name: http://rfc.abstractfactory.io/spec/19 (19/SAM)
+* Name: http://rfc.abstractfactory.io/spec/19
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: raw
 

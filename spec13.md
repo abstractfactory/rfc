@@ -1,17 +1,22 @@
-# Zero Open Metadata (ZOM)
+# Zero Open Metadata
 
 This document describes an extension of Open Metadata for high-concurrency and/or high-performance scenarios utilising the ZeroMQ networking library.
 
-![](https://dl.dropbox.com/s/ghnv20fy1u725az/spec13_zom_v001.png)
+![](../images/13/title.png)
 
-* Name: http://rfc.abstractfactory.io/spec/13 (13/ZOM)
+* Name: http://rfc.abstractfactory.io/spec/13
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: draft
-* Inherits: RFC1
+* Related: RFC10
 
-Copyright, Change Process and Language is derived via inheritance as per RFC1.
+Copyright and Language can be found in RFC1
+
+# Change Process
+
+This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
 # Goal
+
 > "If I write to file A, and you write to file A, who wins?"
 
 Your operating system is very adapt at distributing the tasks you assign to it. However there are times when even the smartest operating system with the smartest of hard-drives can corrupt your data; it is after all, the real world.
@@ -20,13 +25,13 @@ One possible source of this corruption is multiple writes to a single location. 
 
 # Architecture
 
-There are many ways of dealing with concurrency. Lets have a look at some in order of its increasing level of complexity.
+Lets have a look at some of the ways of dealing with this problem in ascending order of complexity.
 
-### 1. Introspection
+### Introspection
 
-Possibly the most straight-forward solution is to ash a file-system which files are currently in use and never try and write to one that is, but instead wait for it to become free. (lsof on linux, openfiles.exe on windows)
+Possibly the most straight-forward solution is to ask a file-system which files are currently in use and never try and write to one that is, but instead wait for it to become free. (lsof on linux, openfiles.exe on windows)
 
-### 2. Lock-files
+### Lock-files
 
 Similar to Introspection, another (brute-force) approach of assuring that there is only ever one writer at a time is to use lock-files.
 
@@ -41,21 +46,21 @@ A lock-file is merely an empty file somehow designating which files are "locked"
 
 Only upon completing the edit does the creator then remove his lock-file and thus restore permission for others to create lock-files of their own in preparation for their edits.
 
-#### 2a. Lock-files and deadlocks
+#### Lock-files and deadlocks
 
 There is of course the possibility of an edit not completing successfully and thus leaving behind its lock-file. In these cases, the locked files are forever locked and can never be edited; not even to remove the lock-file.
 
 In cases such as these it may be necessary to introduce a time-slot within which each edit is expected to take place. During edit, the editor could receive a heartbeat every so often - say 20 ms - to which the editor is required to respond. Upon failure to respond, the lock-file is automatically removed and the editor then looses permission to further write to this destination without re-establishing a lock-file.
 
-### 3. Broker
+### Broker
 
 One possibly solution is to introduce a `broker`.
 
-![](https://dl.dropbox.com/s/gyqptp90bjno20x/pep10_concurrency.png)
+![](../images/13/broker.png)
 
 It would then be up to the `broker` to delegate or queue requests to the best of a file-systems capabilities; possibly guaranteeing that there is at most only ever a single writing operating taking place at any given moment per physical hard-disk.
 
-#### 3a. RPC
+#### Broker via RPC
 
 One possible implementation of a broker is to utilising the Open Metadata library via proxy-methods such as a Remore Procedure Call (RPC).
 
@@ -63,11 +68,11 @@ Clients may call upon an exposed service pass to any data they wish to be writte
 
 The broker then would be this service.
 
-### 4. Push/Pull
+### Push/Pull
 
 Similar to the Broker-model, another solution may be to write temporarily to one location, in preparation for the next.
 
-![](https://dl.dropbox.com/s/ln3orzp5xldiz5q/spec10_pushpull.png)
+![](../images/13/pushpull.png)
 
 ```python
 >>> location = om.Location('/server/location')

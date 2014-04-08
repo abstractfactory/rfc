@@ -1,15 +1,19 @@
-# Object-Oriented Metadata (OOM)
+# Object-Oriented Metadata
 
 An extension to Open Metadata to support the notion of inheritance.
 
 ![](https://dl.dropbox.com/s/2eyg655o4cws97t/oom_place_v001.png)
 
-* Name: http://rfc.abstractfactory.io/spec/12 (12/OOM)
+* Name: http://rfc.abstractfactory.io/spec/12
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Inherits: RFC1
+* Related: RFC10
 * State: draft
 
-Copyright, Change Process and Language can be found in RFC1
+Copyright and Language can be found in RFC1
+
+# Change Process
+
+This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
 # Goal
 
@@ -17,7 +21,7 @@ Open Metadata is a method for storing generic data within folders on your hard-d
 
 The result of this is a cascading behaviour in attributes from top to bottom within a hierarchy.
 
-For motivation and use of cascading data, head over to Steve Yegge's inspiration post about the [Universal Design Pattern][]
+For motivation and use of cascading data, head over to Steve Yegge's inspiration post on the [Universal Design Pattern][]
 
 ### When to use
 

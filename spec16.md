@@ -1,8 +1,8 @@
-# Metadata Blob (OMB)
+# Metadata Blob
 
 This document describes the way in which Open Metadata deals with files it cannot parse.
 
-* Name: http://rfc.abstractfactory.io/spec/16 (16/OMB)
+* Name: http://rfc.abstractfactory.io/spec/16
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: RFC1
 * State: draft

@@ -14,11 +14,11 @@ Copyright and Language can be found in RFC1
 
 # Change Process
 
-These RFC documents are Open-source and collaborative. To find out how you can contribute, see the [Consensus-Oriented Specification System (COSS)](http://www.digistan.org/spec:1/COSS).
+This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
 # History
 
-Open Metadata was first initiated in 2013 to facilitate the development of [Pipi][] and as a response to the ever-more complex nature of meta-data for common use.
+Open Metadata was first initiated in 2013 to facilitate the development of [Pipi][] and as a response to the ever-more complex nature of metadata for common use.
 
 #### Definition
 
@@ -30,51 +30,24 @@ In layman's terms; "data about data" - regardless of data-type or traditional us
 
 #### References
 
-* [Notes on consistent meta-data][]
+* [Notes on consistent metacontent][]
 * [Introduction to Augment pt. 1][]
 * ["Everything is a file"][]
 
-# Goal - Open Metadata
+# Goal
 
-The goal of Open Metadata is to introduce a mechanism with which to append meta-data to folders in such a way that it becomes as transparent to the end-user as handling files.
+Introduce a mechanism with which to associate metadata with a location in such a way that it becomes as transparent to the end-user as handling files.
 
-Meta-data is crucial and a basic component not only of computers and the systems we build, but to our psyche. Knowledge is knowledge, but so is our knowledge about this knowledge and therein lies the keyword; *about*. Meta-knowledge, and knowledge to a computer is called `data`.
+Metadata is crucial and a basic component not only of computers and the systems we build, but to our psyche. Knowledge is knowledge, but so is our knowledge about this knowledge and therein lies the keyword; *about*. Meta-knowledge. Knowledge is information is `data`.
 
-Thus, Open Metadata MUST allow for any `data` to contain meta-data, including meta-data itself, and it must to so in a manner that doesn't affect the original `data` in any way and finally this data MUST NOT be bound by any particular representation; meaning it may be in the form of a True or False statement, a string or list of strings or quite simply any format capable of being represented on a file-system.
-
-# Goal - Mk2
-
-Break free from the 2-level hierarchy imposed by Mk1 and support hierarchies of an arbitrary depth and width.
-
-RFC11 (Miller Columns For Everything) defines a hierarchical representation of data that encourages the use of meta-data in any situation. This is different from the current Mk1 in which data is forced into a 2-level hierarchy of `channel` and `key`. The goal of this spec then is to make Open Metadata compatible with RFC11.
-
-Another important evolution is separating the previous `File` and `Folder` objects into `Group` and `Dataset`. Too often did this cause confusion and conflict, both logically but also practically e.g. with the reserved variable name `file` in Python.
-
-# Proposal
-
-Regular folders have representation, use and established syntax.
-
-* `separator` + (`name` + `suffix`) = `separator` + `basename`
-* `\` + `funny_picture` + `.jpeg` = `\` + `funny_picture.jpeg`
-
-A path then is made up out of one or more `basename` objects, each preceeded by a `separator`. If this layout could be perceived as two-dimensional where `x` represents a path and `y` representing the content at that path - then Open Metadata provides a third-dimension `z`, an alternate to `y`.
-
-Their configuration might look as follows:
-
-`x`/`y` --> `location`/`content`
-
-`x`/`z` --> `location`/`meta-data`
-
-Where `x`/`y` is data as seen via e.g. Windows Explorer and `x`/`z` as seen via e.g. About.
-
-This third-dimension - or `tertiary` data - then extends upon the concept of a file-system in such a way that makes it possible to store, not only information in an explicit location within a hierarchy of information, but also information *about* this information, at any level, containing any number of additional levels.
+Open Metadata MUST allow for any `data` to contain metadata, including metadata itself, and it must to so in a manner that doesn't affect the original `data` (See RFC24 on "Sidecar files") and finally this data MUST NOT be bound by any particular representation; meaning it may be stored in any format capable of being represented on a file-system.
 
 # Zen of Open Metadata
 
 * Change is common
-* Control is more important than performance
 * Usability is more important than features
-* Encapsulation is more important than disk-space
+* Control is more important than performance
+* Encapsulation is more important than disk space
 
 <draft>
 #### Cool isn't in technology but in how you use it
@@ -94,7 +67,7 @@ location = '/home/marcus'
 
 Nodes represent and entry in a `database` and is the supertype of all other objects. `database` may be anything from SQL to file-systems to in-memory data-structures.
 
-A group in meta-data is the equivalent of a folder on disk and a dataset a file.
+A group in metadata is the equivalent of a folder on disk and a dataset a file.
 
 Groups, like folders, MUST feature support for one or more datasets and/or groups; a dataset on the other hand MUST NOT contain groups or other datasets.
 
@@ -108,7 +81,7 @@ A new concept introduced in Mk2 is the *data-type*. A data-format is the physica
 
 Here are a all the supported types
 
-Generic
+**Generic**
 
 * `dataset.bool`
 * `dataset.int`
@@ -122,13 +95,13 @@ Generic
 * `group.list`
 * `group.dict`
 
-Numbers
+**Numbers**
 
 * `group.point`
 * `group.vector`
 * `group.matrix`
 
-Web
+**Web**
 
 * `dataset.email`
 * `dataset.like`
@@ -175,11 +148,11 @@ Native data-formats, such as `txt` or `jpeg` are treated with the minimal knowle
 
 Refer to an absolute path as *location* so as to facilitate for future expansion into using URI/URL addresses.
 
-It MUST NOT matter to the programmer *where* the meta-data is stored and it MUST NOT matter in what format that data resides. With such assumptions, we can assert valid meta-data and standard use regardless of it residing on a remote file-system, within a binary file or in-memory within an application. Any content can contain meta-data, regardless of what is hosting it.
+It MUST NOT matter to the programmer *where* the metadata is stored and it MUST NOT matter in what format that data resides. With such assumptions, we can assert valid metadata and standard use regardless of it residing on a remote file-system, within a binary file or in-memory within an application. Any content can contain metadata, regardless of what is hosting it.
 
 ### Writing to groups
 
-Data MAY be written directly to groups; this becomes the meta-data of that group. In the example above we dump directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
+Data MAY be written directly to groups; this becomes the metadata of that group. In the example above we dump directly to a Group object. The resulting datasets are formatted according to the group's suffix which in this case results in an ordered list.
 
 In other cases, where the group has no suffix, the data is formatted as-is; meaning Mk2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the dataset.
 
@@ -239,7 +212,7 @@ location.personal.firstname
 'Marcus'
 ```
 
-*Note*: This is not longer valid, as we use this to access meta-meta-data members.
+*Note*: This is not longer valid, as we use this to access meta-metadata members.
 
 ### \__call__ (deprecated)
 
@@ -288,7 +261,7 @@ Open Metadata MAY constrain the adding of children to a parent when said child w
 ValueError: 'existing_group' already exists
 ```
 
-However as meta-data may also be added ad-hoc via the file-system manually or via a third-part library Open Metadata is unable to enforce this constraint throughout.
+However as metadata may also be added ad-hoc via the file-system manually or via a third-part library Open Metadata is unable to enforce this constraint throughout.
 
 As a result, only the first-returned item is visible to the end user. Open Metadata MAY provide a warning-message when the retrieved name is not unique.
 
@@ -388,4 +361,4 @@ How about reading and writing data via a remote procedure call (RPC)? The datase
 [Pipi]: http://pipi.io
 ["Everything is a file"]: http://www.abstractfactory.io/blog/everything-is-a-file/
 [Introduction to Augment pt. 1]: http://www.abstractfactory.io/blog/introduction-to-augment-pt-1/
-[Notes on consistent meta-data]: http://www.abstractfactory.io/blog/notes-on-consistent-metacontent/
+[Notes on consistent metacontent]: http://www.abstractfactory.io/blog/notes-on-consistent-metacontent/

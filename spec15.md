@@ -1,10 +1,10 @@
-# Meta Metadata (MOM)
+# Meta Metadata
 
 An extension to Open Metadata to support the notion of meta-meta-data.
 
 ![](https://dl.dropbox.com/s/9yqfpsbb16vwy9y/spec15_mom_place_v001.png)
 
-* Name: http://rfc.abstractfactory.io/spec/15 (15/MOM)
+* Name: http://rfc.abstractfactory.io/spec/15
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: RFC1
 * State: draft

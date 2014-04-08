@@ -1,68 +1,117 @@
-# Local Software Discovery
+# Software Discovery
 
-This document describes methods of software discovery within a local operating system.
+This document describes methods of discovering software on a local operating system.
 
-* Name: http://rfc.abstractfactory.io/spec/21 (21/LSD)
+* Name: http://rfc.abstractfactory.io/spec/21
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: draft
-* Related: RFC22
+* Related: RFC29
 * Tags: software discovery, dealing with change
 
 Copyright, Change Process and Language can be found in RFC1
 
 # Goal
 
-How do you program towards executables of software when you can guarantee neither availability nor platform?
+Software discovery is the process of finding software by way of relative reference.
+
+```python
+# Absolute reference
+c:\program files\adobe\photoshop\ps.exe
+
+# Relative reference
+photoshop
+```
+
+Discovering software via relative reference is useful in scenarios where it is important to de-couple the software you write from the software you interact with.
+
+For example, an application launcher, as defined in Wikipedia is:
+
+> ..a computer program that helps a user to locate and start other computer programs.
+
+In this situation, absolute references might look something like this.
+
+```python
+c:\program files\maya\maya.exe
+c:\program files\adobe\photoshop\ps.exe
+c:\program files\foundry\nuke\nuke.exe
+```
+
+Which suffers from two immediate problems.
+
+* `PROBLEM1`: It isn't portable to other platforms 
+* `PROBLEM2`: It forces users on a valid platform to position software in a location determined by the software
+
+A more portable alternative is the use of relative references:
+
+```python
+maya
+photoshop
+nuke
+```
+
+Now the application launcher is independent of the underlying platform and where software is ultimately located. The application launcher and references to software have been de-coupled from its platform.
+
+The issue then is, how do we resolve a relative reference into an absolute reference on the target platform?
 
 # Architecture
 
 ```python
-  __________ 
- |          |
- | criteria |
- |__________|
-      |
-      |
-  ____v_____         ___________         __________
+  __________         ___________         __________
  |          |       |           |       |          |
- | launcher |------>| reference |------>| software |
+ | relative |------>| resolve() |------>| absolute |
  |__________|       |___________|       |__________|
+ 
 
 ```
 
-Given a `criteria`, the `launcher` presents avaiable `software` via a set of `references`.
+The process of resolving a relative reference into an absolute reference may vary based on requirements and preference. Let's have a look at some of the more common ways in which this is dealt with.
 
-For our discussion, our criteria is `Pulp` - a digital asset used in a fictional game that I just made up. `Pulp` is made using the latest version of `Software X` and a rather old but trusty version of `Software Y`, these are our references.
+### No resolve
 
-As `launcher` will run on multiple computers, on multiple platforms in multiple locations at various times, we can't be sure of where `Software X` is located; whether it is located locally on the file-system, or maybe it's a web-application running off the cloud and drawn in your browser. Either way, our `launcher` can't make any assumptions about it.
-
-For the sake of discussion, our criteria will come from disk and will have been put there by humans.
+Simplest approach. Not resolving paths involves assumptions and guesswork.
 
 ```python
-+-- project
-|   +-- game
-|   |   +-- Pulp
+# Fingers crossed that everyone is running Windows, and
+# everyone has their software installed exactly here:
+c:\program files\maya\maya.exe
+c:\program files\adobe\photoshop\ps.exe
+c:\program files\foundry\nuke\nuke.exe
 ```
 
-The next step is to store references in a way that makes them accessible via `Pulp`. One way is to store them in a text document somewhere.
+### Path generation
+
+The act of compiling a full path via templates.
 
 ```python
-# my_references.txt
-/project/game/pulp
-    Software X
-    Software Y
+# Python example
+>>> reference = 'gimp'
+
+>>> windows_template = r'c:\Program Files\{software}\{software}.exe'
+>>> linux_template = r'/opt/{software}/{software}'
+
+>>> resolved_windows = windows_template.format(software=reference)
+c:\Program Files\gimp\gimp.exe
+
+>>> resolved_linux = template_linux.format(software=reference)
+/opt/gimp/gimp
 ```
 
-We can trim this file by storing it directly within `Pulp`
+Path-generation solves `PROBLEM1`. We can get around `PROBLEM2` by ensuring consistent installations on all involved workstation within a facility; which is generally considered common-practice anyway.
 
-```python
-# references.txt
-Software X
-Software Y
+But what about situations where you are working with more than your own facility? What about situations in which you require outsourcing to other facilities or freelancers?
+
+Registration may be better suited for this.
+
+### Registration
+
+The act of making binaries discoverable by name.
+
+```
+# Command-line example
+:> set PATH=PATH;c:\Program Files\Gimp
+:> gimp
 ```
 
-### Method 2 - Generating paths
+Our references have not changed; but their method of resolving into absolute paths has. By making executables discoverable by name at the OS-level we can ensure discoverability across environments where the initial installations of software are out of our hands.
 
-
-### Method 3 - Meeting half-way
-
+There is however a caveat; the process of registration is still required at each workstation.

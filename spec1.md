@@ -19,4 +19,4 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 # Change Process
 
-These RFC documents are Open-source and collaborative. To find out how you can contribute, see the [Consensus-Oriented Specification System (COSS)](http://www.digistan.org/spec:1/COSS).
+This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).

@@ -2,7 +2,7 @@
 
 An extension to Open Metadata to support the notion of cross-referencing.
 
-* Name: http://rfc.abstractfactory.io/spec/17 (17/CRM)
+* Name: http://rfc.abstractfactory.io/spec/17
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: draft
 

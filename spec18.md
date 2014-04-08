@@ -2,7 +2,7 @@
 
 This document describes each supported data-type of Open Metadata and their individual features and differences.
 
-* Name: http://rfc.abstractfactory.io/spec/18 (18/OMT)
+* Name: http://rfc.abstractfactory.io/spec/18
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: raw
 
