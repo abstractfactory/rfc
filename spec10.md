@@ -7,6 +7,7 @@ This document describes the requirements involved in the next-generation of Open
 * Name: http://rfc.abstractfactory.io/spec/10
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Tags: publishing
+* Related: RFC12, RFC13, RFC14, RFC15, RFC16, RFC17, RFC18, RFC20
 * State: raw
 
 Copyright and Language can be found in RFC1
