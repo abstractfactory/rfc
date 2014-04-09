@@ -75,14 +75,14 @@ folder
 |--- .meta
      |--- .history
      |    |--- some data.string&20140401-140541-604
-     |    |--- user
-     |    |--- value
-     |--- some data.string&20140401-140751-121
-     |    |--- user
-     |    |--- value
-     |--- some data.string&20140401-140751-126
-     |    |--- user
-     |    |--- value
+     |    |    |--- user
+     |    |    |--- value
+     |    |--- some data.string&20140401-140751-121
+     |    |    |--- user
+     |    |    |--- value
+     |    |--- some data.string&20140401-140751-126
+     |    |    |--- user
+     |    |    |--- value
      |--- some data.string
 ```
 
@@ -151,7 +151,7 @@ Example
 |-- folder
 |   |-- .meta
 |   |   |-- .versions
-|   |   |   |-- v001&some data.string
+|   |   |   |-- some data.string&v001
 |   |   |   |   |-- user
 |   |   |   |   |-- note
 |   |   |   |   |-- previous_value
