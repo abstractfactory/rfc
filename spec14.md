@@ -81,8 +81,8 @@ folder
      |    |    |--- user
      |    |    |--- value
      |    |--- some data.string&20140401-140751-126
-     |    |    |--- user
-     |    |    |--- value
+     |         |--- user
+     |         |--- value
      |--- some data.string
 ```
 

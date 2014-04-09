@@ -45,7 +45,5 @@ How about situations where the software consists of plug-ins? Each plug-in will 
 
 ```
 
-The above diagram illustrates the general process. There is a key for each software executable, as per RFC21, but also a key per plug-in and its version. The plug-in key is resolved into either
-
-# Architecture
+The above diagram illustrates a general process. There is a key for each software executable, as per RFC21, and a key for each plug-in and version. All keys are resolved into either an absolute path, environment variable or flag.
 
