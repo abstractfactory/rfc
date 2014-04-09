@@ -2,9 +2,9 @@
 
 This document dives into explaining the higher-level architecture as well as some of the decisions involved in finding it.
 
-![](https://dl.dropbox.com/s/fmw0rq10kr4j2hg/uml_pipi_layers.png)
+![](..images/27/title.png)
 
-* Name: http://rfc.abstractfactory.io/spec/27 (27/PIA)
+* Name: http://rfc.abstractfactory.io/spec/27
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: raw
 

@@ -2,7 +2,7 @@
 
 This document describes the requirements upon which every aspect of Pipi is constructed.
 
-* Name: http://rfc.abstractfactory.io/spec/25 (25/PRQ)
+* Name: http://rfc.abstractfactory.io/spec/25
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: draft
 * Related: RFC23

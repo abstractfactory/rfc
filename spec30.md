@@ -2,7 +2,7 @@
 
 This document is about explicit maintenance of a certain set of software along with versions of software throughout a single production.
 
-* Name: http://rfc.abstractfactory.io/spec/11
+* Name: http://rfc.abstractfactory.io/spec/30
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: raw
 

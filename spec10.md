@@ -2,7 +2,7 @@
 
 This document describes the requirements involved in the next-generation of Open Metadata referred to as mark 2 (Mk2) in this specification; previous version referred to as mark 1 (Mk1)
 
-![](https://dl.dropbox.com/s/av2x8gel580ow48/om2_hierarchy.png)
+![](../images/10/title.png)
 
 * Name: http://rfc.abstractfactory.io/spec/10
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>

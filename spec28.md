@@ -2,7 +2,7 @@
 
 This document aims to centralise the most common of all questions asked about Pipi on a first-time basis.
 
-* Name: http://rfc.abstractfactory.io/spec/12 (12/OOM)
+* Name: http://rfc.abstractfactory.io/spec/28
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: RFC1
 * State: draft

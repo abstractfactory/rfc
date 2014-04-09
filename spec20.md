@@ -1,10 +1,10 @@
-# Mirrored Metadata (MMD)
+# Mirrored Metadata
 
 This document describes methods for having one set of metadata be available from multiple locations.
 
-![](https://dl.dropbox.com/s/mp9h56th12wff1e/spec20_mirrored_icon.png)
+![](..images/20/title.png)
 
-* Name: http://rfc.abstractfactory.io/spec/12 (12/AOM)
+* Name: http://rfc.abstractfactory.io/spec/20
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Inherits: spec:1
 

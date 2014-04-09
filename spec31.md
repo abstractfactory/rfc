@@ -2,7 +2,7 @@
 
 This document describes private, public, appdata and userdata content repositories and their relevance in content creation pipelines.
 
-* Name: http://rfc.abstractfactory.io/spec/29
+* Name: http://rfc.abstractfactory.io/spec/31
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Related: RFC21
 * State: raw

@@ -2,9 +2,9 @@
 
 This document describes a general approach to problem-solving meant to alleviate potential problems from happening in the future.
 
-* Name: http://rfc.abstractfactory.io/spec/21
+* Name: http://rfc.abstractfactory.io/spec/26
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* State: draft
+* State: raw
 * Related: 
 * Tags: 
 

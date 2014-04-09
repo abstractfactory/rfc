@@ -2,7 +2,7 @@
 
 This document describes the method with which Pipi reads and writes metadata.
 
-* Name: http://rfc.abstractfactory.io/spec/25 (25/PRQ)
+* Name: http://rfc.abstractfactory.io/spec/24
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: draft
 * Related: RFC23
