@@ -1,6 +1,6 @@
 # Advanced Software Discovery
 
-This document extends upon RFC21, Software Discovery by the use of multiple keywords.
+This document extends upon RFC21 with support for multiple keywords.
 
 * Name: http://rfc.abstractfactory.io/spec/32
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>

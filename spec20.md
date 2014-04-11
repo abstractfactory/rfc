@@ -1,8 +1,8 @@
-# Mirrored Metadata
+# Metadata Referencing
 
 This document describes methods for having one set of metadata be available from multiple locations.
 
-![](..images/20/title.png)
+![](../images/20/title.png)
 
 * Name: http://rfc.abstractfactory.io/spec/20
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>

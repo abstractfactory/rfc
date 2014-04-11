@@ -2,7 +2,7 @@
 
 This document dives into explaining the higher-level architecture as well as some of the decisions involved in finding it.
 
-![](..images/27/title.png)
+![](../images/27/title.png)
 
 * Name: http://rfc.abstractfactory.io/spec/27
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
