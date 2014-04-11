@@ -3,7 +3,7 @@ rfc
 
 > Before one can attempt to solve a problem, one must first define the problem.
 
-This is the Abstract Factory RFC project in which we gather the basis of our implementations in language-neutral, high-level specifications known as RFCs or Request for Comments.
+This is the Abstract Factory RFC project in which we gather the basis of our implementations in language-neutral, implementation-free and high-level specifications known as RFCs or Request for Comments.
 
 This is where you may influence and contribute to our goals, making our work better which ultimately makes your work better. If you succeed, we succeed.
 
