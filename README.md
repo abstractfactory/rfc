@@ -1,7 +1,7 @@
 rfc
 ===
 
-> Before one can attempt to solve a problem, one must first define the problem.
+#### Before one can attempt to solve a problem, one must first define the problem.
 
 This is the Abstract Factory RFC project in which we gather the basis of our implementations in language-neutral, implementation-free and high-level specifications known as RFCs or Request for Comments.
 

@@ -16,7 +16,7 @@ import sublime, sublime_plugin
 
 DIV = '\n\n'
 SPEC_TEMPLATE = 'http://rfc.abstractfactory.io/spec/{number}'
-GITHUB_TEMPLATE = 'https://github.com/abstractfactory/rfc/blob/master/spec{number}.md'
+GITHUB_TEMPLATE = 'https://github.com/abstractfactory/rfc/blob/master/spec/spec{number}.md'
 
 
 def blocks(content):
@@ -121,7 +121,7 @@ def substitute_rfc(content):
         replacement = "[%s](%s)" % (rfc, link)
 
         # RFC may exist with multiple suffixes
-        suffixes = [' ', '\n', ', ']
+        suffixes = [' ', '\n', ', ', ')']
 
         for suffix in suffixes:
             source = rfc + suffix
@@ -156,14 +156,18 @@ class ToJekyllCommand(sublime_plugin.TextCommand):
         with open(source_file) as f:
             content = f.read()
 
+        content = content.decode('ascii', 'replace')
         # Only allow ASCII
         try:
             content.decode('ascii')
         except UnicodeDecodeError as e:
-            # block = content[(e.end - 10): (e.end + 10)]
+            # block = unicode(content[(e.end - 10): (e.end + 10)])
+            # print dir(e)
+            # print 
+            # text = content[e.end].decode('UTF-8', 'strict')
             raise ValueError("Found non-ascii characters "
-                             "in document %s"
-                             % source_file)
+                             "in document %s: %s"
+                             % (source_file))
 
         # Append property derived from `source_file`
         parsed = parse(content)
