@@ -73,7 +73,7 @@ Each change to DOCUMENT may be referred to as a `state` of said DOCUMENT. Here, 
 
 # Architecture
 
-Exactly two (2) versioning patterns exist followed by variations of each; `Monolithic` and `Polylithic`. In `Monolithic` versioning, DOCUMENT is continuously updated and changes to any given DOCUMENT may be optionally tracked external to said DOCUMENT; this may be referred to as `implicit tracking`.
+Exactly two (2) versioning patterns exist followed by variations of each; `Monolithic` and `Polylithic`. In `Monolithic` versioning, DOCUMENT is continuously overwritten and changes to any given DOCUMENT may be optionally tracked external to said DOCUMENT; this may be referred to as `implicit tracking`.
 
 The [Monolithic Versioning Pattern][] is further defined in RFC3
 
