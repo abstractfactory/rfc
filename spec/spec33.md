@@ -26,6 +26,7 @@ Versioning serves exactly two purposes; tracking change and maintaining referent
 
 * [Monolithic Versioning Pattern][]
 * [Polylithic Versioning Pattern][]
+* [Temporal Versioning Pattern][]
 
 ### Maintaining Referential Integrity
 
@@ -69,7 +70,7 @@ Here, `document2` references/depends on `document1`; i.e. if `document1` changes
 
 ```
 
-Each change to DOCUMENT may be referred to as a `state` of said DOCUMENT. Here, `document1` provides one or more instances of `state`, each produced at various stages of development, however `document3` only references `state2`.. A `state` is the main mechanism with which to **track change**.
+Each change to DOCUMENT may be referred to as a `state` of said DOCUMENT. Here, `document1` provides one or more instances of `state`, each produced at various stages of development, however `document3` only references `state2`. A `state` is the main mechanism with which to **track change**.
 
 # Architecture
 
@@ -77,7 +78,7 @@ Exactly two (2) versioning patterns exist followed by variations of each; `Monol
 
 The [Monolithic Versioning Pattern][] is further defined in RFC3
 
-In `Polylithic` versioning, each change to DOCUMENT is made explicit and requires each DOCUMENT referencing another DOCUMENT to manually maintain referential integrity; this may be referred to as `explicit tracking`.
+In `Polylithic` versioning, each change to DOCUMENT is made explicit,  requiring references to each DOCUMENT to be manually maintained; this may be referred to as `explicit tracking`.
 
 The [Polylithic Versioning Pattern][] is further defined in RFC2
 
@@ -100,3 +101,4 @@ Examples of Version Control Software providing a `Monolithic` method of versioni
 [Perforce]: http://www.perforce.com/
 [Monolithic Versioning Pattern]: http://rfc.abstractfactory.io/spec/3
 [Polylithic Versioning Pattern]: http://rfc.abstractfactory.io/spec/2
+[Temporal Versioning Pattern]: http://rfc.abstractfactory.io/spec/4
