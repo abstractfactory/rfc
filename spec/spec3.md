@@ -1,12 +1,12 @@
 # Monolithic Versioning for Production
 
-This document describes a monolithic method of tracking change, in contrast to the polylithic method of RFC2.
+This document describes a method of tracking change with a single document.
 
 * Name: http://rfc.abstractfactory.io/spec/3
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Tags: versioning
-* Related: RFC2, RFC4
-* State: raw
+* Related: RFC2, RFC4, RFC33
+* State: draft
 
 Copyright and Language can be found in RFC1
 
@@ -14,31 +14,29 @@ Copyright and Language can be found in RFC1
 
 This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
-# Goals
+# Language
 
-RFC4 implements an implicit system of version control without manual intervention when transitioning between versions.
+In addition to the language defined in RFC1, DOCUMENT refers to any digital content, including but not limited to files and folders.
 
-This is in direct contrast of IVP whose purpose is to enforce that each change remains separate and layered and therefore non-destructive.
+# Goal
 
-The differences may be considered explicit versus implicit; where explicit change facilitates tracking and control wheras implicit facilitates faster turn-around times.
+The goal of Monolithic Versioning is to maximise concurrency whilst minimising the amount of manual intervention required in keeping a hierarchy of tasks up to date at the cost of an implicit system with the potential to cause unwanted side-effects.
 
-The goals of TVP are to:
-* Simplify the process of maintaining updates of content.
-* Simplify the process of transitioning between updates to content.
+# Architecture
 
-# Definition
+Monolithic Versioning, also known as Mutable Versioning, is the act of saving DOCUMENT whilst (optionally) maintaining history somewhere external to said DOCUMENT. Examples include systems such as [Git][], [Subversion][] and [Perforce][].
 
-* Transitioning between versions MUST NOT require manual intervention.
+As opposed to [Polylithic Versioning][] (RFC2), changes are `implicit` and require no intervention on the part of the user when it comes to performing an `update`.
 
-# Reference Implementation
+# Git
 
-Versioning MUST be allowed to take any form and MUST NOT be restricted to any schema.
+# Subversion
 
-`name`
+# Perforce
 
-Where `name`, like in IVP, is a short identifier for the product in development.
-
-`myAsset`
-
+[Git]:http://git-scm.com/
+[Subversion]: http://subversion.apache.org/
+[Perforce]: http://www.perforce.com/
+[Polylithic Versioning]: http://rfc.abstractfactory.io/spec/2
 [Consensus-Oriented Specification System (COSS)]: http://www.digistan.org/spec:1/COSS
-[RFC 2119]: http://tools.ietf.org/html/rfc2119
+[RFC 2119]: http://tools.ietf.org/html/rfc2119n

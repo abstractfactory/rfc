@@ -14,5 +14,5 @@ Copyright and Language can be found in RFC1
 
 This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
-# Goals
+# Goal
 

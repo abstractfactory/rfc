@@ -1,12 +1,12 @@
-# Immutable Versioning Pattern
+# Polylithic Versioning Pattern
 
-This document describes a polylithic method of tracking change.
+This document describes a method of tracking change involving multiple documents.
 
 * Name: http://rfc.abstractfactory.io/spec/2
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Tags: versioning
-* Related: RFC3, RFC4
-* State: raw
+* Related: RFC3, RFC4, RFC33
+* State: draft
 
 Copyright and Language can be found in RFC1
 
@@ -14,34 +14,17 @@ Copyright and Language can be found in RFC1
 
 This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
-# Goals
+# Goal
 
-The opposite of versioned is monolithic and may thus be referred to as polylithic. In a monolithic process, there are no record of events or change and all that exists at any given point in time is here and now.
+The goal of the Polylithic Versioning Pattern is to maximise control whilst minimising the rate of error at the cost of additional steps required in keeping a hierarchy of tasks up to date.
 
-The monolithic approach has a few problems; mainly that it discourages change as change would imply a new permanent state.
+# Architecture
 
-In a versioned process, change is "layered"; meaning that no change affects previous state. This encourages change as it completely eliminates the cost of making mistakes.
+Polylithic Versioning, also known as Immutable Versioning, is the act of incrementally saving DOCUMENT; each increment providing `state` to said DOCUMENT.
 
-# Definition
+As opposed to [Monolithic Versioning][] (RFC3), changes are made `explicit` and require manual intervention when it comes time to perform an `update`.
 
-* Refering to past, present and future states MUST be explicit.
-
-# Reference Implementation
-
-Versioning may take the form of increasing numerical suffixes to files and folders in the form of:
-
-`name:separator:version`
-
-Where `name` is a short identifier for the product in development, `separator` being a unique character visually separating head from tail and `version` an increasing integer; higher numbers meaning later versions.
-
-`myAsset_v1`
-
-It can sometimes be helpful to maintain a fixed-length on the number of integers in versioning so as to simplify parsing.
-
->>> product = 'myAsset_v001'  # A Python string
->>> version = int(product[:-3])
-
-Always assuring that the last n number of characters represents the version makes it possible to perform simple string-manipulation techniques to derive a version from any given product.
+# In-house
 
 [Consensus-Oriented Specification System (COSS)]: http://www.digistan.org/spec:1/COSS
 [RFC 2119]: http://tools.ietf.org/html/rfc2119

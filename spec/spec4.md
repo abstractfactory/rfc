@@ -1,12 +1,12 @@
-# Timed Versioning Pattern
+# Temporal Versioning Pattern
 
-This document describes a compromise between Immutable and Mutable Versioning, called Timed Versioning.
+This document describes a compromise RFC2 and RFC3 supporting the notion of past, present and future.
 
 * Name: http://rfc.abstractfactory.io/spec/4
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Tags: versioning
-* Related: RFC2, RFC3
-* State: raw
+* Related: RFC2, RFC3, RFC33
+* State: draft
 
 Copyright and Language can be found in RFC1
 
@@ -14,41 +14,69 @@ Copyright and Language can be found in RFC1
 
 This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
-# Goals
+# Goal
 
-TVP implements an implicit system of version control which allows for referencing past states via the use of time-stamps.
+The Temporal Versioning Pattern is a compromise between RFC2 and RFC3 providing a time-aware `state`.
 
-The problems imposed by IVP is the manual intervention involved in updates. MVP fixes this, but removes our ability to refer to arbitrary points in history.
+The benefit of [Monolithic Versioning][] lies in the automatic-ness of its operation, whilst the benefit of [Polylithic Versioning][] resides in the amount of control given to the user.
 
-As a compromise, TVP stores history exactly like IVP but allows artists to instead refer to an additional single monolithic version that is constantly kept at the highest, or recommended, version.
+Temporal Versioning then proposes an alternative encapsulating the benefits of both.
 
-# Definition
+### Use-case
 
-* Transitioning between versions MUST NOT require manual intervention.
-* Referring to past, present and future states MUST be explicit.
+This pattern fits scenarious where updates are most often kept up to date and `state` not often required, but still kept out of back-up or peace-of-mind concerns.
 
 # Architecture
 
-Versions may be classified as being either `historical` or `current`. Furthermore, states may be classified as being either `latest` or `recommended` and `historical` versions MUST include a `timestamp`
+`state` may be classified as being either `historical` or `current`. Furthermore, `state` may be classified as being either `latest` or `recommended`.
 
-* `historical`: persistent and immutable, just like IVP, and MUST include a `timestamp`
-* `current`: a singleton and the one referred to by others and is continually replaced to reflect either `latest` or `recommended` states.
-* `latest`: last state at which a product was saved.
-* `recommended`: human-decided factors govern whether or not a version is recommended or not (usually those backwards-compatible with previous versions or those representing the next evolutionary step (e.g. an upgrade))
-* `timestamp`: a unique point in time with precision appropriate for the given application. (suggested year:month:day:hour:minute for long-running projects and month:day:hour:minute:second for shorter ones)
+Both `historical` and `current` includes a `timestamp`.
 
-# Reference Implementation
+Like Monolithic Versioning, a DOCUMENT is continuously overwritten. Changes are tracked separately and with it a `timestamp`. The `timestamp` may then be used in retrieving a global `state` for each DOCUMENT residing within the `range` specified.
 
-The `current` version MUST be allowed to take any form and `historical` versions MUST include a `timestamp`
+```python
+database
+|-- document1
+|-- document2
+|-- document3
+|
+|-- .history
+    |-- document1&2014-03-01 21:12
+    |-- document1&2014-03-01 21:24
+    |-- document1&2014-03-02 12:56
+    |
+    |-- document2&2014-03-01 20:10
+    |-- document2&2014-03-01 21:04
+    |-- document2&2014-03-03 10:22
+    |
+    |-- document3&2014-01-02 19:10
+    |-- document3&2014-01-06 19:01
+    |-- document3&2014-02-03 09:36
+```
 
-* `name`
-* `name:separator:timestamp`
+Here, three document exists, each with three instances of `state` stored in ".history", each `state` stored with a `timestamp`.
 
-Where `name`, like in IVP, is a short human-readable identifier and `timestamp` a unique identifier for the time at which the product was made.
+A DOCUMENT referencing another DOCUMENT then stores a `timestamp` at the point of reference.
 
-* `/product/myAsset`
-* `/product/history/myAsset_1403251846`
+```python
+ _____________
+|             |
+|  document1  |
+|_____________|
+       |
+ ______|______
+|             |
+|  document2  |  --> document1 referenced at 2014-03-02 at 10:05
+|_____________|      i.e. document1&2014-03-01 21:24
+       |
+ ______|______
+|             |
+|  document3  |  --> document2 referencet at 2014-03-02 at 10:05
+|_____________|      i.e. document2&2014-03-01 21:04
 
-Products referencing `myAsset` MUST include a `timestamp` at which the reference took place.
+``` 
 
-* `/otherproduct/myProject`
+`document2` and `document3` will be continuously updated as per Monolithic Versioning, but using the metadata stored about the time at which the initial reference took place may at any point in time resolve what the initial references were.
+
+[Monolithic Versioning]: http://rfc.abstractfactory.io/spec/3
+[Polylithic Versioning]: http://rfc.abstractfactory.io/spec/2
