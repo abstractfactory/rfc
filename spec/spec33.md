@@ -84,11 +84,11 @@ The [Polylithic Versioning Pattern][] is further defined in RFC2
 
 ### Implicit Tracking
 
-In implicit tracking, a DOCUMENT is unaware of changes to referenced DOCUMENT; the change is said to be implicit and the `update` process said to be automatic or implied.
+In implicit tracking, a DOCUMENT is de-coupled from changes to referenced DOCUMENT; the change is said to be implicit and the `update` process said to be automatic or implied.
 
 ### Explicit Tracking
 
-In explicit tracking, a DOCUMENT maintains reference to a fixed `state` and any `update` handled manually; either via user intervention or external mechanisms, such as Version Control Software (VCS).
+In explicit tracking, a DOCUMENT is tightly coupled and maintains reference to a fixed `state` and any `update` handled manually; either via user intervention or external mechanisms, such as Version Control Software (VCS).
 
 # Version Control Software
 
