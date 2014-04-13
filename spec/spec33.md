@@ -20,7 +20,7 @@ In addition to the language defined in RFC1, DOCUMENT refers to any digital cont
 
 # Goal
 
-Versioning serves exactly two purposes; tracking change and maintaining referential integrity.
+Versioning serves exactly two (2) purposes; tracking change and maintaining referential integrity.
 
 #### Related
 

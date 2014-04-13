@@ -14,8 +14,52 @@ Copyright and Language can be found in RFC1
 
 This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
+# Language
+
+In addition to the language defined in RFC1, DOCUMENT refers to any digital content, including but not limited to files and folders.
+
 # Goal
 
-As content is strongly-coupled to the application in which it was produced, it can sometimes be beneficial to maintain multiple data-types of the same version so as to allow it to be used in multiple applications other than the one it was originally created in.
+In situations where DOCUMENT is strongly coupled to the software in which it was created, it may be beneficial to maintain multiple sets of DOCUMENT per version so as to facilitate its use in software other than the one in which the DOCUMENT was originally created. Each set of DOCUMENT may be referred to as a `representation` of a particular `version`.
 
-Representations Pattern define a way in which to do so with little logical overhead.
+* Versioning is further defined in RFC33.
+
+# Architecture
+
+Given the DOCUMENT `mydoc`, one or more instances of `representation` may be provided:
+
+```python
+mydoc
+|-- version 1
+	|-- mydoc.txt
+	|-- mydoc.doc
+	|-- mydoc.rtf
+	|-- mydoc.md
+```
+
+Where each suffix represents use in target software:
+
+* `txt` 	-- Originating from Notepad
+* `doc` 	-- Originating from Microsoft Office
+* `rtf` 	-- Originating from Microsoft Wordpad
+* `md`		-- Originating from Markdown
+
+At this point, a single DOCUMENT is accessible from within multiple sets of software.
+
+Another example taken from the film industry, `myanimation` was initially created in Autodesk Maya 2015.
+
+```python
+myanimation
+|-- version 1
+	|-- myanimation.mb-2014
+	|-- myanimation.mb-2013
+	|-- myanimation.fbx
+	|-- myanimation.abc
+	|-- myanimation.obj
+		|-- frame 1.obj
+		|-- frame 2.obj
+		|-- ...
+	|-- myanimation.mov
+```
+
+Here, a single DOCUMENT created in a newer version of Maya is accessible from previous versions of the same software, in addition to software supporting the various standards `fbx`, `abc` and `obj`, as well as a format accessible by video players, potentially representing the version to non-technical personell.

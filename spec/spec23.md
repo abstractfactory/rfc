@@ -16,6 +16,7 @@ Our mission is to provide a scaleable, location-, software- and platform-agnosti
 * [Requirements][]
 * [Architecture][]
 * [Metadata][]
+* [Configurable Content][]
 * [FAQ][]
 
 # What is Digital Content Creation?
@@ -46,6 +47,7 @@ Now that we've got that all out of the way, got questions? Have a look at the [F
 * <marcus@abstractfactory.io>
 * <jobs@abstractfactory.io>
 
+[Configurable Content]: http://rfc.abstractfactory.io/spec/31/
 [Metadata]: http://rfc.abstractfactory.io/spec/24
 [Requirements]: http://rfc.abstractfactory.io/spec/25
 [Architecture]: http://rfc.abstractfactory.io/spec/27

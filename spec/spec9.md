@@ -17,6 +17,19 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 
 When working towards a goal, it can sometimes be difficult to distinguish between what is presentable and what is work-in-progress; resulting in inconsistency in the manner in which results are ultimately presented to others.
 
+#### Synonyms
+
+`private` is sometimes also referred to as
+
+* `development`
+* `work in progress`
+* `source`
+
+`public` is sometimes also referred to as
+
+* `published`
+* `production`
+
 # Architecture
 
 When creating content, there are exactly two types of results; `private` and `public` 

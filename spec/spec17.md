@@ -30,6 +30,10 @@ At this point, '/home/marcus' will contain an absolute reference to the metadata
 'Hello World'
 ```
 
+### Marker
+
+In the above example the curly-braces ("{}") are used as a means to distinguish a cross-reference from other content. In this scenario, the curly-braces are referred to as a `marker`.
+
 # A trustworthy encapsulation
 
 Similar to attribute access within an inheritance tree, referencing is a one-way street. Children MUST be able to access metadata exposed by parents, but parents MUST NOT be able to access metadata exposed by children.
@@ -64,9 +68,9 @@ Since any child within a hierarchy may choose to expose metadata, it is possible
 
 However, there may be cases when this MUST NOT be allowed to happen and so the mechanism MUST include a method of asserting this; such as raising an exception or returning an error code either when it is attempted or when multiple names were found upon query.
 
-### Escaping {}
+### Escaping the marker
 
-If you encounter a situation where the @-sign necessarily must appear directly infront of a character, you may escape it.
+If you encounter a situation where the designated marker necessarily must appear directly infront of a character, you may escape it.
 
 ```python
 >>> somedata.data = 'Hello \{ImportantMessage\}'

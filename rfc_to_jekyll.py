@@ -121,7 +121,7 @@ def substitute_rfc(content):
         replacement = "[%s](%s)" % (rfc, link)
 
         # RFC may exist with multiple suffixes
-        suffixes = [' ', '\n', ', ', ')']
+        suffixes = [' ', '\n', ', ', ')', '.']
 
         for suffix in suffixes:
             source = rfc + suffix
@@ -157,6 +157,7 @@ class ToJekyllCommand(sublime_plugin.TextCommand):
             content = f.read()
 
         content = content.decode('ascii', 'replace')
+
         # Only allow ASCII
         try:
             content.decode('ascii')
