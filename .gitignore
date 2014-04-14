@@ -1,3 +1,4 @@
 .*
 !.gitignore
 spec/jekyll*
+*10.md*
