@@ -29,6 +29,7 @@ When working towards a goal, it can sometimes be difficult to distinguish betwee
 
 * `published`
 * `production`
+* `build`
 
 # Architecture
 

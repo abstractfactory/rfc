@@ -4,8 +4,7 @@ This document describes a method of tracking change with a single document.
 
 * Name: http://rfc.abstractfactory.io/spec/3
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Tags: versioning
-* Related: RFC2, RFC4, RFC33
+* Tags: versioning, publishing
 * State: draft
 
 Copyright and Language can be found in RFC1

@@ -7,8 +7,7 @@ This document describes the requirements involved in the next-generation of Open
 * Name: http://rfc.abstractfactory.io/spec/10
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Tags: publishing
-* Related: RFC12, RFC13, RFC14, RFC15, RFC16, RFC17, RFC18, RFC20
-* State: raw
+* State: draft
 
 Copyright and Language can be found in RFC1
 
@@ -27,6 +26,17 @@ Open Metadata was first initiated in 2013 to facilitate the development of [Pipi
 * data -- A piece of information
 
 In layman's terms; "data about data" - regardless of data-type or traditional use.
+
+#### See also
+
+* RFC12: Object-oriented Metadata
+* RFC13: Zero Open Metadata
+* RFC14: Temporal Open Metadata
+* RFC15: Meta Metadata
+* RFC16: Metadata Blob
+* RFC17: Cross-referencing Metadata
+* RFC18: Open Metadata Types
+* RFC20: Metadata Referencing
 
 #### References
 
