@@ -1,6 +1,6 @@
 # Hierarchical Representation
 
-This document describes the requirements for elements in a tree (nodes)
+This document describes the requirements for elements in a tree (nodes).
 
 * Name: http://rfc.abstractfactory.io/spec/37
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
