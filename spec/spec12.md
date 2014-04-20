@@ -1,8 +1,8 @@
-# Object-Oriented Metadata
+# Cascading Metadata
 
 An extension to Open Metadata to support the notion of inheritance.
 
-![](https://dl.dropbox.com/s/2eyg655o4cws97t/oom_place_v001.png)
+![](../images/12/title.png)
 
 * Name: http://rfc.abstractfactory.io/spec/12
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
@@ -17,7 +17,9 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 
 # Goal
 
-Open Metadata is a method for storing generic data within folders on your hard-drive. This document describes a method that defines each folder as an object within an inheritance-tree; each folder inheriting from its parent.
+> Add missing, replace existing (tm)
+
+Open Metadata is a method for associating generic data with folders on your hard-drive. This document describes a method that defines each folder as an object within an inheritance-tree; each folder inheriting from its parent.
 
 The result of this is a cascading behaviour in attributes from top to bottom within a hierarchy.
 
@@ -33,20 +35,20 @@ Inheritance is not suited to all types of information. Consider the description 
 
 # Architecture
 
-OOM extends Open Metadata with the `Instance` and `Attribute` objects and an `inherit()` method. Open Metadata defines `om.pull()` as a means of reading from disk; `om.inherit()` pulls data from both current and ascending folders. `Instance` then wraps `om.Location` to replicate the interface of a regular plain-data-type programming object.
+Cascading Metadata extends Open Metadata with the `inherit` method. Open Metadata defines `om.pull()` as a means of reading from disk; `om.inherit()` then pulls data from both current and ascending folders.
 
 ```python
->>> config = oom.Instance(r'c:\users\marcus\sublime')
+>>> config = Location(r'c:\users\marcus\sublime')
 >>> config.plugins = ['spell_correction']
 ```
 
-With `oom.inherit()`, each folder may be thought of as a subclass of its parent, passing on and potentially overriding information from parent to child; just as you would expect from regular inheritance in Object-oriented languages such as Python or C++.
+With `inherit()`, each folder may be thought of as a subclass of its parent, passing on and potentially overriding information from parent to child; just as you would expect from regular inheritance in Object-oriented languages such as Python or C++.
 
 ```python
->>> userconfig = oom.Instance(r'c:\users\marcus\sublime\user')
->>> oom.inherit(userconfig)
->>> userconfig.plugins = ['my_custom_plugin']
->>> userconfig.plugins
+>>> plugins = Variable(r'plugins', parent=config)
+>>> inherit(plugins)
+>>> plugins.value = ['my_custom_plugin']
+>>> plugins.value
 ['spell_correction', 'my_custom_plugin']
 ```
 
@@ -54,55 +56,50 @@ With `oom.inherit()`, each folder may be thought of as a subclass of its parent,
 
 Inheritance is additive. It may be easier to think of inheritance as being cascading. Cascading inheritance enforces the LSP in that however you edit children, a parent may always be replaced by its child.
 
-This is an important concept in a progammable hierarchy and one that is enforced in the design of OOM. If a child were to be given the ability to break the LSP, then you could never be sure at which point in your hierarchy your code will fail.
+This is an important concept in a progammable hierarchy and one that is enforced in the design of Cascading Metadata. If a child were to be given the ability to break the LSP, then you could never be sure at which point in your hierarchy your code will fail.
 
 ```python
->>> oom.remove(userconfig.plugins)
+>>> remove(plugins)
 ```
-
-## Difference between `Location` and `Instance`
-
-`Instance` is essentially a `Location`, with a few minor differences.
-
-1. `Location` does not take into account ascending parent-hood.
-2. `Location` cannot have its members accessed via dot-notation.
-3. and thus `Location` cannot have its members modified directly.
 
 ## Designed for inheritance
 
 In the above example, how would you go about *removing* or *altering* inherited information? Consider the following example
 
 ```python
->>> project = oom.Instance(r'/project')
->>> project.executables
+>>> project = Location('/project')
+>>> executables = Variable('executables', parent=project)
+>>> executables.value
 ['maya', 'houdini']
 ```
 
 Underneath 'project' we have 'shot5', but we don't want 'maya' to be part of 'shot5', so what do we do?
 
 ```python
->>> project = oom.Instance('/project')
->>> project.executables
+>>> executables = Variable('executables', parent=config)
+>>> executables.value
 {'maya': True, 'houdini': True}
 ```
 
 Now both 'maya' and 'houdini' have a bool value specifying whether or not they are active. Inactivating any executable is now a matter of:
 
 ```python
->>> shot = oom.Instance('/project/shot5')
->>> shot.executables = {'maya': False}
->>> shot.executables
+>>> shot = Location('/project/shot5')
+>>> executables = Variable('executables', parent=shot)
+>>> executables.value = {'maya': False}
+>>> executables.value
 {'maya': False, 'houdini': True}
 ```
 
 ### Selective inheritance
 
-What about situations where you aren't looking to inherit *every* member of an instance? This is the recommended way with which to retrieve metadata in an inheritance manner as it greatly decreases the amount of reading done in each query.
+What about situations where you aren't looking to inherit *every* member of location? The following is the recommended way with which to retrieve metadata in an inheritance manner as it greatly decreases the amount of reading done in each query.
 
 ```python
->>> shot = oom.Instance('/project/shot5')
->>> oom.inherit(shot.executables)
->>> shot.executables
+>>> shot = Location('/project/shot5')
+>>> executables = Variable('executables', parent=shot)
+>>> inherit(executables)
+>>> executables.value
 {'maya': False, 'houdini': True}
 ```
 
@@ -111,44 +108,14 @@ What about situations where you aren't looking to inherit *every* member of an i
 How about situations where you may only be interested in an immediate parent, and not any of the parents above?
 
 ```python
->>> oom.pull(oom.Instance('/')).data == ['a']
->>> oom.pull(oom.Instance('/project')).data == ['b']
->>>
->>> shot = oom.Instance('/project/shot5')
->>> oom.inherit(shot, level=1)
->>> shot.data = 'c'
->>> shot.data
+>>> shot = Location('/project/shot5')
+>>> inherit(shot, depth=1)
+>>> shot.value = 'c'
+>>> shot.value
 ['b', 'c']
 ```
 
-# Implementation
-
-```python
-# Psuedo-code
-class Instance:
-	def __init__:
-		children = []
-		inherited_children = []
-
-	def data:
-		return inherited_children + children
-
-```
-
-Each Instance contain a `inherited_children` member which is mostly empty when not utilising `oom.inherit()`
-
-After `oom.inherit()` `inherited_children` is populated with.. inherited children (i.e. data) that is added upon query, but not altered upon edit.
-
-```python
-# This will add '5' to 'instance', but won't remove inherited data
->>> instance.data
-['hello']
->>> instance.data = [5]
->>> instance.data
-['hello', 5]
-```
-
-### Inheritance by either Instance or Attribute
+### Inheritance by either Collection or Value
 
 ```python
 def inherit_instance()
