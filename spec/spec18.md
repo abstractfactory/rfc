@@ -19,3 +19,9 @@ Meta-metadata:
 Meta-metadata:
 
 * Range	-- A minimum/maximum invariant
+
+### Date
+
+### Environment Variable
+
+Limited amount of characters available, no spaces and only one separator, based on platform; ';' for Nt and ':' for Posix.

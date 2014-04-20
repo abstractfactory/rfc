@@ -15,17 +15,27 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 
 # Goal
 
-Coupling content with metadata is crucial in content management and there are a few alternatives out there that facilitate this; in this spec we'll have a look at some of these and talk a little bit about why Pipi instead chose to roll its own.
+Associating metadata with content is paramount in digital asset management. There are a few solutions out there which facilitates this; in this spec we'll have a look at some of these and talk a little bit about why we at Abstract Factory chose to roll our own.
 
-# Alternatives
+# Existing solutions deemed unsuited
 
 There have been numerous attempts in the past at associating content with metadata; each of which was deemed unsuited to the goals of Pipi. More information about these goals can be found in RFC25 along with a definition of Metadata in RFC26
 
-Why exactly were these methods deemed unsuited?
-
-*Note: have a look at RFC26 for futher definition of how "metadata" is defined in Pipi.
+Why exactly were these methods deemed unsuited? Let's go through each possible method at a higher level.
 
 ### Piggyback metadata
+
+```python
+  ___________
+ |           |\        ____   # Data added to existing data
+ |           _|      _|    |
+ |          |       | |    |
+ |          |  <--  | | +  |
+ |          |_      |_|    |
+ |            |       |____|
+ |____________|    
+
+```
 
 Piggyback is defined as
 
@@ -33,33 +43,78 @@ Piggyback is defined as
 
 Files and folders contain metadata, both explicit and implicit. Implicit metadata are things such as size, type and last modified dates. Those are indeed interesting and useful, but perhaps more interesting and useful are explicit metadata.
 
-Explicit metadata is data in addition to data; i.e. the location of that photograph you took or the album cover of that mp3 you listened. Neither are the content itself, they are both descriptions of content.
+Explicit metadata is data in addition to data; i.e. the location of that photograph you took or the album cover of that mp3 you listened to. Neither are the content itself, they are both *about* the content.
 
-There are a number of ways in which to store this type of metadata; some of which are [XMP][] first developed by [Adobe][] in 2001 and mainly used for images and [ID3][] developed by [Damaged Cybernetics][] in 1996 and mainly used for audio; most prevalently perhaps the MP3 file-format.
+There are a number of ways in which to store this type of metadata; such as XMP and ID3.
 
-XMP, ID3 and others are *explicit* metadata in that they append bits onto an existing file that host metadata. The two aspects they all share is perhaps also their greatest weaknesses
+* [XMP][] --  First developed by [Adobe][] in 2001 and mainly used for images.
+* [ID3][] -- Developed by [Damaged Cybernetics][] in 1996 and mainly used for audio; most prevalently perhaps the MP3 file-format.
 
-1. They rely on whatever software reading the file to be aware of the existance of metadata; whether they make use of it or not - e.g. ID3 occupies a tiny space in the header of music files. Players not familiar with this metadata would play rather than discard the metadata and thus produce a short noise at the start of any song.
+XMP, ID3 and others are *explicit* metadata in that they append bits onto an existing file that host metadata. They both share a great weakness; they rely on whatever software reading the file to be aware of the existance of metadata; whether they make use of it or not - e.g. ID3 occupies a tiny space in the header of music files. Players not familiar with this metadata would play rather than discard the metadata and thus produce a short noise at the start of any song.
 
-2. The type and amount of metadata that each protocol support are fixed; either due to the amount of space they occupy - ID3 occupy exactly 30 bytes of space - or due to the standard imposing a certain set of entries assumed to be most commonly sought after - XMP supposedly supports binary but is most prevalently used to store text. [1](http://en.wikipedia.org/wiki/Extensible_Metadata_Platform)
+ID3 is a fixed-sized addition of metadata. It means you they only provide a certain amount of options, as well as a certain size of each option, and a total size of each - 30 bytes.
+
+##### XML
+
+Different from both XMP and ID3 in that, rather than enforcing itself into the very definition of a file-format, XML metadata lives happily together with any unicode content. Besides also being a file-format, it defines a method of adding metadata within a text-document via the use of `tags`.
+
+
+```xml
+<header>
+  Some header content
+  tagged with metadata
+</header>
+```
+
+Here, the content "Some header content.." has been `tagged` with "header", indicating some information *about* the content; in this case that it is a header.
 
 ### Ad-hoc metadata
 
-- storing ad-hoc in maya ascii, nk and others
+```python
+  ___________
+ |           |\
+ |            |
+ |            |
+ |            |
+ |            |
+ |        # + |
+ |____________|
+
+```
+
+A variant of piggyback metadata in which metadata is added within the augmented file directly - similar to XML. It is however bound to formats which support arbitrary modifications without having those affect the original content.
+
+Some examples where this is possible;
+
+* Nuke -- scene files stored in plain-text formats and allows for comments. Within each comment lies the potential of arbitrary data to be interpreted by an outside vendor.
+* Maya -- may store scene files in plain-text as well.
+* Sublime -- configuration files, plain-text
 
 ### Sidecar files
+
+```python
+  ____________
+ |           |\       _______
+ |            |      |      |\
+ |            |      |   +   |
+ |            |\  ___|_______|___
+ |            | \|               |
+ |            |  |_______________|
+ |____________|     \_/     \_/
+
+```
 
 Sidecar files is defined as
 
 > "files storing data not supported by the source file format"
 
-As opposed to self-contained metadata, described above, this method allows for the storage of metadata with any item - file or folder - and doesn't pose any restrictions as to what data may be stored or in which way to store it.
+Different from piggyback metadata in that, rather than a fusion of two separate formats, sidecar files remain separate to the data it augments.
 
-- storing metadata as content, together with content.
+This is the method used by [Open Metadata][] and in effect [Pipi][].
 
 ### Relational database
 
-By far the most common, sustainable approach of storing metadata in relation to content is with a relational database. In a relational database, content is stored as a reference - most commonly as paths absolute within given environment - and metadata as attributes
+By far the most common, sustainable approach of storing metadata in relation to content is with a relational database. In a relational database, content is augmenting content by means of storing a reference - a relation - to content; most commonly as paths, absolute within given environment.
 
 ```
                                                attribute
@@ -77,17 +132,23 @@ tuple | | /path/to/content.jpeg | mytag | my long description | ... |
 
 ```
 
-Each `attribute` capable of storing arbitrary data - most commonly strings - each providing a value to its corresponding key stored in the up-most row.
+Each `attribute` capable of storing arbitrary data - most commonly strings - each providing a value for its corresponding key stored in the up-most row.
 
-#### Pros
+This is the method used by [Shotgun][], [FTrack][] and others.
 
-As all data is stored within a strict table, lookup is fast and facilitates complex search queries based on any combination of attributes.
+### Graph Database
 
-#### Cons
+Similar to Relational Databases, but with a different technology hosting content and the associated pros and cons that comes with that. Sadly I know very little of graph databases, someone else is free to fill in for me here.
 
+### [HDF5][]
 
-### HDF5
+Not strictly designed for metadata, but useful as sidecar files and may contain arbitrary data in a well-insulated binary file-format.
 
+[Pipi]: http://abstractfactory.io/pipi
+[HDF5]: http://www.hdfgroup.org/HDF5/
+[Open Metadata]: https://github.com/abstractfactory/openmetadata
+[Shotgun]: http://shotgunsoftware.com/
+[FTrack]: https://www.ftrack.com/
 [Adobe]: http://www.adobe.com
 [ID3]: http://en.wikipedia.org/wiki/ID3
 [XMP]: https://www.adobe.com/products/xmp/

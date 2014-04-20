@@ -106,7 +106,10 @@ def deparse(parsed):
     blocks = []
     order = ('title', 'summary', 'properties', 'content')
     for key in order:
-        blocks.append(parsed[key])
+        value = parsed[key]
+        if key == 'title':
+            value = '# ' + value
+        blocks.append(value)
     
     reconstructed = DIV.join(blocks)
     return reconstructed
@@ -232,7 +235,7 @@ def perform_string_substitution(content):
     return content
 
 
-def generate_jekyll_document(path):
+def generate_jekyll_document(path, simulate=False):
     """
     Parse currently open file, and write it out to:
     
@@ -305,8 +308,11 @@ def generate_jekyll_document(path):
 
     print "Writing Jekyll file %s" % output_path
 
-    with open(output_path, 'w') as f:
-        f.write(jekyll_document)
+    if not simulate:
+        with open(output_path, 'w') as f:
+            f.write(jekyll_document)
+    else:
+        print jekyll_document
 
     return True
 
@@ -322,7 +328,9 @@ Followed by a summary.
 
 This is RFC12, and this RFC14
 '''
-
-    parsed = parse(demo_content)
-    parsed = reconstruct_parsed(parsed)
-    print deparse(parsed)
+    
+    path = r'C:\Users\marcus\Dropbox\AF\development\marcus\pipi\rfc\spec\spec45.md'
+    generate_jekyll_document(path, simulate=True)
+    # parsed = parse(demo_content)
+    # parsed = reconstruct_parsed(parsed)
+    # print deparse(parsed)

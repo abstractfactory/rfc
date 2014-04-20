@@ -1,6 +1,6 @@
 # The Request Pattern
 
-This document extends the general Observer Pattern with the ability to respond.
+This pattern extends the general Observer Pattern with the ability to respond.
 
 * Name: http://rfc.abstractfactory.io/spec/45
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
@@ -14,7 +14,7 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 
 # Goal
 
-This pattern is a combination of ["Observer Pattern"][] found in e.g. Qt and ["Request-reply Pattern"][] found in e.g. web-server communication and is useful in inter-process communication between decoupled, yet associated components of a software architecture design; particularly GUI programming.
+This pattern is a combination of [Observer Pattern][] found in e.g. Qt and [Request-reply Pattern][] found in e.g. ZeroMQ and is useful in synchronous, inter-process communication between decoupled, yet associated components of a software architecture design; particularly GUI programming.
 
 ```python
                       __________       
@@ -28,7 +28,7 @@ This pattern is a combination of ["Observer Pattern"][] found in e.g. Qt and ["R
 
 ```
 
-Picture a graphical user interface (`graphics`) where a button represents performing a command; e.g. running a program.
+Picture a graphical user interface `graphics` where a button represents performing a command; e.g. running a program.
 
 Traditionally (e.g. in [MVP][]), `graphics` isn't actually performing any actions, but merely communicating that this is what the user has requested to have happen.
 
@@ -128,7 +128,7 @@ This pattern of handling and discarding requests may be called the [Strategy Pat
 ```python
 # Multiple observers example
 observer = type('Math', (object,), {})()
-observer.get_factorial = pifou.signal.Request()
+observer.get_factorial = Request()
 
 subject1 = type('CloudService', (object,), {})()
 subject2 = type('LocalService', (object,), {})()

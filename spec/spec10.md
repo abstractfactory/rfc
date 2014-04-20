@@ -99,6 +99,12 @@ Here are a all the supported types
 * `dataset.string`
 * `dataset.text`
 * `dataset.date`
+* `dataset.color`
+* `dataset.flag`
+* `dataset.arg`
+* `dataset.kwarg`
+* `dataset.url`
+* `dataset.path`
 * `dataset.null`
 * `group.enum`
 * `group.tuple`
@@ -111,10 +117,13 @@ Here are a all the supported types
 * `group.vector`
 * `group.matrix`
 
-**Web**
+**Communication**
 
-* `dataset.email`
 * `dataset.like`
+* `dataset.email`
+* `dataset.following`
+* `dataset.message`
+* `group.conversation`
 
 `bool`, `int`, `float`, `string` and `date` represent simple files with an added suffix corresponding to their type, such as *myfile.string*. `enum`, `tuple` and `list` however are different from regular groups in that they are *ordered*; meaning they maintain the individual indexes of each member. This is useful when storing data that may be visualised in a UI which needs to display items in a certain order; such as a full address.
 
@@ -149,6 +158,40 @@ Each dataset MUST start out with a default value.
 * `dataset.date` = `Current Date`
 * `dataset.null` = `Empty`
 
+
+### Late binding
+
+Late binding implies that functionality within an object is determined at run-time. 
+
+In a database, each dataset is stored along with a suffix that determine its type; e.g. string, float, bool etc. When assigning any value to a dataset, this type is implicitly defined; similar to variables in a dynamically typed programming language such as Python:
+
+```python
+# Which data-type does `my_variable` end up with? (spoiler: a boolean)
+>>> my_variable.data = 'hello'
+>>> my_variable.data = 5
+>>> my_variable.data = True
+```
+
+This works, because there MUST exist only one (1) suffix per dataset within the database.
+
+```python
+om.write(path, '/secretOfLife, 'coconut')
+om.write(path, '/secretOfLite', 47)
+# This overwrites the 'secretOfLite.string' on disk
+# with 'secretOfLife.int', just like it would in any programming language
+```
+
+The same MAY apply to groups as well.
+
+```python
+>>> my_variable.data = 'this will make a dataset of type "string"'
+>>> my_variable.data = ['this will make a group', 'of type "list"']
+```
+
+#### References
+
+* http://en.wikipedia.org/wiki/Late_binding
+* http://en.wikipedia.org/wiki/Dynamic_dispatch
 
 ### Data-formats
 
