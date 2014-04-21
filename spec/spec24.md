@@ -19,7 +19,7 @@ Associating metadata with content is paramount in digital asset management. Ther
 
 # Existing solutions deemed unsuited
 
-There have been numerous attempts in the past at associating content with metadata; each of which was deemed unsuited to the goals of Pipi. More information about these goals can be found in RFC25 along with a definition of Metadata in RFC26
+History is packed full of attempts at associating content with metadata; each of which was deemed unsuited to the goals of Pipi. More information about these goals can be found in RFC25.
 
 Why exactly were these methods deemed unsuited? Let's go through each possible method at a higher level.
 
@@ -120,13 +120,15 @@ This is the method used by [Open Metadata][] and in effect [Pipi][].
  |            |                      |      |\
  |            |                      |   +   |
  |            |                   ___|_______|___
- |            |                  |               |
+ |            |< - - - - - - - - |               |
  |            |                  |_______________|
  |____________|                     |__|   |__| 
-
+                                     \/     \/
 ```
 
-By far the most common, sustainable approach of storing metadata in relation to content is with a relational database. In a relational database, content is augmenting content by means of storing a reference - a relation - to content; most commonly as paths, absolute within given environment.
+By far the most common approach of storing metadata associated to content is with a relational database. In a relational database, metadata is stored, similar to sidecar files above, separate to the content it augments.
+
+Content and metadata is then associated via a `relation` - most commonly in the form of an absolute path to the content on a file-system.
 
 ```
                                                attribute
@@ -150,12 +152,29 @@ This is the method used by [Shotgun][], [FTrack][] and others.
 
 ### Graph Database
 
+```python
+  ____________
+ |           |\                       _______
+ |            |                      |      |\
+ |            |                      |   +   |
+ |            |                   ___|_______|___
+ |            |< - - - - - - - - |               |
+ |            |                  |_______________|
+ |____________|                     |__|   |__| 
+                                     \/     \/
+```
+
 Similar to Relational Databases, but with a different technology hosting content and the associated pros and cons that comes with that. Sadly I know very little of graph databases, someone else is free to fill in for me here.
 
 ### [HDF5][]
 
 Not strictly designed for metadata, but useful as sidecar files and may contain arbitrary data in a well-insulated binary file-format.
 
+### [Camlistore][]
+
+I'm only familiar with the name, including it due to its relevance in storage.
+
+[Camlistore]: https://camlistore.org/
 [Pipi]: http://abstractfactory.io/pipi
 [HDF5]: http://www.hdfgroup.org/HDF5/
 [Open Metadata]: https://github.com/abstractfactory/openmetadata
