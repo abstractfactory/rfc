@@ -115,21 +115,37 @@ How about situations where you may only be interested in an immediate parent, an
 ['b', 'c']
 ```
 
-### Inheritance by either Collection or Value
+### Modified Inheritance Tree
+
+How about situations where you'd prefer inheriting from locations that isn't within the immediate parenthood?
+
+That can bee achieved by either modifying `bases`, the list of immediate parents - i.e., superclasses - or modifying `mro`, the method resolution order - i.e. the entire parenthood until `depth`.
+
+#### 1. Multiple inheritance
 
 ```python
-def inherit_instance()
-   pass
+>>> config_a = Location('/project/shot5/configA')
+>>> config_b = Location('/project/shot4/configB')
+>>> config_a.bases.append(config_b)
+>>> config_a.bases
+[Location('configA'), Location('configB')]
+>>> config_a.bases.pop()
+>>> config_a += config_b  # Convenience method
+>>> config_a.bases
+[Location('configA'), Location('configB')]
+```
+Here, `config_a` is also inheriting from `config_b`, even though they are within different hierarchies. The original tree remains unmodified, much like multiple inheritance in object-oriented programming languages, but an additional "superclass" is added to the original which will act identical to its immediate parent in terms of what is overridden/appended.
 
-def inherit_attribute()
-   pass
+#### 2. Method Resolution Order
 
-def inherit(item)
-   if isinstance(item, Instance):
-      return inherit_instance(item)
-   elif isinstance(item, Attribute):
-      return inherit_attribute(item)
-   raise TypeError
+
+```python
+>>> om.inherit(config_a, pull=False)
+>>> config_a.mro
+[Location('shot5'), Location('project')]
+>>> config_a.mro.insert(0, config_b)
+>>> config_a.mro
+[Location('configB'), Location('shot5'), Location('project')]
 ```
 
 [Liskov Substitution Principle]: http://en.wikipedia.org/wiki/Liskov_substitution_principle

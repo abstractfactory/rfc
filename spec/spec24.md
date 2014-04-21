@@ -114,6 +114,18 @@ This is the method used by [Open Metadata][] and in effect [Pipi][].
 
 ### Relational database
 
+```python
+  ____________
+ |           |\                       _______
+ |            |                      |      |\
+ |            |                      |   +   |
+ |            |                   ___|_______|___
+ |            |                  |               |
+ |            |                  |_______________|
+ |____________|                     |__|   |__| 
+
+```
+
 By far the most common, sustainable approach of storing metadata in relation to content is with a relational database. In a relational database, content is augmenting content by means of storing a reference - a relation - to content; most commonly as paths, absolute within given environment.
 
 ```
