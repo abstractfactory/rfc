@@ -1,6 +1,6 @@
 # Pipi
 
-This document provides a general overview of the digital content creation platform that is Pipi.
+This document provides a general overview of the digital content creation framework that is Pipi.
 
 * Name: http://rfc.abstractfactory.io/spec/23
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
@@ -9,9 +9,21 @@ This document provides a general overview of the digital content creation platfo
 
 # Mission
 
-Our mission is to provide a scaleable, location-, software- and platform-agnostic framework for digital content creation.
+Our mission is to provide a..
 
-#### Related
+* scale agnostic
+* location agnostic
+* software agnostic
+* platform agnostic
+
+..framework for digital content creation, for content without a clear end-of-life state.
+
+##### Synonyms
+
+* [*pipeline*](http://www.andrew-whitehurst.net/pipeline.html)
+* [*digital asset management system*](http://en.wikipedia.org/wiki/Digital_Asset_Management)
+
+##### Related
 
 * [Requirements][]
 * [Architecture][]
@@ -27,9 +39,9 @@ Let's just all agree that we are talking about bringing something into existance
 
 Whenever you bring anything into existance that exists purely as ones and zeroes, you are digitally creating content and that is where Pipi is made to fit.
 
-# What is a platform?
+# What is a framework?
 
-Google defines 'platform' as 
+Google defines 'framework' as 
 
 > an essential supporting structure of a building, vehicle, or object.
 

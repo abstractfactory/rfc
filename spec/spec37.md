@@ -25,7 +25,6 @@ A `node` MUST support:
 * `REQ04`: Subtraction of children (filtering)
 * `REQ05`: Forwarding/re-direction
 * `REQ06`: In-memory metadata (private)
-* `REQ07`: External metadata (public)
 
 # Architecture
 
@@ -196,18 +195,8 @@ parent1
 # Terminology
 * `metadata`
 * `private`
-* `public`
 ```
 
 In addition to support for parent(s) and children, a `node` MUST support the notion of `metadata`.
-
-`metadata` is divided into two categories; `private` and `public`. `public` `metadata` lives external to the object (e.g. such as on disk, within a database) wheras `private` `metadata` resides within.
-
-`public` `metadata` is powered by Open Metadata and MUST be provided with access to:
-
-* Reading
-* Adding
-* Removing
-* Modifying
 
 `private` `metadata` is powered by whatever features the programming languages supports; including, but not limited to, strings, ints, bools, floats.

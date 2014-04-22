@@ -74,16 +74,16 @@ Example
 folder
 |--- .meta
      |--- .history
-     |    |--- some data.string&20140401-140541-604
+     |    |--- some data&20140401-140541-604
      |    |    |--- user
      |    |    |--- value
-     |    |--- some data.string&20140401-140751-121
+     |    |--- some data&20140401-140751-121
      |    |    |--- user
      |    |    |--- value
-     |    |--- some data.string&20140401-140751-126
+     |    |--- some data&20140401-140751-126
      |         |--- user
      |         |--- value
-     |--- some data.string
+     |--- some data
 ```
 
 ### An historical event
@@ -130,6 +130,26 @@ time
 
 As history may be discarded upon retrieval, it is important to retain some notion of history for future reference. For instance, multiple changes may have been made, but at some point in time a very early version of history was restored and thus discarded all following history. For users in the future, they would have no way of knowing whether there was any data between the restoration and previously latest value.
 
+#### Preserving type
+
+History MUST maintain the type of each value stored. E.g. when editing a `int`, making it a `float`, history MUST accurately preserve the change in type.
+
+##### Example
+
+```python
+folder
+|--- .meta
+     |--- .history
+     |    |--- age&20140401-100101-000  # <-- notice
+     |    |    |--- user.string
+     |    |    |--- value.int
+     |    |--- age&20140401-100102-000  # <-- notice
+     |    |    |--- user.string
+     |    |    |--- value.float
+```
+
+Notice how "age" doesn't include a suffix? In this case, history stores the variable regardless of its type, and thus changing type would keep incrementing the same imprint. The value however is stored with type maintained.
+
 ### An alternative version
 
 At any point in time MAY a node be stored as a version. A version is identical to a historical backup, except for its incremental versioning and that it may also support additional metadata such as a note.
@@ -151,7 +171,7 @@ Example
 |-- folder
 |   |-- .meta
 |   |   |-- .versions
-|   |   |   |-- some data.string&v001
+|   |   |   |-- some data&v001
 |   |   |   |   |-- user
 |   |   |   |   |-- note
 |   |   |   |   |-- previous_value

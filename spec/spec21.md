@@ -22,10 +22,6 @@ c:\program files\adobe\photoshop\photoshop.exe
 photoshop
 ```
 
-```
-Discovery is only half the story. Head over to RFC29 on Persistent Software References for how one may go about associating keys with your software.
-```
-
 Discovering software via key is useful in scenarios where it is important to decouple the software you write from the software you interact with.
 
 For example, an application launcher, as defined in Wikipedia is:
@@ -56,6 +52,10 @@ nuke
 Designing the application launcher towards these keys makes it independent of the underlying platform and where software is ultimately located. The application launcher and references to software have been decoupled from the platform.
 
 The issue then is, how do we resolve a key into an absolute path on the target platform?
+
+Related
+
+* RFC29 - Persistent Software References
 
 # Architecture
 

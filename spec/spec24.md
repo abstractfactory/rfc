@@ -1,6 +1,6 @@
-# Pipi Metadata
+# Methods of storing metadata
 
-This document describes the method with which Pipi manages metadata.
+This document describes all possible methods of storing metadata.
 
 * Name: http://rfc.abstractfactory.io/spec/24
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
@@ -50,7 +50,7 @@ There are a number of ways in which to store this type of metadata; such as XMP 
 * [XMP][] --  First developed by [Adobe][] in 2001 and mainly used for images.
 * [ID3][] -- Developed by [Damaged Cybernetics][] in 1996 and mainly used for audio; most prevalently perhaps the MP3 file-format.
 
-XMP, ID3 and others are *explicit* metadata in that they append bits onto an existing file that host metadata. They both share a great weakness; they rely on whatever software reading the file to be aware of the existance of metadata; whether they make use of it or not - e.g. ID3 occupies a tiny space in the header of music files. Players not familiar with this metadata would play rather than discard the metadata and thus produce a short noise at the start of any song.
+XMP, ID3 and others are *explicit* metadata in that they append bits onto an existing file that host metadata. They both share one great weakness; they rely on whatever software reading the file to be aware of the existance of metadata; regardless of whether they make use of it or not - e.g. ID3 occupies a tiny space in the header of music files. Players not familiar with this metadata would play rather than discard the metadata and thus produce a short noise at the start of any song.
 
 ID3 is a fixed-sized addition of metadata. It means you they only provide a certain amount of options, as well as a certain size of each option, and a total size of each - 30 bytes.
 
@@ -172,7 +172,7 @@ Not strictly designed for metadata, but useful as sidecar files and may contain 
 
 ### [Camlistore][]
 
-I'm only familiar with the name, including it due to its relevance in storage.
+I'm only familiar with the name, including it due to its potential relevance in storing metadata.
 
 [Camlistore]: https://camlistore.org/
 [Pipi]: http://abstractfactory.io/pipi

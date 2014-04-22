@@ -39,7 +39,7 @@ In layman's terms; "data about data" - regardless of data-type or traditional us
 * RFC19: Storage Agnostic
 * RFC20: Referencing
 * RFC35: Garbage Collection
-* RFC41: Temporal Resolution
+* RFC41: Driver
 * RFC46: Temporal Resolution
 
 #### References
@@ -82,11 +82,11 @@ Read more about Blobs in RFC16
 
 ### Data-types
 
-A data-format is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system, e.g. `jpeg`, `zip`. A data-type however is their interface towards the programmer - their object-type, if you will - and determines what tools are available; both textually but also graphically.
+A data-**format** is the physical layout of one's and zero's within the one-dimensional array of bytes that make up a file on a file-system, e.g. `jpeg`, `zip`. A data-**type** however is their interface towards the programmer - their object-type, if you will - and determines what tools are available; both textually and ultimately graphically.
 
-All data-types native to Open Metadata MUST serialise outgoing data into JSON-compatible data.
+All data-types native to Open Metadata MUST serialise outgoing data into JSON-compatible data and MAY deserialise incoming data using JSON as well.
 
-Here are all the supported types
+Here are *all* the supported types
 
 **Generic**
 
@@ -94,6 +94,14 @@ Here are all the supported types
 * `int`
 * `float`
 * `string`
+* `enum`
+* `tuple`
+* `list`
+* `dict`
+* `null`
+
+**Util**
+
 * `text`
 * `date`
 * `color`
@@ -102,14 +110,10 @@ Here are all the supported types
 * `kwarg`
 * `url`
 * `path`
-* `null`
-* `enum`
-* `tuple`
-* `list`
-* `dict`
 
 **Numbers**
 
+* `scalar`
 * `point`
 * `vector`
 * `matrix`
@@ -127,19 +131,19 @@ Here are all the supported types
 
 ```python
 # Python example
-data = ['31 Quantum Tower',
+value = ['31 Quantum Tower',
     'Poland Road',
     'W21X 8SL',
     'London',
     'UK']
 
 location = Location('/home/marcus')
-collection = Collection('myaddress.list', parent=location)
+entry = Entry('myaddress.list', parent=location)
 
-collection.value = data
-collection.dump()
+entry.value = value
+entry.dump()
 
-assert collection.value == data
+assert entry.value == value
 
 ```
 
@@ -175,7 +179,8 @@ This works, because there MUST exist only one (1) suffix per entry within the da
 om.write(path, '/secretOfLife, 'coconut')
 om.write(path, '/secretOfLite', 47)
 # This overwrites the 'secretOfLite.string' on disk
-# with 'secretOfLife.int', just like it would in any programming language
+# with 'secretOfLife.int', just like it would in a
+# dynamic programming language, like Python.
 ```
 
 The same MAY apply to groups as well.
@@ -200,55 +205,72 @@ Refer to an absolute path as *location* so as to facilitate for future expansion
 
 It MUST NOT matter to the programmer *where* the metadata is stored and it MUST NOT matter in what format that data resides. With such assumptions, we can assert valid metadata and standard use regardless of it residing on a remote file-system, within a binary file or in-memory within an application. Any content can contain metadata, regardless of what is hosting it.
 
-### 
+### Correlation with `variable`
+
+`Entry` is tightly connected to the terminology of a `variable` in programming languages with dynamic type-checking.
+
+A `variable` is defined on Wikipedia as:
+
+> a storage location and an associated symbolic name (an identifier) which contains some known or unknown quantity or information, a value. - http://en.wikipedia.org/wiki/Variable_(computer_science)
+
+In programming languages with dynamic type-checking, the type of each variable can be modified at run-time.
+
+```python
+# For example
+>>> my_var = 5
+>>> my_var = 'Hello World!'
+```
+
+The same is true for the `Entry` object.
+
+```python
+>>> my_entry.value = 5
+>>> my_entry.value = 'Hello World'
+```
 
 ### Writing to groups
 
 Data MAY be written directly to groups; this becomes the metadata of that collection. In the example above we dump directly to a Group object. The resulting entries are formatted according to the collection's suffix which in this case results in an ordered list.
 
-In other cases, where the collection has no suffix, the data is formatted as-is; meaning Mk2 will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the entry.
+In other cases, where the collection has no suffix, the data is formatted as-is; meaning Open Metadata will determine in which format the data is to be stored based on its object-type within the given programming language and imprint the result into the suffix of the entry.
 
 ```python
 
-# Example of auto-determining data-type from suffix-less collection using
-collection = Collection('mygroup', parent=location)
-collection.value = ['some data']
+# Example of auto-determining data-type
+# from suffix-less collecton of entries.
+entry = Entry('mygroup', parent=location)
+entry.value = ['some data']
 ```
 
-This MAY introduce a possible performance penalty; due to the amount of guess-work that has to be done and so the user SHOULD explicitly specify the data-type for any given collection.
+This MAY introduce a possible performance penalty; due to the amount of guess-work that has to be done and so the user SHOULD explicitly specify the data-type for any given entry.
 
 # Syntax
 
-The purpose of Open Metadata remains the same and the syntactical differences are cosmetic-only.
-
 ```python
-"""Demonstration of the current syntax"""
+"""Demonstration of the syntax"""
 
 import os 
 import openmetadata as om 
 
 path = os.path.expanduser('~') 
-path = os.path.join(path, 'test_folder') 
 
 location = Location(path) 
-assert not location.exists 
 
-data = {
+value = {
     'hello': 'there', 
     'startFrame': 5, 
     'endFrame': 10, 
     'hidden': True
 } 
 
-collection = Collection('keyvaluestore.dict', parent=location)
-collection.value = data
-collection.dump()
+entry = Entry('keyvaluestore', parent=location)
+entry.value = value
+entry.dump()
   
-assert collection.value == data
-assert location.value == {collection.name: data}
+assert entry.value == value
 
-location.clear()
-assert not location.exists
+om.clear(location)
+assert not om.find(location)
 ```
 
 ### Bracket-notation
@@ -259,17 +281,24 @@ Open Metadata MAY support the notion of accessing members via bracket-notation.
 >>> location['child']
 ```
 
+The same is true for accessing list-style entries.
+
+```python
+>>> location[0]
+>>> location[1]
+```
+
 ### Use of `dump()`
 
-Coupling reading and writing within the same object sure is a convenience, but also introduces a security risk. I'm not talking about someone hacking your object while you use it, but more of security for you, yourself, while using an object. Having `dump()` so close to overall operation of an object, a misspelling or misuse could potentially lead to removing important information.
+Coupling reading and writing within the same object sure is a convenience, but also introduces a security risk. I'm not talking about someone hacking your object while you use it, but more of security for you, yourself, while using an object. Having `dump()` close to overall operation of an object, a misspelling or misuse could potentially lead to removing important information.
 
 An alternative is to introduce a separate method responsible for dump-operations.
 
 ```python
 >>> location = Location('/home/marcus')
->>> collection = Collection('description.list')
->>> collection.value = ['my', 'ordered', 'list']
->>> dump(collection)
+>>> entry = Entry('description.list')
+>>> entry.value = ['my', 'ordered', 'list']
+>>> dump(entry)
 ```
 
 It didn't take any more lines of code, yet the implementation of writing is de-coupled from the object with which the contains resides and put into a more global space from where it can be distributed appropriately if need be.
@@ -284,7 +313,7 @@ Another benefit is their interchangeability. `dump()` performs an action, but th
 
 # Arbitrary Depth
 
-An important aspect of Mk2 is that of arbitrary depths; i.e. allowing for an unlimited nesting of `entry` within `collection`.
+An important aspect of Open Metadata is that of arbitrary depths; i.e. allowing for an unlimited nesting of `entry` within `entry`.
 
 ```python
 +-- top folder

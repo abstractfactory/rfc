@@ -23,7 +23,7 @@ Pipi is:
 * Platform agnostic
 * Scale agnostic
 
-And our mantra is "Enable Artists"; opposite of which is "Restricting Artists"
+And our mantra is "Enable Artists"; opposite of which is "Constraining Artists"
 
 ### Location Agnostic
 
