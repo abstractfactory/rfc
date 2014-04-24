@@ -1,55 +1,94 @@
-# Pipi
+# Pipi Specification
 
-This document provides a general overview of the digital content creation framework that is Pipi.
+This document defines what it means to be Pipi
 
 * Name: http://rfc.abstractfactory.io/spec/23
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * State: draft
 * Related: RFC24, RFC25, RFC27, RFC39
 
-# Mission
+Copyright and Language can be found in RFC1
 
-Our mission is to provide a..
+# Change Process
 
-* scale agnostic
-* location agnostic
-* software agnostic
-* platform agnostic
+This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
 
-..framework for digital content creation, for content without a clear end-of-life state.
+# Goal
 
-##### Synonyms
+To advance the state of the art in the digital creation of content without a clear end-of-life status.
 
-* [*pipeline*](http://www.andrew-whitehurst.net/pipeline.html)
-* [*digital asset management system*](http://en.wikipedia.org/wiki/Digital_Asset_Management)
+# Content Life Cycle
+![](https://dl.dropbox.com/s/y0gzwyhww5xl1hc/cycle_small.png "Content Life Cycle")
 
-##### Related
+Broadly speaking, content passes through at least four stages; *creation*, *review*, *management* and *delivery*. Each stage orthogonal to the next; meaning that pursuing one does not advance the next. E.g. no matter how much you create, you won't achieve better management, and regardless of how much you manage, you won't achieve better deliveries.
 
-* [Requirements][]
-* [Architecture][]
-* [Metadata][]
-* [Configurable Content][]
-* [FAQ][]
+Each stage must be approached separately and ultimately work together to fulfill the requirements put on you to produce your content. As illustrated, the process is a cycle. Once delivered, creation resumes. This facilitates a iterative development style.
+
+References
+
+* [Agile development](http://en.wikipedia.org/wiki/Agile_software_development)
+* [Lean software development](http://en.wikipedia.org/wiki/Lean_software_development)
+* [Pipi Object Model][]
+
+### Create
+![](https://dl.dropbox.com/s/1buwumlf7ytaiep/create_small.png "Create")
+
+Creation involves running your Digital Content Creation Software (DCCS) and, using the tools provided, pursue the goal set by your criteria and requirements.
+
+Pipi is set out to provide DCCS specific tools, both plug-ins to existing DCCS and standalone software.
+
+References
+
+* Fabric Engine
+* Houdini Engine
+
+### Review
+![](https://dl.dropbox.com/s/3kq2b1np6vrj13j/review_small.png "Review")
+
+Review is the process of sharing your work with others in order to receive feedback. It includes versioning, conform and discoverability of your work so that it may be scrutinised by others with as little effort as possible.
+
+References
+
+* Shotgun Review
+* FTrack Review
+
+### Manage
+![](https://dl.dropbox.com/s/5d4ujps4fgteptq/manage_small.png "Manage")
+
+Content management involves the standardisation of output in an attempt to facilitate change, reuse and automation. Content management is the fight against information silos and is the life-blood of the Content Life Cycle.
+
+References
+
+* [Information silo on Wikipedia](http://en.wikipedia.org/wiki/Information_silo)
+* [Managing Enterprise Content - Ann Rockley][]
+
+### Deliver
+![](https://dl.dropbox.com/s/drp352hk7hkoe1z/deliver_small.png "Deliver")
+
+Delivery is the final step of a content life cycle and involves holistic filtering and conform. At the end of a delivery, your content aligns with content much like it. The point of which is to facilitate reuse and automation.
+
+References
+
+* Shot building
+* Asset library
+* Automated representations
 
 # What is Digital Content Creation?
 
-Well, first of all the word 'content' is loosely defined. 'Content' within the context of Pipi simply means 'data', but I fear even that suffers from a rather loose definition.
+The word 'content' is loosely defined. 'Content' within the context of Pipi means 'data', meaning `information`. Thus digital content creation is the creation of information by means of computers.
 
-Let's just all agree that we are talking about bringing something into existance that previously did not exist. 'Digital' content creation then is the bringing of something into existance happening digitally; i.e. in the form of ones and zeroes.
+References
 
-Whenever you bring anything into existance that exists purely as ones and zeroes, you are digitally creating content and that is where Pipi is made to fit.
+* [Digital Asset Management - Elisabeth Keathley][]
+* [DAM Survival Guide - David Diamond][]
 
 # What is a framework?
 
-Google defines 'framework' as 
+Pipi is a framework. Google defines 'framework' as 
 
 > an essential supporting structure of a building, vehicle, or object.
 
-In terms of software development, this means a supporting structure to your software. Which means Pipi isn't an application on its own but rather relies on you making it into one.
-
-This isn't true, of course. Not fully, at least. It is a framework with "batteries-included"; meaning you can take it for a spin without any programming knowledge. But for those of you that do have programming knowledge, there is an equal amount of pleasantries in there for you as well.
-
-Pipi ships with solutions to most common problems in any domain where something is being brought into existance by means of computers. This applies to making film, making games, making music and more.
+Thus Pipi facilitates rapid development of digital content creation systems, also known as digital asset management systems.
 
 # Conclusion
 
@@ -59,6 +98,10 @@ Now that we've got that all out of the way, got questions? Have a look at the [F
 * <marcus@abstractfactory.io>
 * <jobs@abstractfactory.io>
 
+[Pipi Object Model]: http://www.abstractfactory.io/blog/pipi-object-model-pt-1
+[Managing Enterprise Content - Ann Rockley]: http://amzn.to/1iecGhU
+[Digital Asset Management - Elisabeth Keathley]: http://amzn.to/1nnVTei
+[DAM Survival Guide - David Diamond]: http://amzn.to/1l05t4x
 [Configurable Content]: http://rfc.abstractfactory.io/spec/31/
 [Metadata]: http://rfc.abstractfactory.io/spec/24
 [Requirements]: http://rfc.abstractfactory.io/spec/25
