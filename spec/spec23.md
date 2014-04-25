@@ -18,7 +18,7 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 To advance the state of the art in the digital creation of content without a clear end-of-life status.
 
 # Content Life Cycle
-![](https://dl.dropbox.com/s/y0gzwyhww5xl1hc/cycle_small.png "Content Life Cycle")
+<!-- ![](https://dl.dropbox.com/s/y0gzwyhww5xl1hc/cycle_small.png "Content Life Cycle") -->
 
 Broadly speaking, content passes through at least four stages; *creation*, *review*, *management* and *delivery*. Each stage orthogonal to the next; meaning that pursuing one does not advance the next. E.g. no matter how much you create, you won't achieve better management, and regardless of how much you manage, you won't achieve better deliveries.
 
@@ -31,7 +31,7 @@ References
 * [Pipi Object Model][]
 
 ### Create
-![](https://dl.dropbox.com/s/1buwumlf7ytaiep/create_small.png "Create")
+<!-- ![](https://dl.dropbox.com/s/1buwumlf7ytaiep/create_small.png "Create") -->
 
 Creation involves running your Digital Content Creation Software (DCCS) and, using the tools provided, pursue the goal set by your criteria and requirements.
 
@@ -43,7 +43,7 @@ References
 * Houdini Engine
 
 ### Review
-![](https://dl.dropbox.com/s/3kq2b1np6vrj13j/review_small.png "Review")
+<!-- ![](https://dl.dropbox.com/s/3kq2b1np6vrj13j/review_small.png "Review") -->
 
 Review is the process of sharing your work with others in order to receive feedback. It includes versioning, conform and discoverability of your work so that it may be scrutinised by others with as little effort as possible.
 
@@ -53,7 +53,7 @@ References
 * FTrack Review
 
 ### Manage
-![](https://dl.dropbox.com/s/5d4ujps4fgteptq/manage_small.png "Manage")
+<!-- ![](https://dl.dropbox.com/s/5d4ujps4fgteptq/manage_small.png "Manage") -->
 
 Content management involves the standardisation of output in an attempt to facilitate change, reuse and automation. Content management is the fight against information silos and is the life-blood of the Content Life Cycle.
 
@@ -63,7 +63,7 @@ References
 * [Managing Enterprise Content - Ann Rockley][]
 
 ### Deliver
-![](https://dl.dropbox.com/s/drp352hk7hkoe1z/deliver_small.png "Deliver")
+<!-- ![](https://dl.dropbox.com/s/drp352hk7hkoe1z/deliver_small.png "Deliver") -->
 
 Delivery is the final step of a content life cycle and involves holistic filtering and conform. At the end of a delivery, your content aligns with content much like it. The point of which is to facilitate reuse and automation.
 
