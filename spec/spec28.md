@@ -37,6 +37,4 @@ This is important; a studio should definitely enforce a particular way of workin
 
 Having said that, we may *suggest* one way in which to apply Pipi - we do of course have ideal candidates for usage and workflow, all of which is openly shared with you in our [RFC repository][] of methodologies and specifications - but at the end of the day we provide a non-restrictive platform that allows you to make your own assumptions and specify your own requirements based on what fits your situation the best. It would be foolish of us to try and impose our way of thinking onto you and your situation, as we could not begin to assume how this situation would look. Hence "Enable Artists" is something enforced here at Abstract Factory, but not necessarily something enforced at your studio.
 
-![](https://dl.dropbox.com/s/drp352hk7hkoe1z/deliver_small.png "Deliver")
-
 [RFC repository]: http://rfc.abstractfactory.io

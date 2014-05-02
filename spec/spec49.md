@@ -7,11 +7,15 @@ This document describes the first beta release of Pipi.
 * State: draft
 * Related: RFC10
 
-Copyright and Language can be found in RFC1
+Language can be found in RFC1
+
+# Copyright
+
+
 
 # Change Process
 
-This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
+This document is not to be altered by anyone but the editor.
 
 # Language
 
