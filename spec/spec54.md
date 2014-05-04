@@ -14,6 +14,10 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 
 # Goal
 
-Advance the state of Open Metadata in common use by providing an overview of a variety of use-cases, applicable in a variety of scenarios.
+The definition of "metadata" has been continually re-invented over the years. Re-invented to fit a particular use. Traditionally, content and metadata was kept separate. Traditionally, methods of persisting and manipulating metadata was ad-hoc.
 
-Open Metadata is designed to be open-ended. Designed to fit a large number of uses. Originally designed as a foundation for digital asset management systems, the possible situations fit for Open Metadata continually grows.
+Not any more.
+
+Open Metadata is designed to make content self-describing. Intelligent, capable of persisting associated metadata; complex, homogeneous
+
+The number of uses for "data about data" are as many as "data" itself. It is our hope that together with this document you shall gain perspective on some of the possible problems this solution solves and how it can aid in bringing together a multitude of ad-hoc solutions for general purpuse metadata, software configuration, persistent/memoized storage of software settings and more.

@@ -53,7 +53,7 @@ $ maya
 
 ```bash
 # The syntax of `dash` is as follows:
-[command][flag][query]
+[command] [query] [flag]
 ```
 
 At each turn `dash` performs a breath-first search in a hierarchy of content, returning the first item found. Alternatively, a commands may be daisy-chained for aggregated searches such as the one above.

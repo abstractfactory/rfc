@@ -41,9 +41,6 @@ References
 * Fabric Engine
 * Houdini Engine
 
-### Review
-![][review]
-
 Review is the process of sharing your work with others in order to receive feedback. It includes versioning, conform and discoverability of your work so that it may be scrutinised by others with as little effort as possible.
 
 References
@@ -51,18 +48,12 @@ References
 * Shotgun Review
 * FTrack Review
 
-### Manage
-![][manage]
-
 Content management involves the standardisation of output in an attempt to facilitate change, reuse and automation. Content management is the fight against information silos and is the life-blood of the Content Life Cycle.
 
 References
 
 * [Information silo on Wikipedia](http://en.wikipedia.org/wiki/Information_silo)
 * [Managing Enterprise Content - Ann Rockley][]
-
-### Deliver
-![][deliver]
 
 Delivery is the final step of a content life cycle and involves holistic filtering and conform. At the end of a delivery, your content aligns with content much like it. The point of which is to facilitate reuse and automation.
 
