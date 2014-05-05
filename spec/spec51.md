@@ -2,8 +2,6 @@
 
 This document describes a method of articulating characters with focus on re-usability and flexibility.
 
-![](https://dl.dropbox.com/s/gaarxvlyx97ydf6/20140428_layered-articulation.png)
-
 * Name: http://rfc.abstractfactory.io/spec/51
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
 * Related: RFC52, RFC53

@@ -27,6 +27,51 @@ Textual Software Configuration defines three (3) commands for performing softwar
 * `-`
 * `wrap`
 
+### Target group
+
+`dash` et. al. is designed for every-day use by artists. As such, the requirements are that `dash` MUST be:
+
+* `REQ01` Easy to remember
+* `REQ02` Quick to write
+
+Examples of an ideal syntax
+
+```bash
+# Run maya, from hulk project
+$ dash hulk
+$ maya
+
+# Run maya, from a specific shot
+$ dash hulk/1000
+$ maya
+```
+
+Here are some examples of non-compliant syntaxes.
+
+```bash
+# Too specific
+$ dash /projects/hulk/shots/1000
+
+# Too many flags
+$ dash --project hulk/1000 --app maya --version 2014 --arch x64
+
+# Esoteric characters (*from bcore)
+$ dash @/projects/a ---packages.python.version=2.6 launch
+```
+
+References
+
+* [bcore](https://github.com/Byron/bcore/issues/19)
+
+### Extended use
+
+`dash` MUST comply with `REQ01` and `REQ02`, but MAY offer additional support for complex setup; e.g. when using `dash` with automated or scripted utilities.
+
+Extended features
+
+* Version specificity
+* 
+
 # Architecture
 
 Given the hierarchy:
@@ -132,7 +177,6 @@ Globally accessible wrappers are stored at the root of `dash`
 $ dash --clear
 $ wrap maya
 ```
-
 
 ### Specificity
 
