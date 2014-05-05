@@ -124,7 +124,7 @@ $ dash /projects/hulk/shots/1000
 $ dash --project hulk/1000 --app maya --version 2014 --arch x64
 
 # Esoteric characters (*from bcore)
-# - @ and triple-dash
+# - @, triple-dash and dot
 $ dash @/projects/a ---packages.python.version=2.6
 
 # Multiple operations (*from bcore)
@@ -145,8 +145,7 @@ This specification MUST comply with `REQ01` and `REQ02` but MAY offer additional
 Override pre-determined software versions.
 
 ```bash
-# Triple-dash, from bcore.
-$ dash hulk/1000 ---package.maya.version=2013
+$ dash hulk/1000 --/packages/maya/version=2013
 ```
 
 **Exclusion**
@@ -154,7 +153,7 @@ $ dash hulk/1000 ---package.maya.version=2013
 Exclude pre-determined software using the `--not` flag.
 
 ```bash
-$ dash hulk/1000 --not plugin.maya.matrixNodes
+$ dash hulk/1000 --not /plugins/maya/matrixNodes
 ```
 
 # Architecture
