@@ -22,3 +22,10 @@ As software is a collection of services, a Software-Oriented Architecture is the
 
 # Architecture
 
+Kom is a decentralised, inter-process library. Meaning that it provides a chat-like interface to software, via RPCs using ZeroMQ, and that it doesn't rely on a central broker to do so. Kom consists of three (3) components.
+
+* `protocol`
+* `broadcast`
+* `nameserver`
+
+`nameserver` is the 

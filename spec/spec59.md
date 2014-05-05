@@ -4,7 +4,7 @@ The Open Metadata programming language.
 
 * Name: http://rfc.abstractfactory.io/spec/59
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* State: raw
+* State: draft
 
 Copyright and Language can be found in RFC1
 

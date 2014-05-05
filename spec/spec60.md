@@ -4,8 +4,8 @@ Definition of `goto` A command-line utility for effectively navigating large hie
 
 * Name: http://rfc.abstractfactory.io/spec/60
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* Related: RFC21, RFC29
-* State: raw
+* Related: RFC57
+* State: draft
 
 Copyright and Language can be found in RFC1
 
