@@ -1,6 +1,6 @@
 # Terminal Context Sensitivity
 
-Define the most efficient method of configuring software via a terminal.
+Definition of context sensitivity as provided via a terminal.
 
 * Name: http://rfc.abstractfactory.io/spec/57
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
