@@ -30,7 +30,7 @@ Syntax MUST align with RFC57.
 ```bash
 # Go to shot 1000 of hulk, breadth-first
 $ goto hulk/1000
-cwd set to /projects/hulk/shots/1000
+# cwd sucessfully set to /projects/hulk/shots/1000
 ```
 
 The `breadth-first` method of `goto` performs a breadth-first search of content, starting from the current working directory (`cwd`) and stopping at the first match.
@@ -77,7 +77,7 @@ Users may jump to pre-defined locations with `aliases` (not to be confused with 
 # Go to private dir of current context, alias
 $ cd /some/dir
 $ goto --home
-# cwd set to /projects/hulk/shots/1000/private/marcus
+# cwd successfully set to /projects/hulk/shots/1000/private/marcus
 ```
 
 Aliases are prefixed with a double-dash which hides the possibility of using flags with `goto`.
