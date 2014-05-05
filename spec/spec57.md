@@ -145,7 +145,7 @@ This specification MUST comply with `REQ01` and `REQ02` but MAY offer additional
 Override pre-determined software versions.
 
 ```bash
-$ dash hulk/1000 --/packages/maya/version=2013
+$ dash hulk/1000 --/packages/maya/version 2013
 ```
 
 **Exclusion**
