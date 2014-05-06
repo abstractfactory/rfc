@@ -456,11 +456,11 @@ Where do the keys `SHOT` and `PROJECT` come from?
 
 A `key` MUST be pre-defined and there MAY be three (3) methods of defining them.
 
-#### 1. Built-in
+##### 1. Built-in
 
 Here, each `key` is coded into `dash`. `dash` MAY provide a plugin-based architecture into which end-users could implement custom keys.
 
-* External configuration
+##### 2. External configuration
 
 Here, keys are recorded into a external configuration of sorts, for example a `.json` serialised dictionary:
 
@@ -473,7 +473,7 @@ Here, keys are recorded into a external configuration of sorts, for example a `.
 
 In this dictionary, each key represents a `dash` `key`; their values represent an expression used in resolving the given `key` into a `dash` `value`; `ROOT` being hard-coded into `dash` and configurable as specified in #Absolute Context below.
 
-* Self-describing content
+##### 3. Self-describing content
 
 Here, each directory provides their own key(s).
 
