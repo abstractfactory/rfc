@@ -10,6 +10,10 @@ This document describes methods of discovering software on a local operating sys
 
 Copyright, Change Process and Language can be found in RFC1
 
+# Change Process
+
+This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
+
 # Goal
 
 Software discovery is the process of finding software by way of key so as to design software for multiple platforms with fluid requirements.
