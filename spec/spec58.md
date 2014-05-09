@@ -29,3 +29,9 @@ Kom is a decentralised, inter-process library. Meaning that it provides a chat-l
 * `nameserver`
 
 `nameserver` is the 
+
+# Push/pull
+
+define the push/pull model
+
+See also RFC66

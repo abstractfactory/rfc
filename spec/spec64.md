@@ -15,16 +15,21 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 
 # Goal
 
-Programmable content replaces the need for:
+Programmable Content is a data-driven method of storing content designed for automation. It substitutes much of:
 
 * naming conventions
 * database as data-store for metadata
 * directory-structure dependency
-* schema for directory structures
+
+And serves as an alternative for:
+
+* directory structure convention
+* directory structure schema
 
 Pre-requisites; intelligent content.
 
 See also RFC65
+See also [Unified Content Strategy](http://www.amazon.co.uk/Managing-Enterprise-Content-Unified-Strategy/dp/032181536X)
 
 ### Naming convention
 

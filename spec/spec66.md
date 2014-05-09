@@ -4,7 +4,7 @@ Definition of a node capable of recieving input from multiple sources of data.
 
 * Name: http://rfc.abstractfactory.io/spec/66
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* State: raw
+* State: draft
 
 Copyright and Language can be found in RFC1
 
@@ -73,15 +73,15 @@ A side-effect of the benefit listed above is the notion of decentralisation. Lik
 
 ### A deferred push
 
-By not applying changes immediately, we've opened up the doors for significant scalability benefits; both in real-time and off-line performance.
+By not applying changes immediately, we've opened up the doors for significant scalability benefits; both real-time and off-line.
 
-### Real-time performance
+### Real-time scalability
 
 In the vast majority of cases, a user navigating a user-interface isn't interested in what is actually happening within a data-store. Instead, a user is interested in communicating his intentions to the computer as quickly and efficiently as possible. The computer can then take additional time to complete these requests.
 
 Ultimately, it matters not how many modifications is being requested by the user, graphical interfaces relying on a `node` can never become bogged down in under-the-hood details.
 
-### Off-line performance
+### Off-line scalability
 
 Qt relies on events. Events are triggered from many places at tight intervals and some of these events cancel each other out - such as when a widget is requested to be painted red, but before it has a chance to get painted, it is requested to be painter blue.
 

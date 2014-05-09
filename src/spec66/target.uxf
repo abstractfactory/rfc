@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>620</x>
+      <x>610</x>
       <y>250</y>
       <w>90</w>
       <h>110</h>
@@ -19,7 +19,7 @@ bg=light_gray</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
+      <x>480</x>
       <y>250</y>
       <w>70</w>
       <h>60</h>
@@ -33,7 +33,7 @@ bg=default</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>530</x>
+      <x>520</x>
       <y>250</y>
       <w>110</w>
       <h>50</h>
@@ -45,7 +45,7 @@ bg=default</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
+      <x>480</x>
       <y>320</y>
       <w>70</w>
       <h>60</h>
@@ -59,7 +59,7 @@ bg=default</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>530</x>
+      <x>520</x>
       <y>260</y>
       <w>110</w>
       <h>110</h>
