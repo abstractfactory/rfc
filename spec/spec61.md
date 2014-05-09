@@ -1,6 +1,6 @@
-# Terminal Open Metadata
+# Open Metadata-cli
 
-Definition of `om` the terminal version of Open Metadata
+Definition of the command-line interface of Open Metadata.
 
 * Name: http://rfc.abstractfactory.io/spec/61
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
@@ -20,7 +20,7 @@ To provide terminal access to the fundamental properties of Open Metadata.
 
 ```bash
 # Syntax
-[command] [key] {value}
+$ [command] [key] [value] [option]
 ```
 
 ```bash
@@ -28,9 +28,20 @@ To provide terminal access to the fundamental properties of Open Metadata.
 $ om name Marcus
 $ om name
 Marcus
-$ om /address/street Blackwall Way
+$ om /address/street "Blackwall Way"
 $ om /address/street
 Blackwall Way
 $ om /address
 street=Blackwall Way
+```
+
+### The `@` operator
+
+Cast, or force, a certain datatype.
+
+```bash
+$ om myflag @Flag
+$ om mytext "a string" @Text
+$ om myfloat 5 @Float
+$ om mylike True @Like
 ```

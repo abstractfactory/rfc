@@ -1,6 +1,6 @@
 # Terminal Context Sensitivity
 
-Definition of context sensitivity as provided via a terminal.
+Definition of context sensitivity via a command-line interface (cli).
 
 * Name: http://rfc.abstractfactory.io/spec/57
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
@@ -18,6 +18,10 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 To provide a user with context sensitivity within a terminal.
 
 Context sensitivity means to alter a running session of a terminal in such a way that any further action to take effect only within the given context.
+
+> Note - this document uses a fictional tool called `dash` to help illustrate the benefits and disadvantages of various approaches to context sensitivity. As defined by Rez, `dash` is an Environment Management System.
+
+See also [Rez][rez]
 
 ### Example - Save
 
@@ -102,6 +106,19 @@ Thus, with context sensitivity, *commands* may be kept minimal and implicit.
 * `REQ01` Easy to remember
 * `REQ02` Quick to write
 
+`dash` MUST also be capable of being implemented on multiple platforms. As such:
+
+* `REQ03` Cross-platform
+
+Targeted terminals are:
+
+* cmd.exe
+* bash
+
+In which case:
+
+* `REQ04` ASCII-characters only
+
 Examples of an ideal syntax
 
 ```bash
@@ -135,26 +152,6 @@ $ dash hulk/1000 launch
 References
 
 * [bcore](https://github.com/Byron/bcore/issues/19)
-
-### Extended use
-
-This specification MUST comply with `REQ01` and `REQ02` but MAY offer additional support for complex use; targeted at using `dash` by automated or scripted means.
-
-**Absolute versioning**
-
-Override pre-determined software versions.
-
-```bash
-$ dash hulk/1000 --/packages/maya/version 2013
-```
-
-**Exclusion**
-
-Exclude pre-determined software using the `--not` flag.
-
-```bash
-$ dash hulk/1000 --not /plugins/maya/matrixNodes
-```
 
 # Architecture
 
@@ -274,6 +271,47 @@ $ maya
 ```
 
 `maya` then is a `bootstrapper` around the actual executable, first performing a workspace query; creating a workspace if none is found, based on the active username.
+
+### Dependency resolution
+
+Dependency resolution is beyond the scope of this document; however dependency resolution may be applicable from *within* a context sensitive command-line interface.
+
+See also [Rez][rez]
+See also [Software Dependency Resolution][dependency]
+See also [Software Discovery][discovery]
+
+### Extended use
+
+Any implementation built upon this specification MUST comply with `REQ01` and `REQ02` but MAY offer the additional features; targeted at using `dash` for debugging, automation or via scripts:
+
+**Dump**
+
+Preview, or export variables that would have been injected into your environment.
+
+```bash
+$ dash hulk/1000
+$ dash --dump
+export PROJECT=hulk
+export SHOT=1000
+```
+
+* Inspired by Rez
+
+**Absolute versioning**
+
+Override pre-determined software versions.
+
+```bash
+$ dash hulk/1000 --/packages/maya/version 2013
+```
+
+**Exclusion**
+
+Exclude pre-determined software using the `--not` flag.
+
+```bash
+$ dash hulk/1000 --not /plugins/maya/matrixNodes
+```
 
 ### Strap
 
@@ -555,6 +593,22 @@ $ customApp
 
 Here, the directory of `customApp` is being added to the PATH environment variable, making this command available when previously it was not. This could potentially be used to provide context sensitive commands, so as to not dilute the global namespace with every possible command; thus utilising a benefit of context sensitivity.
 
+#### DIRECT Alternatives
+
+There are two potential methods of altering the environment of an active session; either you export environment variables directly into your shell:
+
+```bash
+$ export KEY=value
+```
+
+Or you trigger a sub-shell, which effectively transports you into a separate process; a child of the original.
+
+```bash
+$ sub-shell
+# You are now in a subshell.
+$ _
+```
+
 ### Alternative environment
 
 This RFC is based on providing context sensitivity by exporting variables to the active environment. There are a few limitations to this approach.
@@ -653,6 +707,9 @@ $ dash --root
 
 Or persistently, somehow..
 
+[rez]: https://github.com/nerdvegas/rez
+[dependency]: http://rfc.abstractfactory.io/spec/62
+[discovery]: http://rfc.abstractfactory.io/spec/21/
 [bootstrapping]: http://rfc.abstractfactory.io/spec/62
 [RFC24]: http://rfc.abstractfactory.io/spec/24
 [om]: https://github.com/abstractfactory/openmetadata
