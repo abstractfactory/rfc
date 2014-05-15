@@ -89,7 +89,7 @@ Sometimes, the commands used towards a given context may stem from a variety of 
 
 Thus context provides a means of bridging such commands so as to reduce the number of signatures any user must remember.
 
-See also [Adapter Pattern][adapter]
+* See also [Adapter Pattern][adapter]
 
 ```bash
 # Without context sensitivity
@@ -283,9 +283,9 @@ $ maya
 
 Dependency resolution is beyond the scope of this document; however dependency resolution may be applicable from *within* a context sensitive command-line interface.
 
-See also [Rez][rez]
-See also [Software Dependency Resolution][dependency]
-See also [Software Discovery][discovery]
+* See also [Rez][rez]
+* See also [Software Dependency Resolution][dependency]
+* See also [Software Discovery][discovery]
 
 ### Extended use
 
@@ -345,7 +345,7 @@ $ set PATH=/projects/hulk/executables
 $ maya
 ```
 
-See also [Bootstrapping Software][bootstrapping]
+* See also [Bootstrapping Software][bootstrapping]
 
 As executables on their own cannot be expected to make use of the context provided by `dash`, a bootstrapper must be present to prepare or otherwise educate software about the context under which it is to be run.
 
@@ -536,7 +536,7 @@ $ /projects/hulk <-- "do you have a key called 'PROJECT'?" -- yes
 hulk
 ```
 
-See also [Open Metadata][om]
+* See also [Open Metadata][om]
 
 ### When to alter the environment
 
@@ -636,8 +636,8 @@ In short, a sidecar file is a standalone file on disk that may substitute storin
 
 Thus eliminating all limitations of native environment variables.
 
-See also: [Methods of storing metadata][RFC24]
-See also: [Open Metadata][om]
+* See also: [Methods of storing metadata][RFC24]
+* See also: [Open Metadata][om]
 
 #### Sidecar files and concurrent access
 
