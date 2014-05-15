@@ -20,6 +20,7 @@ Programmable Content is a data-driven method of storing content designed for aut
 * naming conventions
 * database as data-store for metadata
 * directory-structure dependency
+* round-trip conventions (e.g. Users are at /home, and /home/Marcus is a User)
 
 And serves as an alternative for:
 

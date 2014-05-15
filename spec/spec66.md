@@ -1,4 +1,4 @@
-# Push/Pull Node
+# Push/pull node
 
 Definition of a node capable of recieving input from multiple sources of data.
 

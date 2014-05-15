@@ -19,9 +19,16 @@ To provide a user with context sensitivity within a terminal.
 
 Context sensitivity means to alter a running session of a terminal in such a way that any further action to take effect only within the given context.
 
-> Note - this document uses a fictional tool called `dash` to help illustrate the benefits and disadvantages of various approaches to context sensitivity. As defined by Rez, `dash` is an Environment Management System.
+> Note - this document uses a fictional tool called `dash` to help illustrate the benefits and disadvantages of various approaches to context sensitivity. As defined by [Rez][is-not], `dash` is an Environment Management System.
 
-See also [Rez][rez]
+* See also [Rez][rez]
+* See also [Environment Modules][em]
+* See also [CDM][cdm]
+
+[is-not]: https://github.com/nerdvegas/rez/wiki#what-is-rez-not
+[rez]: https://github.com/nerdvegas/rez
+[em]: http://nickgeoghegan.net/linux/installing-environment-modules
+[cdm]: http://www.pgbovine.net/cde.html
 
 ### Example - Save
 
@@ -707,7 +714,6 @@ $ dash --root
 
 Or persistently, somehow..
 
-[rez]: https://github.com/nerdvegas/rez
 [dependency]: http://rfc.abstractfactory.io/spec/62
 [discovery]: http://rfc.abstractfactory.io/spec/21/
 [bootstrapping]: http://rfc.abstractfactory.io/spec/62

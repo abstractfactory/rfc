@@ -1,6 +1,6 @@
-# Visual Object Hierarchy
+# Object Hierarchy Path
 
-Motivation and architecture for illustrating an object hierarchy visually.
+Motivation and architecture for illustrating an object hierarchy using standard path-notation.
 
 * Name: http://rfc.abstractfactory.io/spec/67
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
@@ -14,3 +14,4 @@ This document is governed by the [Consensus-Oriented Specification System](http:
 
 # Goal
 
+* a widget, within a widget, having several child widgets; each of which has a path within this hierarchy.
