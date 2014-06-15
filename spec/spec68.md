@@ -4,7 +4,7 @@ Pros and cons of bi-directionality in maintaining integrity of relationships bet
 
 * Name: http://rfc.abstractfactory.io/spec/68
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* State: draft
+* State: raw
 
 Copyright and Language can be found in RFC1
 

@@ -2,6 +2,18 @@
 
 What does it take to create something great?
 
+* Name: http://rfc.abstractfactory.io/spec/69
+* Editor: Marcus Ottosson <marcus@abstractfactory.io>
+* State: raw
+
+Copyright and Language can be found in RFC1
+
+# Change Process
+
+This document is governed by the [Consensus-Oriented Specification System](http://www.digistan.org/spec:1/COSS) (COSS).
+
+# Goal
+
 1. A problem
 2. An understanding of the problem
 3. A solution
@@ -51,9 +63,9 @@ What?
 
 * Pipi
 
-Database in content creation is “a tractor on auto-bahn". Powerful and specialised for a purpose.
+Database in content creation is "a tractor on auto-bahn". Powerful and specialised for a purpose.
 
-Database in content creation is “a sportscar in the woods". Powerful and specialised for a purpose.
+Database in content creation is "a sportscar in the woods". Powerful and specialised for a purpose.
 
 A terrain vehicle on auto-bahn.
 

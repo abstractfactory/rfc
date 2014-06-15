@@ -714,6 +714,17 @@ $ dash --root
 
 Or persistently, somehow..
 
+# Alternatives
+
+What other methods are there of storing context?
+
+### Shotgun Software - Tank
+
+Tank stores configuration as side-car files, whilst accessing them via individual executables.
+
+See also [Tank, per-command context][tank]
+
+[tank]: ../images/57/tank_storingContextInCommand.pdf
 [dependency]: http://rfc.abstractfactory.io/spec/62
 [discovery]: http://rfc.abstractfactory.io/spec/21/
 [bootstrapping]: http://rfc.abstractfactory.io/spec/62

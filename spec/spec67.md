@@ -4,7 +4,7 @@ Motivation and architecture for illustrating an object hierarchy using standard 
 
 * Name: http://rfc.abstractfactory.io/spec/67
 * Editor: Marcus Ottosson <marcus@abstractfactory.io>
-* State: draft
+* State: raw
 
 Copyright and Language can be found in RFC1
 
